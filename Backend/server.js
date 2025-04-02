@@ -11,7 +11,11 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors()); // You can configure this as per your requirements
+app.use(cors({
+  origin: "http://localhost:5173", // Your frontend URL
+  credentials: true, // Allows cookies to be sent
+}));
+// You can configure this as per your requirements
 
 // Routes
 app.use('/api/auth', authRoutes);

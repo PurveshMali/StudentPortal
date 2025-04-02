@@ -49,7 +49,7 @@ const FeaturedCourses = () => {
             <h2 className="text-3xl font-bold text-gray-900 mb-2">Featured Courses</h2>
             <p className="text-gray-600">Explore top courses created by students and educators</p>
           </div>
-          <a href="/courses" className="flex items-center text-indigo-600 hover:text-indigo-800 font-medium">
+          <a href="/courses" className="flex items-center text-[#6E59A5] hover:text-[#6E59A6] font-medium">
             View all courses <span className="ml-1">→</span>
           </a>
         </div>
@@ -68,7 +68,7 @@ const FeaturedCourses = () => {
               </div>
               <div className="p-5 flex flex-col flex-grow">
                 <div className="mb-3">
-                  <span className="inline-block bg-indigo-100 text-indigo-800 rounded-full px-3 py-1 text-sm font-medium">
+                  <span className="inline-block bg-indigo-100 text-[#6E59A5] rounded-full px-3 py-1 text-sm font-medium">
                     {course.level}
                   </span>
                 </div>

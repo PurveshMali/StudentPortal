@@ -1,3 +1,5 @@
+import { Link, Links } from "react-router-dom"
+
 const HeroSection = () => {
     return (
       <section className="bg-[#E6E0FF] py-16">
@@ -14,12 +16,13 @@ const HeroSection = () => {
                 for an enhanced learning experience.
               </p>
               <div className="flex flex-wrap gap-4 mb-8">
-                <button className="bg-[#6E59A5] hover:bg-[#7b59a5] text-white font-medium py-3 px-6 rounded-md">
+
+                <Link to={"/signup"} className="bg-[#6E59A5] hover:bg-[#7b59a5] text-white font-medium py-3 px-6 rounded-md">
                   Get Started
-                </button>
-                <button className="bg-white hover:bg-gray-100 text-gray-900 font-medium py-3 px-6 rounded-md border border-gray-300">
+                </Link>
+                <Link to={"/courses"} className="bg-white hover:bg-gray-100 text-gray-900 font-medium py-3 px-6 rounded-md border border-gray-300">
                   Explore Courses
-                </button>
+                </Link>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4">
                 <div className="flex items-center">

@@ -63,7 +63,7 @@ const RecommendedCourses = () => {
                 key={course.id}
                 className="bg-white rounded-lg overflow-hidden shadow border border-gray-100 flex flex-col relative"
               >
-                <div className="absolute top-3 right-3 bg-indigo-600 text-white px-2 py-1 rounded-full text-sm font-medium">
+                <div className="absolute top-3 right-3 bg-[#6E59A5] text-white px-2 py-1 rounded-full text-sm font-medium">
                   {course.match}% Match
                 </div>
                 <div>
@@ -71,7 +71,7 @@ const RecommendedCourses = () => {
                 </div>
                 <div className="p-5 flex flex-col flex-grow">
                   <div className="mb-3">
-                    <span className="inline-block bg-indigo-100 text-indigo-800 rounded-full px-3 py-1 text-sm font-medium">
+                    <span className="inline-block bg-indigo-100 text-[#6E59A5] rounded-full px-3 py-1 text-sm font-medium">
                       {course.level}
                     </span>
                   </div>

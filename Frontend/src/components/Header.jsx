@@ -1,11 +1,13 @@
+import { Link } from "react-router-dom";
+
 const Header = () => {
   return (
     <header className="bg-white border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
-            <a
-              href="/"
+            <Link
+              to={"/"}
               className="flex items-center text-[#6E59A5] font-bold text-xl"
             >
               <svg
@@ -15,16 +17,16 @@ const Header = () => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-book-open-icon lucide-book-open"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-book-open-icon lucide-book-open"
               >
                 <path d="M12 7v14" />
                 <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" />
               </svg>
               <span className="ml-2">EduConnect</span>
-            </a>
+            </Link>
             <nav className="hidden md:ml-10 md:flex space-x-8">
               <a href="/courses" className="text-gray-600 hover:text-gray-900">
                 Courses

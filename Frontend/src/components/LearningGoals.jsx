@@ -13,11 +13,11 @@ const LearningGoals = ({ goals = [] }) => {
                 <div key={index} className="p-3 bg-white rounded-lg shadow">
                   <div className="flex justify-between text-sm font-medium text-gray-700">
                     <span>{goal.title}</span>
-                    <span className="text-indigo-600">{progress}%</span>
+                    <span className="text-[#6E59A5]">{progress}%</span>
                   </div>
                   <div className="w-full h-2 mt-2 bg-gray-200 rounded-full">
                     <div
-                      className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-400 transition-all duration-300"
+                      className="h-full rounded-full bg-gradient-to-r from-[#6E59A3] to-[#6E59A5] transition-all duration-300"
                       style={{ width: `${progress}%` }}
                       role="progressbar"
                       aria-valuenow={progress}
