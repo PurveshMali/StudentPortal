@@ -74,3 +74,34 @@ exports.login = async (req, res) => {
     return res.status(500).json({ message: 'Server error', error: err.message });
   }
 };
+
+exports.getMe = async (req, res) => {
+  const token = req.cookies.token
+
+  if (!token) {
+    return res.status(401).json({ message: "Unauthorized" })
+  }
+
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET)
+    const user = await User.findById(decoded.userId).select("-password")
+
+    if (!user) {
+      return res.status(401).json({ message: "User not found" })
+    }
+
+    return res.status(200).json({ user })
+  } catch (error) {
+    return res.status(403).json({ message: "Invalid token" })
+  }
+}
+
+// User Logout
+exports.logout = async (req, res) => {
+  try {
+    res.cookie("token", "", { expires: new Date(0), httpOnly: true }) // Clear cookie
+    return res.status(200).json({ message: "Logged out successfully" })
+  } catch (err) {
+    return res.status(500).json({ message: "Server error", error: err.message })
+  }
+}

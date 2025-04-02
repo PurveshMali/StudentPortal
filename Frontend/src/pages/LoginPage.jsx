@@ -80,7 +80,7 @@ const LoginPage = () => {
       // window.location.href = "/dashboard";
     } catch (error) {
       console.error("Login failed:", error.response?.data || error.message);
-      setErrors("Login failed" );
+      setErrors("Login failed");
     } finally {
       setIsSubmitting(false);
     }
@@ -91,33 +91,34 @@ const LoginPage = () => {
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="flex justify-center">
           <Link
-              to={"/"}
-              className="flex items-center text-[#6E59A5] font-bold text-xl"
+            to={"/"}
+            className="flex items-center text-[#6E59A5] font-bold text-xl"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="40"
+              height="40"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-book-open-icon lucide-book-open"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="40"
-                height="40"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="lucide lucide-book-open-icon lucide-book-open"
-              >
-                <path d="M12 7v14" />
-                <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" />
-              </svg>
-              <span className="ml-2">EduConnect</span>
-            </Link>
+              <path d="M12 7v14" />
+              <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" />
+            </svg>
+            <span className="ml-2">EduConnect</span>
+          </Link>
         </div>
         <h2 className="mt-6 text-center text-3xl font-bold text-gray-900">
           Sign in to your account
         </h2>
         <p className="mt-2 text-center text-gray-600">
           Or{" "}
-          <Link to={"/signup"}
+          <Link
+            to={"/signup"}
             className="font-medium text-[#6E59A5] hover:text-[#4f3986]"
           >
             create a new account
@@ -166,7 +167,6 @@ const LoginPage = () => {
                   name="password"
                   type="password"
                   autoComplete="current-password"
-                  
                   value={formData.password}
                   onChange={handleChange}
                   className={`appearance-none block w-full px-3 py-2 border ${
@@ -199,7 +199,7 @@ const LoginPage = () => {
 
               <div className="text-sm">
                 <Link
-            to={"/"}
+                  to={"/"}
                   className="font-medium text-[#8b71f0] hover:[#af9bff]"
                 >
                   Forgot your password?
@@ -215,7 +215,11 @@ const LoginPage = () => {
                   isSubmitting ? "opacity-70 cursor-not-allowed" : ""
                 }`}
               >
-                {isSubmitting ? <FaSpinner className="animate-spin mr-2" /> : "Sign in"}
+                {isSubmitting ? (
+                  <FaSpinner className="animate-spin mr-2" />
+                ) : (
+                  "Sign in"
+                )}
               </button>
             </div>
           </form>
@@ -235,7 +239,7 @@ const LoginPage = () => {
             <div className="mt-6 grid grid-cols-2 gap-3">
               <div>
                 <Link
-            to={"/"}
+                  to={"/"}
                   href="#"
                   className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                 >
@@ -271,7 +275,7 @@ const LoginPage = () => {
 
               <div>
                 <Link
-            to={"/"}
+                  to={"/"}
                   href="#"
                   className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                 >

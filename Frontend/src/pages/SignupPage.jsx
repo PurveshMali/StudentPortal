@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +14,7 @@ const SignupPage = () => {
     agreeToTerms: false,
   });
 
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -91,8 +92,9 @@ const SignupPage = () => {
       );
 
       console.log("Signup successful:", response.data);
-      alert("Signup successful!"); // Or navigate to another page
-
+      alert("Signup successful!"); 
+      // Or navigate to another page
+      navigate("/login"); // Redirect to login page after successful signup
       // Reset form on success
       setFormData({
         firstName: "",
@@ -117,28 +119,30 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#f9f6ff] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="flex justify-center">
-          <a
-            href="/"
-            className="flex items-center text-indigo-700 font-bold text-xl"
+        <Link
+            to={"/"}
+            className="flex items-center text-[#6E59A5] font-bold text-xl"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
+              width="40"
+              height="40"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="h-8 w-8 mr-2"
+              className="lucide lucide-book-open-icon lucide-book-open"
             >
-              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+              <path d="M12 7v14" />
+              <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" />
             </svg>
-            <span>EduConnect</span>
-          </a>
+            <span className="ml-2">EduConnect</span>
+          </Link>
         </div>
         <h2 className="mt-6 text-center text-3xl font-bold text-gray-900">
           Create your account
@@ -147,7 +151,7 @@ const SignupPage = () => {
           Or{" "}
           <Link
             to={"/login"}
-            className="font-medium text-indigo-600 hover:text-indigo-500"
+            className="font-medium text-[#6E59A5] hover:text-[#9b73ff]"
           >
             sign in to your existing account
           </Link>
@@ -175,7 +179,7 @@ const SignupPage = () => {
                     onChange={handleChange}
                     className={`appearance-none block w-full px-3 py-2 border ${
                       errors.firstName ? "border-red-300" : "border-gray-300"
-                    } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+                    } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm`}
                   />
                   {errors.firstName && (
                     <p className="mt-2 text-sm text-red-600">
@@ -202,7 +206,7 @@ const SignupPage = () => {
                     onChange={handleChange}
                     className={`appearance-none block w-full px-3 py-2 border ${
                       errors.lastName ? "border-red-300" : "border-gray-300"
-                    } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+                    } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm`}
                   />
                   {errors.lastName && (
                     <p className="mt-2 text-sm text-red-600">
@@ -230,7 +234,7 @@ const SignupPage = () => {
                   onChange={handleChange}
                   className={`appearance-none block w-full px-3 py-2 border ${
                     errors.email ? "border-red-300" : "border-gray-300"
-                  } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+                  } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm`}
                 />
                 {errors.email && (
                   <p className="mt-2 text-sm text-red-600">{errors.email}</p>
@@ -255,7 +259,7 @@ const SignupPage = () => {
                   onChange={handleChange}
                   className={`appearance-none block w-full px-3 py-2 border ${
                     errors.password ? "border-red-300" : "border-gray-300"
-                  } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+                  } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm`}
                 />
                 {errors.password && (
                   <p className="mt-2 text-sm text-red-600">{errors.password}</p>
@@ -285,7 +289,7 @@ const SignupPage = () => {
                     errors.confirmPassword
                       ? "border-red-300"
                       : "border-gray-300"
-                  } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+                  } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm`}
                 />
                 {errors.confirmPassword && (
                   <p className="mt-2 text-sm text-red-600">
@@ -303,7 +307,7 @@ const SignupPage = () => {
                   type="checkbox"
                   checked={formData.agreeToTerms}
                   onChange={handleChange}
-                  className={`h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded ${
+                  className={`h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded ${
                     errors.agreeToTerms ? "border-red-300" : ""
                   }`}
                 />
@@ -316,14 +320,14 @@ const SignupPage = () => {
                   I agree to the{" "}
                   <a
                     href="/terms"
-                    className="text-indigo-600 hover:text-indigo-500"
+                    className="text-purple-600 hover:text-purple-500"
                   >
                     Terms and Conditions
                   </a>{" "}
                   and{" "}
                   <a
                     href="/privacy"
-                    className="text-indigo-600 hover:text-indigo-500"
+                    className="text-purple-600 hover:text-purple-500"
                   >
                     Privacy Policy
                   </a>
@@ -340,7 +344,7 @@ const SignupPage = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
+                className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 ${
                   isSubmitting ? "opacity-70 cursor-not-allowed" : ""
                 }`}
               >
