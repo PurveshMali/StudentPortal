@@ -32,7 +32,7 @@ app.use('/api/learner', learnerRoutes);
 app.use('/api/educator', educatorRoutes);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// Sample protected routes
+// Sample protected
 app.get('/api/educator', authenticate, authorize(['educator']), (req, res) => {
   res.send('Welcome, Educator!');
 });
