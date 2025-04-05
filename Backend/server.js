@@ -5,6 +5,9 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
 const { authenticate, authorize } = require('./middleware/authMiddleware');
+const learnerRoutes = require('./routes/learner');
+
+
 
 const app = express();
 
@@ -13,8 +16,10 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors()); // You can configure this as per your requirements
 
+
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/learner', learnerRoutes);
 
 // Protected route example
 app.get('/api/educator', authenticate, authorize(['educator']), (req, res) => {
