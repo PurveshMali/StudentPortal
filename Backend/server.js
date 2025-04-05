@@ -4,7 +4,10 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
+const learnerRoutes = require('./routes/learner');
+const educatorRoutes = require('./routes/educatorRoutes');
 const { authenticate, authorize } = require('./middleware/authMiddleware');
+const path = require("path");
 
 const app = express();
 
@@ -17,8 +20,15 @@ app.use(cors({
 }));
 // You can configure this as per your requirements
 
+app.use((req, res, next) => {
+  console.log(`[${req.method}] ${req.originalUrl}`);
+  next();
+});
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/learner', learnerRoutes);
+app.use('/api/educator', educatorRoutes);
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Protected route example
 app.get('/api/educator', authenticate, authorize(['educator']), (req, res) => {

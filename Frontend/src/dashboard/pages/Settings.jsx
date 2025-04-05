@@ -282,7 +282,7 @@ const Settings = () => {
               <button
                 onClick={() => setActiveTab("profile")}
                 className={`flex items-center w-full px-3 py-2 rounded-md text-left ${
-                  activeTab === "profile" ? "bg-primary text-white" : "hover:bg-gray-100 dark:hover:bg-gray-700"
+                  activeTab === "profile" ? "bg-primary text-white" : "hover:bg-[#9089d0] dark:hover:bg-[#e3e0ff]"
                 }`}
               >
                 <User size={18} className="mr-2" />
@@ -291,7 +291,7 @@ const Settings = () => {
               <button
                 onClick={() => setActiveTab("security")}
                 className={`flex items-center w-full px-3 py-2 rounded-md text-left ${
-                  activeTab === "security" ? "bg-primary text-white" : "hover:bg-gray-100 dark:hover:bg-gray-700"
+                  activeTab === "security" ? "bg-primary text-white" : "hover:bg-[#9089d0] dark:hover:bg-[#9089d0]"
                 }`}
               >
                 <Lock size={18} className="mr-2" />
@@ -300,7 +300,7 @@ const Settings = () => {
               <button
                 onClick={() => setActiveTab("notifications")}
                 className={`flex items-center w-full px-3 py-2 rounded-md text-left ${
-                  activeTab === "notifications" ? "bg-primary text-white" : "hover:bg-gray-100 dark:hover:bg-gray-700"
+                  activeTab === "notifications" ? "bg-primary text-white" : "hover:bg-[#9089d0] dark:hover:bg-gray-700"
                 }`}
               >
                 <Bell size={18} className="mr-2" />

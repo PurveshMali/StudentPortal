@@ -2,7 +2,7 @@ import { Link, Links } from "react-router-dom"
 
 const HeroSection = () => {
     return (
-      <section className="bg-[#E6E0FF] py-16">
+      <section className="bg-[#E6E0FF] py-16 mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ">
             <div>
@@ -17,7 +17,7 @@ const HeroSection = () => {
               </p>
               <div className="flex flex-wrap gap-4 mb-8">
 
-                <Link to={"/signup"} className="bg-[#6E59A5] hover:bg-[#7b59a5] text-white font-medium py-3 px-6 rounded-md">
+                <Link to={"/signup"} className="bg-[#6E59A5] hover:bg-[#9371bd] text-white font-medium py-3 px-6 rounded-md">
                   Get Started
                 </Link>
                 <Link to={"/courses"} className="bg-white hover:bg-gray-100 text-gray-900 font-medium py-3 px-6 rounded-md border border-gray-300">

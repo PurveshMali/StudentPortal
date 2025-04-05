@@ -1,188 +1,211 @@
 "use client"
-
-import { useState } from "react"
-import { useDashboardData } from "../hooks/useDashboardData"
-import Chart from "../components/Chart"
-import Table from "../components/Table"
-import Loader from "../components/Loader"
-import { Download, Calendar, Filter } from "lucide-react"
+import { motion } from "framer-motion"
+import { Video, Users, User } from "lucide-react"
 
 const Reports = () => {
-  const { data: dashboardData, loading } = useDashboardData()
-  const [reportType, setReportType] = useState("performance")
-  const [timeRange, setTimeRange] = useState("6months")
-
-  if (loading || !dashboardData) {
-    return <Loader />
-  }
-
-  const { performanceData, courseData } = dashboardData
-
-  // Filter data based on time range
-  const filteredPerformanceData = (() => {
-    switch (timeRange) {
-      case "3months":
-        return performanceData.slice(-3)
-      case "6months":
-        return performanceData.slice(-6)
-      case "1year":
-        return performanceData
-      default:
-        return performanceData
-    }
-  })()
-
-  // Course completion data for pie chart
-  const courseCompletionData = [
-    { name: "High (80%+)", value: courseData.filter((c) => c.completion >= 80).length },
-    { name: "Medium (60-79%)", value: courseData.filter((c) => c.completion >= 60 && c.completion < 80).length },
-    { name: "Low (< 60%)", value: courseData.filter((c) => c.completion < 60).length },
+  // Sample data for tutoring sessions
+  const tutoringSessions = [
+    {
+      id: 1,
+      title: "Machine Learning Algorithms",
+      educator: "Dr. Alan Smith",
+      domain: "AI & ML",
+      level: "Intermediate",
+      date: "Apr 15, 2025",
+      time: "2:00 PM",
+      students: 8,
+      maxStudents: 10,
+      thumbnail: "/placeholder.svg?height=200&width=400",
+      type: "Group",
+    },
+    {
+      id: 2,
+      title: "React Hooks Deep Dive",
+      educator: "Alex Johnson",
+      domain: "Web Development",
+      level: "Advanced",
+      date: "Apr 16, 2025",
+      time: "4:30 PM",
+      students: 5,
+      maxStudents: 8,
+      thumbnail: "/placeholder.svg?height=200&width=400",
+      type: "Group",
+    },
+    {
+      id: 3,
+      title: "Data Structures Fundamentals",
+      educator: "Prof. Maria Rodriguez",
+      domain: "Programming",
+      level: "Beginner",
+      date: "Apr 17, 2025",
+      time: "1:00 PM",
+      students: 1,
+      maxStudents: 1,
+      thumbnail: "/placeholder.svg?height=200&width=400",
+      type: "One-on-One",
+    },
+    {
+      id: 4,
+      title: "Cloud Computing Essentials",
+      educator: "Sarah Williams",
+      domain: "Cloud Computing",
+      level: "Beginner",
+      date: "Apr 18, 2025",
+      time: "3:00 PM",
+      students: 6,
+      maxStudents: 12,
+      thumbnail: "/placeholder.svg?height=200&width=400",
+      type: "Group",
+    },
+    {
+      id: 5,
+      title: "Blockchain Technology",
+      educator: "Michael Chen",
+      domain: "Cryptography",
+      level: "Advanced",
+      date: "Apr 19, 2025",
+      time: "11:00 AM",
+      students: 1,
+      maxStudents: 1,
+      thumbnail: "/placeholder.svg?height=200&width=400",
+      type: "One-on-One",
+    },
+    {
+      id: 6,
+      title: "Mobile App Development",
+      educator: "Jessica Lee",
+      domain: "Mobile",
+      level: "Intermediate",
+      date: "Apr 20, 2025",
+      time: "5:00 PM",
+      students: 7,
+      maxStudents: 10,
+      thumbnail: "/placeholder.svg?height=200&width=400",
+      type: "Group",
+    },
   ]
 
-  // Student performance data
-  const studentPerformanceData = [
-    { name: "A (90-100%)", students: 320 },
-    { name: "B (80-89%)", students: 480 },
-    { name: "C (70-79%)", students: 280 },
-    { name: "D (60-69%)", students: 120 },
-    { name: "F (< 60%)", students: 45 },
-  ]
-
-  const renderReportContent = () => {
-    switch (reportType) {
-      case "performance":
-        return (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Chart
-              type="line"
-              data={filteredPerformanceData}
-              title="Student Performance Over Time"
-              dataKeys={["students"]}
-              colors={["#6E59A5"]}
-            />
-            <Chart
-              type="bar"
-              data={studentPerformanceData}
-              title="Grade Distribution"
-              dataKeys={["students"]}
-              colors={["#6E59A5"]}
-            />
-          </div>
-        )
-      case "courses":
-        return (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Chart
-              type="pie"
-              data={courseCompletionData}
-              title="Course Completion Rates"
-              dataKeys={["value"]}
-              colors={["#6E59A5", "#9B8ACA", "#C7BFE4"]}
-            />
-            <Table
-              data={courseData.sort((a, b) => b.completion - a.completion).slice(0, 5)}
-              columns={[
-                { key: "name", label: "Course Name" },
-                { key: "students", label: "Students" },
-                {
-                  key: "completion",
-                  label: "Completion",
-                  render: (value) => `${value}%`,
-                },
-                { key: "rating", label: "Rating" },
-              ]}
-              title="Top Performing Courses"
-            />
-          </div>
-        )
-      case "engagement":
-        return (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Chart
-              type="area"
-              data={filteredPerformanceData}
-              title="Student Engagement Trends"
-              dataKeys={["students", "courses"]}
-              colors={["#6E59A5", "#9B8ACA"]}
-            />
-            <div className="bg-white dark:bg-dark-card rounded-lg p-6 border border-gray-200 dark:border-gray-700 shadow-sm">
-              <h3 className="text-lg font-medium mb-4">Engagement Insights</h3>
-              <ul className="space-y-4">
-                <li className="flex items-start">
-                  <div className="flex-shrink-0 w-2 h-2 mt-2 rounded-full bg-primary"></div>
-                  <p className="ml-3 text-sm">Student engagement increased by 15% in the last quarter</p>
-                </li>
-                <li className="flex items-start">
-                  <div className="flex-shrink-0 w-2 h-2 mt-2 rounded-full bg-primary"></div>
-                  <p className="ml-3 text-sm">Course completion rates are highest in Computer Science</p>
-                </li>
-                <li className="flex items-start">
-                  <div className="flex-shrink-0 w-2 h-2 mt-2 rounded-full bg-primary"></div>
-                  <p className="ml-3 text-sm">
-                    Students who participate in forums are 30% more likely to complete courses
-                  </p>
-                </li>
-                <li className="flex items-start">
-                  <div className="flex-shrink-0 w-2 h-2 mt-2 rounded-full bg-primary"></div>
-                  <p className="ml-3 text-sm">Video content has 2x higher engagement than text-based content</p>
-                </li>
-                <li className="flex items-start">
-                  <div className="flex-shrink-0 w-2 h-2 mt-2 rounded-full bg-primary"></div>
-                  <p className="ml-3 text-sm">Weekend activity accounts for 40% of total platform usage</p>
-                </li>
-              </ul>
-            </div>
-          </div>
-        )
-      default:
-        return null
-    }
+  // Animation variants for cards
+  const cardVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0, transition: { duration: 0.3 } },
+    hover: {
+      y: -5,
+      boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)",
+      transition: { duration: 0.2 },
+    },
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <h1 className="text-2xl font-bold">Reports & Analytics</h1>
-        <button className="flex items-center px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-hover">
-          <Download size={18} className="mr-2" />
-          Export Report
+    <div className="container mx-auto px-4 py-8">
+      {/* Header section */}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4 md:mb-0">Tutoring Dashboard</h1>
+        <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md flex items-center transition-colors duration-200">
+          <span className="mr-2">Schedule New Session</span>
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path
+              fillRule="evenodd"
+              d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+              clipRule="evenodd"
+            />
+          </svg>
         </button>
       </div>
 
-      <div className="flex flex-col md:flex-row md:items-center gap-4 p-4 bg-white dark:bg-dark-card rounded-lg border border-gray-200 dark:border-gray-700">
-        <div className="flex items-center">
-          <Filter size={20} className="mr-2 text-gray-500" />
-          <span className="text-sm font-medium mr-2">Report Type:</span>
-          <select
-            value={reportType}
-            onChange={(e) => setReportType(e.target.value)}
-            className="p-2 rounded-md bg-white dark:bg-dark-card border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-primary"
+      {/* Tutoring sessions grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {tutoringSessions.map((session) => (
+          <motion.div
+            key={session.id}
+            className="bg-white rounded-xl overflow-hidden shadow-md border border-gray-100"
+            variants={cardVariants}
+            initial="initial"
+            animate="animate"
+            whileHover="hover"
           >
-            <option value="performance">Student Performance</option>
-            <option value="courses">Course Analytics</option>
-            <option value="engagement">Engagement Metrics</option>
-          </select>
-        </div>
+            {/* Session thumbnail */}
+            <div className="relative h-48 w-full">
+              <img
+                src={session.thumbnail || "/placeholder.svg"}
+                alt={session.title}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute top-3 right-3">
+                <span
+                  className={`px-3 py-1 rounded-full text-xs font-medium ${
+                    session.domain === "AI & ML"
+                      ? "bg-purple-100 text-purple-800"
+                      : session.domain === "Web Development"
+                        ? "bg-blue-100 text-blue-800"
+                        : session.domain === "Programming"
+                          ? "bg-green-100 text-green-800"
+                          : session.domain === "Cloud Computing"
+                            ? "bg-teal-100 text-teal-800"
+                            : session.domain === "Cryptography"
+                              ? "bg-indigo-100 text-indigo-800"
+                              : "bg-gray-100 text-gray-800"
+                  }`}
+                >
+                  {session.domain}
+                </span>
+              </div>
+            </div>
 
-        <div className="flex items-center">
-          <Calendar size={20} className="mr-2 text-gray-500" />
-          <span className="text-sm font-medium mr-2">Time Range:</span>
-          <select
-            value={timeRange}
-            onChange={(e) => setTimeRange(e.target.value)}
-            className="p-2 rounded-md bg-white dark:bg-dark-card border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-primary"
-          >
-            <option value="3months">Last 3 Months</option>
-            <option value="6months">Last 6 Months</option>
-            <option value="1year">Last Year</option>
-          </select>
-        </div>
+            {/* Session details */}
+            <div className="p-5">
+              <div className="flex justify-between items-start mb-2">
+                <h3 className="text-lg font-semibold text-gray-800 line-clamp-2">{session.title}</h3>
+                <span
+                  className={`ml-2 px-2 py-1 rounded-md text-xs font-medium ${
+                    session.type === "One-on-One"
+                      ? "bg-rose-100 text-rose-700 flex items-center"
+                      : "bg-emerald-100 text-emerald-700 flex items-center"
+                  }`}
+                >
+                  {session.type === "One-on-One" ? (
+                    <>
+                      <User className="h-3 w-3 mr-1" />
+                      {session.type}
+                    </>
+                  ) : (
+                    <>
+                      <Users className="h-3 w-3 mr-1" />
+                      {session.type}
+                    </>
+                  )}
+                </span>
+              </div>
+
+              <p className="text-sm text-gray-600 mb-3">By {session.educator}</p>
+
+              <div className="flex items-center mb-3">
+                <span className="bg-gray-100 text-gray-700 text-xs font-medium px-2 py-1 rounded mr-2">
+                  {session.level}
+                </span>
+                <span className="text-xs text-gray-500">
+                  {session.date} • {session.time}
+                </span>
+              </div>
+
+              <div className="flex justify-between items-center">
+                <div className="text-sm text-gray-600">
+                  <span className="font-medium">
+                    {session.students}/{session.maxStudents}
+                  </span>{" "}
+                  students
+                </div>
+                <button className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-1.5 px-3 rounded-md flex items-center transition-colors duration-200">
+                  <Video className="h-4 w-4 mr-1.5" />
+                  Join Session
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        ))}
       </div>
-
-      {renderReportContent()}
     </div>
   )
 }
 
-export default Reports
-
+export default Reports;

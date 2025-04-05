@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 // import DashboarPage from './pages/DashboarPage';
 import Dashboard from './dashboard/Dashboard'
+import NewEducator from './dashboard/pages/NewEducator';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         {/* <Route path="/dashboard" element={<DashboarPage />} /> */}
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/new-educator" element={<NewEducator />} />
       </Routes>
     </Router>
   );

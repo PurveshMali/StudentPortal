@@ -10,12 +10,14 @@ import Loader from "../components/Loader"
 
 // Import all pages
 import Overview from "../pages/Overview"
-import Users from "../pages/Users"
-import Courses from "../pages/Courses"
+import Users from "../pages/MyCourses"
+import Courses from "../pages/ForumPage"
 import Reports from "../pages/Reports"
-import ForumAnalytics from "../pages/ForumAnalytics"
+import ForumAnalytics from "../pages/NGOPartners"
 import AIInsights from "../pages/AlInsights"
 import Settings from "../pages/Settings"
+import NGOPartners from "../pages/NGOPartners"
+import ForumPage from "../pages/ForumPage"
 
 const DashboardLayout = () => {
   const { theme } = useTheme()
@@ -51,11 +53,11 @@ const DashboardLayout = () => {
       case "courses":
         return <Users />
       case "forum":
-        return <Courses />
+        return <ForumPage />
       case "tutoring":
         return <Reports />
       case "ngoPartners":
-        return <ForumAnalytics />
+        return <NGOPartners />
       case "saved":
         return <AIInsights />
       case "settings":

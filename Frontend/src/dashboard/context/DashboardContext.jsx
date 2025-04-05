@@ -7,10 +7,10 @@ const DashboardContext = createContext()
 export const DashboardProvider = ({ children }) => {
   const [dashboardData, setDashboardData] = useState({
     stats: {
-      totalStudents: 1245,
+      forumPoints: 445,
       activeCourses: 32,
-      completionRate: 78,
-      averageGrade: 85,
+      tutoringSession: 78,
+      achievements: 25,
     },
     recentActivity: [
       { id: 1, user: "Purvesh Mali", action: "Completed course", course: "Advanced Mathematics", time: "2 hours ago" },

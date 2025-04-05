@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header className="bg-white border-b border-gray-200">
+    <header className="bg-white border-b border-gray-200 fixed top-0 left-0 right-0 z-50 shadow-sm mb-5">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
@@ -66,7 +66,7 @@ const Header = () => {
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
             </div>
-            <button className="p-2 relative">
+            {/* <button className="p-2 relative">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6 text-gray-600"
@@ -81,7 +81,7 @@ const Header = () => {
                 <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
               </svg>
               <span className="absolute top-1 right-1 h-2 w-2 bg-red-500 rounded-full"></span>
-            </button>
+            </button> */}
             <button className="p-2 ml-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +96,9 @@ const Header = () => {
                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
               </svg>
             </button>
-            <button className="ml-4 bg-gray-100 rounded-full h-8 w-8"></button>
+            <Link to="/login" className="ml-4 bg-[#9b85d4] hover:bg-[#8774b7] text-white font-bold rounded-sm py-2 px-4 w-auto">
+              Login
+            </Link>
           </div>
         </div>
       </div>
