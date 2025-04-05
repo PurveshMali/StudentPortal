@@ -2,8 +2,21 @@ Login = http://localhost:5000/api/auth/login
 Signup = http://localhost:5000/api/auth/signup
 Learner = http://localhost:5000/api/learner
 Educator = http://localhost:5000/api/educator
-
 in header 
-
 key = Authorization
 value = Bearer jwt_token
+
+
+
+Unlock educator 
+/api/auth/unlock-educator
+
+
+Apply for Course
+POST /api/learner/apply/:courseId
+
+
+
+
+
+
