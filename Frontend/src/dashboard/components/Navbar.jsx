@@ -1,39 +1,35 @@
 "use client";
 
 import { useState } from "react";
-import { useTheme } from "../context/ThemeContext";
 import { useAuth } from "../hooks/useAuth";
 import { Bell, Sun, Moon, Search, ChevronDown } from "lucide-react";
 import Notifications from "./Notifications";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
-  const { theme, toggleTheme } = useTheme();
   const { user } = useAuth();
   const [showNotifications, setShowNotifications] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleEducatorUnlock = () => {
-    navigate("/new-educator");
+  const isEducatorDashboard = location.pathname.includes("educator-dashboard");
+
+  const handleEducatorToggle = () => {
+    setShowUserMenu(false); // Close dropdown after click
+
+    if (!user?.isEducator) {
+      navigate("/new-educator");
+    } else {
+      // Toggle between dashboards
+      navigate(isEducatorDashboard ? "/dashboard" : "/educator-dashboard");
+    }
   };
 
   return (
-    <div
-      className={`fixed top-0 right-0 left-0 ml-64 z-30 ${
-        theme === "dark"
-          ? "bg-dark-card text-primary-foreground"
-          : "bg-white text-gray-800"
-      } border-b ${theme === "dark" ? "border-purple-100" : "border-gray-200"}`}
-    >
+    <div className="fixed top-0 right-0 left-0 ml-64 z-30 bg-dark-card text-primary-foreground bg-white text-gray-800 border-b border-purple-100">
       <div className="flex items-center justify-end px-6 py-3 space-x-4">
-        <button
-          onClick={toggleTheme}
-          className="p-2 rounded-full hover:bg-[#e9e0ff] dark:hover:bg-[#e9e0ff] transition"
-        >
-          {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
-        </button>
-
+        {/* Theme toggle can be added here */}
         <div className="relative">
           <button
             onClick={() => setShowNotifications(!showNotifications)}
@@ -58,28 +54,25 @@ const Navbar = () => {
               className="w-10 h-10 rounded-full border-2 border-primary"
             />
             <div className="hidden md:block">
-                <p className="text-sm font-medium">{user?.firstName || "User"}</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">{user?.role || "Role"}</p>
-              </div>
+              <p className="text-sm font-medium">{user?.firstName || "User"}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                {isEducatorDashboard ? "Educator" : "Learner"}
+              </p>
+            </div>
             <ChevronDown size={16} />
           </button>
 
-
-          {showUserMenu && !user?.isEducator && (
-            <div
-              className={`absolute right-0 mt-2 w-56 py-3 rounded-xl shadow-2xl ${
-                theme === "dark"
-                  ? "bg-purple-900 text-white"
-                  : "bg-white text-gray-800"
-              } z-50 border ${
-                theme === "dark" ? "border-gray-700" : "border-gray-200"
-              }`}
-            >
+          {showUserMenu && (
+            <div className="absolute right-0 mt-2 w-56 py-3 rounded-xl shadow-2xl bg-purple-900 text-white z-50 border border-gray-200">
               <button
-                onClick={handleEducatorUnlock}
-                className="w-full px-4 py-3 text-sm font-semibold text-center text-white bg-gradient-to-r from-indigo-500 to-purple-500 rounded-md hover:from-rple-600 hover:to-indigo-600 transition"
+                onClick={handleEducatorToggle}
+                className="w-full px-4 py-3 text-sm font-semibold text-center text-white bg-gradient-to-r from-indigo-500 to-purple-500 rounded-md hover:from-purple-600 hover:to-indigo-600 transition"
               >
-                Unlock Educator Portal
+                {!user?.isEducator
+                  ? "Unlock Educator Portal"
+                  : isEducatorDashboard
+                  ? "Switch to Learner"
+                  : "Switch to Educator"}
               </button>
             </div>
           )}

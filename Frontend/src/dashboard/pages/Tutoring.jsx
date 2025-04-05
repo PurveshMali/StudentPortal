@@ -2,7 +2,7 @@
 import { motion } from "framer-motion"
 import { Video, Users, User } from "lucide-react"
 
-const Reports = () => {
+const Tutoring = () => {
   // Sample data for tutoring sessions
   const tutoringSessions = [
     {
@@ -17,6 +17,7 @@ const Reports = () => {
       maxStudents: 10,
       thumbnail: "/placeholder.svg?height=200&width=400",
       type: "Group",
+      meetingUrl: "https://calendar.app.google/MbrskCBkfuLLdtAR9"
     },
     {
       id: 2,
@@ -30,6 +31,7 @@ const Reports = () => {
       maxStudents: 8,
       thumbnail: "/placeholder.svg?height=200&width=400",
       type: "Group",
+      meetingUrl: "https://meeting.example.com/react-hooks"
     },
     {
       id: 3,
@@ -43,6 +45,7 @@ const Reports = () => {
       maxStudents: 1,
       thumbnail: "/placeholder.svg?height=200&width=400",
       type: "One-on-One",
+      meetingUrl: "https://meeting.example.com/data-structures"
     },
     {
       id: 4,
@@ -56,6 +59,7 @@ const Reports = () => {
       maxStudents: 12,
       thumbnail: "/placeholder.svg?height=200&width=400",
       type: "Group",
+      meetingUrl: "https://meeting.example.com/cloud-computing"
     },
     {
       id: 5,
@@ -69,6 +73,7 @@ const Reports = () => {
       maxStudents: 1,
       thumbnail: "/placeholder.svg?height=200&width=400",
       type: "One-on-One",
+      meetingUrl: "https://meeting.example.com/blockchain"
     },
     {
       id: 6,
@@ -82,8 +87,14 @@ const Reports = () => {
       maxStudents: 10,
       thumbnail: "/placeholder.svg?height=200&width=400",
       type: "Group",
+      meetingUrl: "https://meeting.example.com/mobile-app-dev"
     },
   ]
+
+  // Handle join session click
+  const handleJoinSession = (meetingUrl) => {
+    window.open(meetingUrl, '_blank');
+  }
 
   // Animation variants for cards
   const cardVariants = {
@@ -195,7 +206,10 @@ const Reports = () => {
                   </span>{" "}
                   students
                 </div>
-                <button className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-1.5 px-3 rounded-md flex items-center transition-colors duration-200">
+                <button 
+                  onClick={() => handleJoinSession(session.meetingUrl)}
+                  className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-1.5 px-3 rounded-md flex items-center transition-colors duration-200"
+                >
                   <Video className="h-4 w-4 mr-1.5" />
                   Join Session
                 </button>
@@ -208,4 +222,4 @@ const Reports = () => {
   )
 }
 
-export default Reports;
+export default Tutoring;

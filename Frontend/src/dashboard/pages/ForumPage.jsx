@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Search, TrendingUp, Clock, User, Plus, ChevronDown } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { Search, TrendingUp, Clock, User, Plus, ChevronDown, X, Send } from 'lucide-react';
 
 const ForumPage = () => {
   // Mock data
@@ -17,6 +17,29 @@ const ForumPage = () => {
       upvotes: 24,
       replies: 7,
       timestamp: "2 hours ago",
+      comments: [
+        {
+          id: "c1",
+          author: "Alex Wilson",
+          avatar: "/placeholder.svg",
+          content: "For backpropagation, think of it as applying the chain rule repeatedly. The key is to calculate partial derivatives with respect to each weight.",
+          timestamp: "1 hour ago"
+        },
+        {
+          id: "c2",
+          author: "Maria Garcia",
+          avatar: "/placeholder.svg",
+          content: "I recommend looking into computational graphs. They make understanding the flow of gradients much clearer.",
+          timestamp: "45 minutes ago"
+        },
+        {
+          id: "c3",
+          author: "Raj Patel",
+          avatar: "/placeholder.svg",
+          content: "Have you checked out Andrew Ng's deep learning course? The math explanations there are excellent.",
+          timestamp: "20 minutes ago"
+        }
+      ]
     },
     {
       id: "2",
@@ -24,13 +47,29 @@ const ForumPage = () => {
       excerpt: "I've completed the basic algorithms course and want to dive deeper. What books or courses would you recommend?",
       author: {
         name: "Michael Wright",
-        avatar: "/placeholder.svg",
+        avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ9CtNtthbAXC6HWPmyTdVGT4jYugq0SspnN8VR54yYoVTyQ7L3Jnjb9tPP6dTtk9i99M&usqp=CAU",
         points: 156,
       },
       tags: ["Algorithms", "Computer Science", "Books"],
       upvotes: 18,
       replies: 12,
       timestamp: "6 hours ago",
+      comments: [
+        {
+          id: "c4",
+          author: "Jennifer Lee",
+          avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ9CtNtthbAXC6HWPmyTdVGT4jYugq0SspnN8VR54yYoVTyQ7L3Jnjb9tPP6dTtk9i99M&usqp=CAU",
+          content: "Introduction to Algorithms by CLRS is the gold standard. Challenging but worth it.",
+          timestamp: "5 hours ago"
+        },
+        {
+          id: "c5",
+          author: "Thomas Johnson",
+          avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ9CtNtthbAXC6HWPmyTdVGT4jYugq0SspnN8VR54yYoVTyQ7L3Jnjb9tPP6dTtk9i99M&usqp=CAU",
+          content: "I'd also recommend Algorithm Design Manual by Skiena. More practical than CLRS.",
+          timestamp: "4 hours ago"
+        }
+      ]
     },
     {
       id: "3",
@@ -38,13 +77,22 @@ const ForumPage = () => {
       excerpt: "My React application is getting slow with large datasets. What are some effective ways to optimize performance?",
       author: {
         name: "Emily Johnson",
-        avatar: "/placeholder.svg",
+        avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ9CtNtthbAXC6HWPmyTdVGT4jYugq0SspnN8VR54yYoVTyQ7L3Jnjb9tPP6dTtk9i99M&usqp=CAU",
         points: 542,
       },
       tags: ["React", "JavaScript", "Performance"],
       upvotes: 42,
       replies: 15,
       timestamp: "1 day ago",
+      comments: [
+        {
+          id: "c6",
+          author: "David Chen",
+          avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ9CtNtthbAXC6HWPmyTdVGT4jYugq0SspnN8VR54yYoVTyQ7L3Jnjb9tPP6dTtk9i99M&usqp=CAU",
+          content: "React.memo and useMemo can prevent unnecessary re-renders. Also look into virtualization for large lists.",
+          timestamp: "20 hours ago"
+        }
+      ]
     },
     {
       id: "4",
@@ -52,13 +100,22 @@ const ForumPage = () => {
       excerpt: "I'm working on a project that needs to scale efficiently. What patterns and practices should I follow?",
       author: {
         name: "David Kim",
-        avatar: "/placeholder.svg",
+        avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ9CtNtthbAXC6HWPmyTdVGT4jYugq0SspnN8VR54yYoVTyQ7L3Jnjb9tPP6dTtk9i99M&usqp=CAU",
         points: 723,
       },
       tags: ["Microservices", "System Design", "Architecture"],
       upvotes: 36,
       replies: 8,
       timestamp: "2 days ago",
+      comments: [
+        {
+          id: "c7",
+          author: "Sophia Martinez",
+          avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ9CtNtthbAXC6HWPmyTdVGT4jYugq0SspnN8VR54yYoVTyQ7L3Jnjb9tPP6dTtk9i99M&usqp=CAU",
+          content: "Domain-driven design is crucial for defining service boundaries properly.",
+          timestamp: "1 day ago"
+        }
+      ]
     },
     {
       id: "5",
@@ -66,13 +123,22 @@ const ForumPage = () => {
       excerpt: "I need help implementing secure authentication with OAuth 2.0 in my Express app. Any guidance would be appreciated.",
       author: {
         name: "Alex Turner",
-        avatar: "/placeholder.svg",
+        avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ9CtNtthbAXC6HWPmyTdVGT4jYugq0SspnN8VR54yYoVTyQ7L3Jnjb9tPP6dTtk9i99M&usqp=CAU",
         points: 412,
       },
       tags: ["Node.js", "Authentication", "OAuth"],
       upvotes: 29,
       replies: 11,
       timestamp: "3 days ago",
+      comments: [
+        {
+          id: "c8",
+          author: "James Wilson",
+          avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ9CtNtthbAXC6HWPmyTdVGT4jYugq0SspnN8VR54yYoVTyQ7L3Jnjb9tPP6dTtk9i99M&usqp=CAU",
+          content: "I recommend the passport-oauth2 package. Made implementation much simpler in my projects.",
+          timestamp: "2 days ago"
+        }
+      ]
     },
   ];
 
@@ -91,6 +157,15 @@ const ForumPage = () => {
       upvotes: 12,
       replies: 5,
       timestamp: "1 week ago",
+      comments: [
+        {
+          id: "c9",
+          author: "Elena Rodriguez",
+          avatar: "/placeholder.svg",
+          content: "Check CUDA and cuDNN versions. They need to match the TensorFlow version you're using.",
+          timestamp: "6 days ago"
+        }
+      ]
     },
     {
       id: "7",
@@ -105,6 +180,15 @@ const ForumPage = () => {
       upvotes: 8,
       replies: 4,
       timestamp: "2 weeks ago",
+      comments: [
+        {
+          id: "c10",
+          author: "Kenji Tanaka",
+          avatar: "/placeholder.svg",
+          content: "Consider using a document DB for course content and SQL for user progress tracking.",
+          timestamp: "10 days ago"
+        }
+      ]
     },
   ];
 
@@ -132,10 +216,14 @@ const ForumPage = () => {
       return acc;
     }, {})
   );
+  const [upvotedPosts, setUpvotedPosts] = useState({}); // Track which posts the user has upvoted
   const [selectedCategory, setSelectedCategory] = useState('All Categories');
   const [selectedRelevance, setSelectedRelevance] = useState('Most Relevant');
   const [selectedTime, setSelectedTime] = useState('All Time');
   const [showNewQuestionModal, setShowNewQuestionModal] = useState(false);
+  const [activeCommentSection, setActiveCommentSection] = useState(null);
+  const [commentText, setCommentText] = useState('');
+  const commentInputRef = useRef(null);
 
   // Handle tab change
   const handleTabChange = (tab) => {
@@ -148,6 +236,8 @@ const ForumPage = () => {
     } else if (tab === 'my-posts') {
       setDisplayPosts([...myPosts]);
     }
+    // Close any open comment section when changing tabs
+    setActiveCommentSection(null);
   };
 
   // Handle search
@@ -170,12 +260,111 @@ const ForumPage = () => {
     setDisplayPosts(filtered);
   };
 
-  // Handle upvote
+  // Handle upvote - now checks if already upvoted
   const handleUpvote = (postId) => {
+    if (upvotedPosts[postId]) {
+      // User already upvoted this post
+      return;
+    }
+    
+    // Update upvote count
     setPostsUpvotes(prev => ({
       ...prev,
       [postId]: prev[postId] + 1
     }));
+    
+    // Mark post as upvoted by this user
+    setUpvotedPosts(prev => ({
+      ...prev,
+      [postId]: true
+    }));
+    
+    // Also update the upvote count in the original data arrays
+    const updatePostsArray = (postsArray) => {
+      return postsArray.map(post => {
+        if (post.id === postId) {
+          return { ...post, upvotes: post.upvotes + 1 };
+        }
+        return post;
+      });
+    };
+    
+    // Update the appropriate array
+    if (activeTab === 'my-posts') {
+      const updatedMyPosts = updatePostsArray(myPosts);
+      // Update display if we're in my-posts tab
+      if (activeTab === 'my-posts') {
+        setDisplayPosts(updatedMyPosts);
+      }
+    } else {
+      const updatedAllPosts = updatePostsArray(allPosts);
+      // Update display if we're not in my-posts tab
+      if (activeTab !== 'my-posts') {
+        setDisplayPosts(updatedAllPosts);
+      }
+    }
+  };
+
+  // Toggle comment section
+  const toggleCommentSection = (postId) => {
+    if (activeCommentSection === postId) {
+      setActiveCommentSection(null);
+    } else {
+      setActiveCommentSection(postId);
+      setCommentText('');
+      // Focus on comment input after a short delay to allow rendering
+      setTimeout(() => {
+        if (commentInputRef.current) {
+          commentInputRef.current.focus();
+        }
+      }, 100);
+    }
+  };
+
+  // Add new comment
+  const addComment = (postId) => {
+    if (!commentText.trim()) return;
+    
+    const newComment = {
+      id: `c${Date.now()}`,
+      author: "Current User",
+      avatar: "/placeholder.svg",
+      content: commentText,
+      timestamp: "Just now"
+    };
+    
+    // Find and update the post with the new comment
+    const updatePostsArray = (postsArray) => {
+      return postsArray.map(post => {
+        if (post.id === postId) {
+          const updatedComments = [...(post.comments || []), newComment];
+          return { 
+            ...post, 
+            comments: updatedComments,
+            replies: post.replies + 1
+          };
+        }
+        return post;
+      });
+    };
+    
+    // Update in the appropriate array and the display
+    if (activeTab === 'my-posts' || myPosts.some(post => post.id === postId)) {
+      const updatedMyPosts = updatePostsArray(myPosts);
+      // If this is one of the user's posts, update myPosts
+      if (activeTab === 'my-posts') {
+        setDisplayPosts(updatedMyPosts);
+      }
+    } else {
+      const updatedAllPosts = updatePostsArray(allPosts);
+      // If this is not one of the user's posts, update allPosts
+      if (activeTab !== 'my-posts') {
+        setDisplayPosts(updatedAllPosts);
+      }
+    }
+    
+    // Clear comment input
+    setCommentText('');
   };
 
   // Handle tag filter
@@ -195,7 +384,7 @@ const ForumPage = () => {
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      // Mock adding a new question
+      // Create new question
       const newPost = {
         id: String(allPosts.length + myPosts.length + 1),
         title: title,
@@ -209,9 +398,10 @@ const ForumPage = () => {
         upvotes: 0,
         replies: 0,
         timestamp: "Just now",
+        comments: []
       };
       
-      // Update state
+      // Update upvotes tracking
       setPostsUpvotes(prev => ({
         ...prev,
         [newPost.id]: 0
@@ -223,6 +413,9 @@ const ForumPage = () => {
       // If currently on my posts tab, update display
       if (activeTab === 'my-posts') {
         setDisplayPosts([...myPosts]);
+      } else if (activeTab === 'recent') {
+        // If on recent tab, add to top
+        setDisplayPosts([newPost, ...displayPosts]);
       }
       
       // Close modal
@@ -280,6 +473,69 @@ const ForumPage = () => {
               </button>
             </div>
           </form>
+        </div>
+      </div>
+    );
+  };
+
+  // Comment Section Component
+  const CommentSection = ({ postId, comments }) => {
+    return (
+      <div className="mt-4 pt-4 border-t border-gray-200">
+        <h3 className="font-medium mb-3">Comments</h3>
+        
+        {/* Comment list */}
+        <div className="space-y-4 mb-4">
+          {comments && comments.length > 0 ? (
+            comments.map(comment => (
+              <div key={comment.id} className="flex space-x-3 pb-3 border-b border-gray-100">
+                <div className="w-8 h-8 bg-gray-200 rounded-full overflow-hidden">
+                  <img 
+                    src={comment.avatar} 
+                    alt={comment.author} 
+                    className="w-full h-full object-cover" 
+                  />
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center space-x-2">
+                    <span className="font-medium">{comment.author}</span>
+                    <span className="text-xs text-gray-500">{comment.timestamp}</span>
+                  </div>
+                  <p className="text-gray-700 mt-1">{comment.content}</p>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-500 text-sm">No comments yet. Be the first to comment!</p>
+          )}
+        </div>
+        
+        {/* Add comment form */}
+        <div className="flex space-x-3">
+          <div className="w-8 h-8 bg-gray-200 rounded-full overflow-hidden">
+            <img 
+              src="/placeholder.svg" 
+              alt="Current User" 
+              className="w-full h-full object-cover" 
+            />
+          </div>
+          <div className="flex-1 relative">
+            <textarea
+              ref={commentInputRef}
+              className="w-full p-2 pl-3 pr-10 border border-gray-300 rounded-lg resize-none"
+              placeholder="Add a comment..."
+              rows="2"
+              value={commentText}
+              onChange={(e) => setCommentText(e.target.value)}
+            ></textarea>
+            <button 
+              className="absolute right-2 bottom-2 text-blue-600 p-1 rounded-full hover:bg-blue-50"
+              onClick={() => addComment(postId)}
+              disabled={!commentText.trim()}
+            >
+              <Send size={18} />
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -385,21 +641,33 @@ const ForumPage = () => {
                 
                 <div className="flex items-center text-gray-600">
                   <button 
-                    className="flex items-center mr-6 hover:text-blue-600"
+                    className={`flex items-center mr-6 ${upvotedPosts[post.id] ? 'text-blue-600' : 'hover:text-blue-600'}`}
                     onClick={() => handleUpvote(post.id)}
+                    disabled={upvotedPosts[post.id]}
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
                     </svg>
                     <span>{postsUpvotes[post.id]} upvotes</span>
                   </button>
-                  <div className="flex items-center">
+                  <button 
+                    className={`flex items-center ${activeCommentSection === post.id ? 'text-blue-600' : ''}`}
+                    onClick={() => toggleCommentSection(post.id)}
+                  >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-1.008c-.897.4-1.75.708-2.917.708-1.1 0-2-.9-2-1.5 0-.2.5-1.6 1.7-3.2C2.266 10.842 2 9.444 2 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 9a1 1 0 11-2 0 1 1 0 012 0zm4 0a1 1 0 11-2 0 1 1 0 012 0zm4 0a1 1 0 11-2 0 1 1 0 012 0z" clipRule="evenodd" />
                     </svg>
                     <span>{post.replies} replies</span>
-                  </div>
+                  </button>
                 </div>
+                
+                {/* Comment Section */}
+                {activeCommentSection === post.id && (
+                  <CommentSection 
+                    postId={post.id} 
+                    comments={post.comments || []} 
+                  />
+                )}
               </div>
             ))}
 
@@ -471,6 +739,25 @@ const ForumPage = () => {
                   <option>This Year</option>
                 </select>
               </div>
+            </div>
+          </div>
+          
+          {/* Popular Tags */}
+          <div>
+            <h2 className="text-lg font-bold mb-4">Popular Tags</h2>
+            <div className="flex flex-wrap gap-2">
+              {popularTags.map((tag, index) => (
+                <span 
+                  key={index} 
+                  className="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm cursor-pointer hover:bg-gray-200"
+                  onClick={() => {
+                    setSearchQuery(tag);
+                    handleSearch({ target: { value: tag } });
+                  }}
+                >
+                  {tag}
+                </span>
+              ))}
             </div>
           </div>
           

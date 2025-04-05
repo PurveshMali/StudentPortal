@@ -8,9 +8,14 @@ const learnerRoutes = require('./routes/learner');
 const educatorRoutes = require('./routes/educatorRoutes');
 const { authenticate, authorize } = require('./middleware/authMiddleware');
 const path = require("path");
+const rewardRoutes = require('./routes/reward');
+const postRoutes = require('./routes/post');
+const replyRoutes = require('./routes/replies');
+const leaderboardRoutes = require('./routes/leaderboard');
+const userRoutes = require('./routes/user');
+const courseRoutes = require('./routes/courseRoutes');
 
 const app = express();
-
 // Middleware
 app.use(express.json());
 app.use(cookieParser());
@@ -27,8 +32,14 @@ app.use((req, res, next) => {
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/learner', learnerRoutes);
-app.use('/api/educator', educatorRoutes);
+app.use("/api/educator", educatorRoutes);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use('/api/posts', postRoutes);
+app.use('/api/replies', replyRoutes);
+app.use('/api/leaderboard', leaderboardRoutes);
+app.use('/api/rewards', rewardRoutes);
+app.use('/api/user', userRoutes);
+app.use('/api/course', courseRoutes);
 
 // Protected route example
 app.get('/api/educator', authenticate, authorize(['educator']), (req, res) => {

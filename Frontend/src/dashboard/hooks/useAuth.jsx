@@ -7,6 +7,7 @@ import axios from "axios";
 
 export const useAuth = () => {
   const [user, setUser] = useState(null);
+  const [educator, setEducator] = useState(null);
   const [loading, setLoading] = useState(true);
  const navigate = useNavigate();
 

@@ -12,12 +12,13 @@ import Loader from "../components/Loader"
 import Overview from "../pages/Overview"
 import Users from "../pages/MyCourses"
 import Courses from "../pages/ForumPage"
-import Reports from "../pages/Reports"
+import Reports from "../pages/Tutoring"
 import ForumAnalytics from "../pages/NGOPartners"
 import AIInsights from "../pages/AlInsights"
 import Settings from "../pages/Settings"
 import NGOPartners from "../pages/NGOPartners"
 import ForumPage from "../pages/ForumPage"
+import Tutoring from "../pages/Tutoring"
 
 const DashboardLayout = () => {
   const { theme } = useTheme()
@@ -55,7 +56,7 @@ const DashboardLayout = () => {
       case "forum":
         return <ForumPage />
       case "tutoring":
-        return <Reports />
+        return <Tutoring />
       case "ngoPartners":
         return <NGOPartners />
       case "saved":
