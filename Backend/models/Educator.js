@@ -1,22 +1,23 @@
-const mongoose = require("mongoose");
-const { v4: uuidv4 } = require("uuid");
+const mongoose = require('mongoose');
 
 const educatorSchema = new mongoose.Schema({
   educatorId: {
     type: String,
-    default: uuidv4,
-    unique: true
+    unique: true,
+    required: true
   },
   userId: {
-    type: String, // UUID from User model
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
     required: true,
-    ref: "User"
+    unique: true
   },
-  currentEducation: String,
-  institute: String,
-  graduationYear: Number,
-  skills: [String],
-  certifications: String
-});
+  name: String,
+  bio: String,
+  skills: [String], // ✅ This is the updated field
+  experience: Number,
+  profilePicture: String,
+}, { timestamps: true });
 
-module.exports = mongoose.model("Educator", educatorSchema);
+
+module.exports = mongoose.model('Educator', educatorSchema);

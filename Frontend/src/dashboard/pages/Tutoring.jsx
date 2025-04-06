@@ -15,7 +15,7 @@ const Tutoring = () => {
       time: "2:00 PM",
       students: 8,
       maxStudents: 10,
-      thumbnail: "/placeholder.svg?height=200&width=400",
+      thumbnail: "https://wallpaperaccess.com/full/4578898.jpg",
       type: "Group",
       meetingUrl: "https://calendar.app.google/MbrskCBkfuLLdtAR9"
     },
@@ -29,7 +29,7 @@ const Tutoring = () => {
       time: "4:30 PM",
       students: 5,
       maxStudents: 8,
-      thumbnail: "/placeholder.svg?height=200&width=400",
+      thumbnail: "https://wallpaperaccess.com/full/1398313.jpg",
       type: "Group",
       meetingUrl: "https://meeting.example.com/react-hooks"
     },
@@ -43,7 +43,7 @@ const Tutoring = () => {
       time: "1:00 PM",
       students: 1,
       maxStudents: 1,
-      thumbnail: "/placeholder.svg?height=200&width=400",
+      thumbnail: "https://tse4.mm.bing.net/th?id=OIP.7u5bQsTw_bllP32M_iK9BgHaEo&pid=Api&P=0&h=180",
       type: "One-on-One",
       meetingUrl: "https://meeting.example.com/data-structures"
     },
@@ -57,7 +57,7 @@ const Tutoring = () => {
       time: "3:00 PM",
       students: 6,
       maxStudents: 12,
-      thumbnail: "/placeholder.svg?height=200&width=400",
+      thumbnail: "https://tse4.mm.bing.net/th?id=OIP.Bh0VJB4reNFUr3eGD3676wHaFj&pid=Api&P=0&h=180",
       type: "Group",
       meetingUrl: "https://meeting.example.com/cloud-computing"
     },
@@ -71,7 +71,7 @@ const Tutoring = () => {
       time: "11:00 AM",
       students: 1,
       maxStudents: 1,
-      thumbnail: "/placeholder.svg?height=200&width=400",
+      thumbnail: "https://wallpaperaccess.com/full/1704555.jpg",
       type: "One-on-One",
       meetingUrl: "https://meeting.example.com/blockchain"
     },
@@ -85,7 +85,7 @@ const Tutoring = () => {
       time: "5:00 PM",
       students: 7,
       maxStudents: 10,
-      thumbnail: "/placeholder.svg?height=200&width=400",
+      thumbnail: "https://tse4.mm.bing.net/th?id=OIP.7u5bQsTw_bllP32M_iK9BgHaEo&pid=Api&P=0&h=180",
       type: "Group",
       meetingUrl: "https://meeting.example.com/mobile-app-dev"
     },

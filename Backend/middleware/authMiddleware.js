@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const User = require('../models/User');
 
 // Load JWT_SECRET from environment variables
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -30,3 +31,6 @@ exports.authorize = (roles) => {
     }
   };
 };
+
+
+

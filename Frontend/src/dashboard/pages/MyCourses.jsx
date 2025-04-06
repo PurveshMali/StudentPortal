@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { Search, Filter, BookOpen, Bookmark, User, Clock } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const MyCourses = () => {
+  const navigate = useNavigate();
+  
   // Mock data from the provided code
   const allCourses = [
     {
@@ -174,11 +177,18 @@ const MyCourses = () => {
     });
   };
 
+  const handleCourseClick = (courseId) => {
+    navigate(`/course/${courseId}`);
+  };
+
   const CourseCard = ({ course }) => {
     const isMyCourse = myCourses.some(myCourse => myCourse.id === course.id);
 
     return (
-      <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+      <div 
+        className="bg-white rounded-lg shadow-sm overflow-hidden cursor-pointer hover:shadow-md transition-shadow duration-200"
+        onClick={() => handleCourseClick(course.id)}
+      >
         <div className="relative">
           <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=500&h=280" alt={course.title} className="w-full h-48 object-cover" />
           <div className="absolute top-4 right-4 bg-white rounded-full px-3 py-1 text-xs font-medium">

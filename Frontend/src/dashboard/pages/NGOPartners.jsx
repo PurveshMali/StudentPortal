@@ -10,7 +10,7 @@ const ngoData = [
     name: "Education For All",
     description:
       "Providing quality education to underprivileged children in rural areas through innovative teaching methods and technology.",
-    logo: "/placeholder.svg?height=200&width=200",
+    logo: "https://imgs.search.brave.com/J_8_OX5bK-_djIjjjv_ogX-f3M5BHlYykzkvPAzptLM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzA1LzM3LzE4Lzc5/LzM2MF9GXzUzNzE4/NzkwN19DOTNiQkpS/NWlDWnpWck03MDVR/TlBBcHByY2JvbUla/ZS5qcGc",
     tags: ["Rural Education", "Technology", "Children"],
     region: "South Asia",
   },
@@ -19,7 +19,7 @@ const ngoData = [
     name: "STEM for Girls",
     description:
       "Empowering young girls through science, technology, engineering, and mathematics education in underserved communities.",
-    logo: "/placeholder.svg?height=200&width=200",
+    logo: "https://imgs.search.brave.com/_OEKgsqS41hq13M4Zn8OhjxwWeRqYnzcOvZ5s-1J0es/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9kMWNz/YXJrejhvYmU5dS5j/bG91ZGZyb250Lm5l/dC9wb3N0ZXJwcmV2/aWV3cy9uZ28tbG9n/by1oZWxwaW5nLWhh/bmRzLWxvZ28tZGVz/aWduLXRlbXBsYXRl/LTI1ZWMyZGU4Nzkx/Y2MzMmZiMzFkN2I4/M2Q4ZDQxOWY2Lmpw/Zz90cz0xNzI2Mzk4/MDI0",
     tags: ["STEM", "Gender Equality", "Youth"],
     region: "Global",
   },
@@ -28,7 +28,7 @@ const ngoData = [
     name: "Digital Literacy Foundation",
     description:
       "Bridging the digital divide by providing computer skills training to communities with limited access to technology.",
-    logo: "/placeholder.svg?height=200&width=200",
+    logo: "https://imgs.search.brave.com/J_8_OX5bK-_djIjjjv_ogX-f3M5BHlYykzkvPAzptLM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzA1LzM3LzE4Lzc5/LzM2MF9GXzUzNzE4/NzkwN19DOTNiQkpS/NWlDWnpWck03MDVR/TlBBcHByY2JvbUla/ZS5qcGc",
     tags: ["Digital Skills", "Adult Education", "Community"],
     region: "North America",
   },
@@ -36,7 +36,7 @@ const ngoData = [
     id: 4,
     name: "Teachers Without Borders",
     description: "Connecting educators globally to share best practices and support schools in developing regions.",
-    logo: "/placeholder.svg?height=200&width=200",
+    logo: "https://imgs.search.brave.com/_OEKgsqS41hq13M4Zn8OhjxwWeRqYnzcOvZ5s-1J0es/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9kMWNz/YXJrejhvYmU5dS5j/bG91ZGZyb250Lm5l/dC9wb3N0ZXJwcmV2/aWV3cy9uZ28tbG9n/by1oZWxwaW5nLWhh/bmRzLWxvZ28tZGVz/aWduLXRlbXBsYXRl/LTI1ZWMyZGU4Nzkx/Y2MzMmZiMzFkN2I4/M2Q4ZDQxOWY2Lmpw/Zz90cz0xNzI2Mzk4/MDI0",
     tags: ["Teacher Training", "Global Education", "Collaboration"],
     region: "Africa",
   },
@@ -44,7 +44,7 @@ const ngoData = [
     id: 5,
     name: "Green Schools Initiative",
     description: "Promoting environmental education and sustainable practices in schools around the world.",
-    logo: "/placeholder.svg?height=200&width=200",
+    logo: "https://imgs.search.brave.com/J_8_OX5bK-_djIjjjv_ogX-f3M5BHlYykzkvPAzptLM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzA1LzM3LzE4Lzc5/LzM2MF9GXzUzNzE4/NzkwN19DOTNiQkpS/NWlDWnpWck03MDVR/TlBBcHByY2JvbUla/ZS5qcGc",
     tags: ["Environmental Education", "Sustainability", "Schools"],
     region: "Europe",
   },
@@ -53,7 +53,7 @@ const ngoData = [
     name: "Inclusive Learning Alliance",
     description:
       "Creating accessible learning environments for students with disabilities through adaptive technologies and teacher training.",
-    logo: "/placeholder.svg?height=200&width=200",
+    logo: "https://imgs.search.brave.com/_OEKgsqS41hq13M4Zn8OhjxwWeRqYnzcOvZ5s-1J0es/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9kMWNz/YXJrejhvYmU5dS5j/bG91ZGZyb250Lm5l/dC9wb3N0ZXJwcmV2/aWV3cy9uZ28tbG9n/by1oZWxwaW5nLWhh/bmRzLWxvZ28tZGVz/aWduLXRlbXBsYXRl/LTI1ZWMyZGU4Nzkx/Y2MzMmZiMzFkN2I4/M2Q4ZDQxOWY2Lmpw/Zz90cz0xNzI2Mzk4/MDI0",
     tags: ["Inclusive Education", "Disability Support", "Accessibility"],
     region: "Asia Pacific",
   },

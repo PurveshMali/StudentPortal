@@ -10,6 +10,8 @@ import NewEducator from './dashboard/pages/NewEducator';
 import SuccessPage from './dashboard/pages/SuccessPage';
 import AddFirstCoursePage from './dashboard/pages/AddFirstCoursePage';
 import EducatorDashboard from './dashboard/pages/EducatorDashboard';
+import CourseDetails from './dashboard/pages/CourseDetails';
+import EducatorForm from './dashboard/pages/EducatorForm';
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
         <Route path="/new-educator" element={<NewEducator />} />
         <Route path="/add-first-course" element={<AddFirstCoursePage />} />
         <Route path="/educator-dashboard" element={<EducatorDashboard />} />
+        <Route path="/course/:courseId" element={<CourseDetails />} />
+        <Route path="/abc" element={<EducatorForm />} />
       </Routes>
     </Router>
   );
