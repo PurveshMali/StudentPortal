@@ -12,6 +12,8 @@ const LoginPage = () => {
     rememberMe: false,
   });
 
+  const APP_URL = process.env.REACT_APP_API_URL;
+
   const navigate = useNavigate(); // Assuming you're using react-router-dom for navigation
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -61,7 +63,7 @@ const LoginPage = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        `${API_URL}/api/auth/login`,
         formData,
         {
           headers: {
