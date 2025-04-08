@@ -12,7 +12,7 @@ const LoginPage = () => {
     rememberMe: false,
   });
 
-  const APP_URL = process.env.REACT_APP_API_URL;
+  const API_URL = process.env.REACT_APP_API_URL;
 
   const navigate = useNavigate(); // Assuming you're using react-router-dom for navigation
   const [errors, setErrors] = useState({});
