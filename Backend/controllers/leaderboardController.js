@@ -1,6 +1,6 @@
 const User = require('../models/User');
 
-exports.getLeaderboard = async (req, res) => {
+exports.getLeaderBoard = async (req, res) => {
   try {
     const topUsers = await User.find({})
       .sort({ 'monthly_activity.upvotes_received': -1 })
