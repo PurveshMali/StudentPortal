@@ -6,7 +6,6 @@ const User = require('../models/User');
 const JWT_SECRET = process.env.JWT_SECRET;
 
 exports.unlockEducator = async (req, res) => {
-    console.log("abc---------------")
   try {
     // 🔐 1. Read token from cookies
     const token = localStorage.getItem('token');

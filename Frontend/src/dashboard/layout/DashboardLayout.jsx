@@ -23,7 +23,7 @@ import Tutoring from "../pages/Tutoring"
 const DashboardLayout = () => {
   const { theme } = useTheme()
   const { user, loading, isAuthenticated } = useAuth()
-  const [activePage, setActivePage] = useState("overview")
+  const [activePage, setActivePage] = useState("courses")
 
   if (loading) {
     return <Loader fullScreen />
@@ -64,7 +64,7 @@ const DashboardLayout = () => {
       case "settings":
         return <Settings />
       default:
-        return <Overview />
+        return <Users />
     }
   }
 

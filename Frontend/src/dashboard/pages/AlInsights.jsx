@@ -17,7 +17,7 @@ const AllInsights = () => {
         author: "Jane Smith",
         duration: "8 hours",
         level: "Beginner",
-        thumbnail: "/placeholder.svg?height=200&width=300",
+        thumbnail: "https://imgs.search.brave.com/NbOWekBS7BuIhLXUS49pdvAfmTdNYlOhlQUmKvR9jO4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jb3Jl/dWkuaW8vcmVhY3Qv/ZG9jcy9pbWFnZXMv/cmVhY3Q0MDAuanBn",
       },
       {
         id: 2,
@@ -25,7 +25,7 @@ const AllInsights = () => {
         author: "John Doe",
         duration: "12 hours",
         level: "Advanced",
-        thumbnail: "/placeholder.svg?height=200&width=300",
+        thumbnail: "https://imgs.search.brave.com/t7GbhNrMWYEpfvyiiS9A0TSYLk-GQBCJO6qQJMk16kU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZGlnaXRhbG9jZWFu/LmNvbS9hcGkvc3Rh/dGljLWNvbnRlbnQv/djEvaW1hZ2VzP3Ny/Yz0vX25leHQvc3Rh/dGljL21lZGlhL2lu/dHJvLXRvLWNsb3Vk/LmQ0OWJjNWY3Lmpw/ZWcmd2lkdGg9MTky/MA",
       },
       {
         id: 3,
@@ -33,7 +33,7 @@ const AllInsights = () => {
         author: "Sarah Johnson",
         duration: "6 hours",
         level: "Intermediate",
-        thumbnail: "/placeholder.svg?height=200&width=300",
+        thumbnail: "https://imgs.search.brave.com/ds6oTskeuNDXXkctI1v-k2kNNZ-Bfj_ipTq3DD-E6zY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/dXhkZXNpZ25pbnN0/aXR1dGUuY29tL2Js/b2cvd3AtY29udGVu/dC91cGxvYWRzLzIw/MjIvMDYvMTQ1X1VY/LURlc2lnbi1Qcmlu/Y2lwbGVzX2Jsb2ct/Mi5wbmc",
       },
     ],
     tutors: [
@@ -43,7 +43,7 @@ const AllInsights = () => {
         session: "Data Science Mentoring",
         datetime: "2023-06-15 14:00",
         domain: "Data Science",
-        avatar: "/placeholder.svg?height=100&width=100",
+        avatar: "https://imgs.search.brave.com/VuWDnxp1vZS4g-N7PeO81LBfEFjprKaBXfRbJsgEtis/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wdWIt/c3RhdGljLmZvdG9y/LmNvbS9hc3NldHMv/cHJvamVjdHMvcGFn/ZXMvMjRmZjA1MmJj/YjUwNDFlZmI1N2I2/ODEyNTM1MWZiNWYv/Zm90b3ItYzFmZWFi/NWI2NDM2NDJkY2Jl/YTQ5NzFhMDVlYzEw/YTEuanBn",
       },
       {
         id: 2,
@@ -51,7 +51,7 @@ const AllInsights = () => {
         session: "Web Development Workshop",
         datetime: "2023-06-18 10:00",
         domain: "Web Dev",
-        avatar: "/placeholder.svg?height=100&width=100",
+        avatar: "https://imgs.search.brave.com/VuWDnxp1vZS4g-N7PeO81LBfEFjprKaBXfRbJsgEtis/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wdWIt/c3RhdGljLmZvdG9y/LmNvbS9hc3NldHMv/cHJvamVjdHMvcGFn/ZXMvMjRmZjA1MmJj/YjUwNDFlZmI1N2I2/ODEyNTM1MWZiNWYv/Zm90b3ItYzFmZWFi/NWI2NDM2NDJkY2Jl/YTQ5NzFhMDVlYzEw/YTEuanBn",
       },
     ],
     forumPosts: [

@@ -12,13 +12,14 @@ const Sidebar = ({ activePage, setActivePage }) => {
   const [collapsed, setCollapsed] = useState(false)
 
   const menuItems = [
-    { id: "overview", label: "Dashboard", icon: BarChart },
+    
     { id: "courses", label: "My Courses", icon: BookOpenText },
     { id: "forum", label: "Forum", icon: MessageSquare },
     { id: "tutoring", label: "Tutoring", icon: GraduationCapIcon },
     { id: "ngoPartners", label: "NGO Partners", icon: UserIcon },
     { id: "saved", label: "Saved", icon: BookmarkIcon },
-    { id: "settings", label: "Settings", icon: Settings },
+    { id: "overview", label: "Analytics", icon: BarChart },
+    { id: "settings", label: "Settings", icon: Settings }
   ]
 
   return (

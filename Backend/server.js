@@ -14,6 +14,7 @@ const replyRoutes = require('./routes/replies');
 const leaderboardRoutes = require('./routes/leaderboard');
 const userRoutes = require('./routes/user');
 const courseRoutes = require('./routes/courseRoutes');
+const forumRoutes = require('./routes/forumRoutes');
 
 const app = express();
 // Middleware
@@ -40,6 +41,7 @@ app.use('/api/leaderboard', leaderboardRoutes);
 app.use('/api/rewards', rewardRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/course', courseRoutes);
+app.use('/api/forum', forumRoutes);
 
 // Protected route example
 app.get('/api/educator', authenticate, authorize(['educator']), (req, res) => {

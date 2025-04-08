@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import ChatComponent from "./ChatComponent";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -101,6 +102,7 @@ const Header = () => {
               </svg>
             </motion.div>
             <motion.button 
+            onClick={<ChatComponent />}
               className="p-2 ml-2"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}

@@ -176,7 +176,7 @@ const CourseDetails = () => {
       <div className="bg-white shadow-sm">
         <div className="max-w-screen-xl mx-auto px-6 py-8">
           <button 
-            onClick={() => navigate('/courses')}
+            onClick={() => navigate('/dashboard')}
             className="flex items-center text-purple-600 mb-6 hover:text-purple-800"
           >
             <ArrowLeft size={18} className="mr-2" />
