@@ -12,7 +12,7 @@ const LoginPage = () => {
     rememberMe: false,
   });
 
-  const API_URL = process.env.REACT_APP_API_URL;
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const navigate = useNavigate(); // Assuming you're using react-router-dom for navigation
   const [errors, setErrors] = useState({});
@@ -62,16 +62,12 @@ const LoginPage = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await axios.post(
-        `${API_URL}/api/auth/login`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true, // Ensures cookies are stored and sent with requests
-        }
-      );
+      const response = await axios.post(`http://localhost:5000/api/auth/login`, formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true, // Ensures cookies are stored and sent with requests
+      });
 
       console.log("Login successful:", response.data);
       alert("Login successful!"); // Handle UI state
@@ -89,12 +85,18 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#f9f6ff] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-black flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Colored blurred lights */}
+      <div className="absolute top-0 left-0 w-72 h-72 bg-pink-500 opacity-30 blur-3xl rounded-full mix-blend-lighten -z-10" />
+      <div className="absolute top-20 right-0 w-96 h-96 bg-blue-500 opacity-20 blur-3xl rounded-full mix-blend-lighten -z-10" />
+      <div className="absolute bottom-0 left-1/3 w-80 h-80 bg-yellow-400 opacity-20 blur-3xl rounded-full mix-blend-lighten -z-10" />
+      <div className="absolute bottom-0 right-10 w-72 h-72 bg-green-400 opacity-20 blur-3xl rounded-full mix-blend-lighten -z-10" />
+
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="flex justify-center">
           <Link
             to={"/"}
-            className="flex items-center text-[#6E59A5] font-bold text-xl"
+            className="flex items-center text-white font-bold text-2xl"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -114,14 +116,14 @@ const LoginPage = () => {
             <span className="ml-2">EduConnect</span>
           </Link>
         </div>
-        <h2 className="mt-6 text-center text-3xl font-bold text-gray-900">
+        <h2 className="mt-6 text-center text-3xl font-bold text-white">
           Sign in to your account
         </h2>
-        <p className="mt-2 text-center text-gray-600">
+        <p className="mt-2 text-center text-gray-400">
           Or{" "}
           <Link
             to={"/signup"}
-            className="font-medium text-[#6E59A5] hover:text-[#4f3986]"
+            className="font-medium text-[#c3b1ff] hover:text-[#af9bff]"
           >
             create a new account
           </Link>
@@ -129,12 +131,12 @@ const LoginPage = () => {
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <div className="bg-white/10 backdrop-blur-md shadow-xl border border-white/10 py-8 px-6 rounded-2xl">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-gray-300"
               >
                 Email address
               </label>
@@ -147,11 +149,11 @@ const LoginPage = () => {
                   value={formData.email}
                   onChange={handleChange}
                   className={`appearance-none block w-full px-3 py-2 border ${
-                    errors.email ? "border-red-300" : "border-gray-300"
-                  } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#af9bff] focus:border-[#af9bff] sm:text-sm`}
+                    errors.email ? "border-red-400" : "border-gray-600"
+                  } bg-black/50 text-white rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#af9bff] focus:border-[#af9bff] sm:text-sm`}
                 />
                 {errors.email && (
-                  <p className="mt-2 text-sm text-red-600">{errors.email}</p>
+                  <p className="mt-2 text-sm text-red-400">{errors.email}</p>
                 )}
               </div>
             </div>
@@ -159,7 +161,7 @@ const LoginPage = () => {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-gray-300"
               >
                 Password
               </label>
@@ -172,11 +174,11 @@ const LoginPage = () => {
                   value={formData.password}
                   onChange={handleChange}
                   className={`appearance-none block w-full px-3 py-2 border ${
-                    errors.password ? "border-red-300" : "border-gray-300"
-                  } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#af9bff] focus:border-[#af9bff] sm:text-sm`}
+                    errors.password ? "border-red-400" : "border-gray-600"
+                  } bg-black/50 text-white rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#af9bff] focus:border-[#af9bff] sm:text-sm`}
                 />
                 {errors.password && (
-                  <p className="mt-2 text-sm text-red-600">{errors.password}</p>
+                  <p className="mt-2 text-sm text-red-400">{errors.password}</p>
                 )}
               </div>
             </div>
@@ -189,11 +191,11 @@ const LoginPage = () => {
                   type="checkbox"
                   checked={formData.rememberMe}
                   onChange={handleChange}
-                  className="h-4 w-4 text-[#af9bff] focus:ring-[#af9bff] border-gray-300 rounded"
+                  className="h-4 w-4 text-[#af9bff] focus:ring-[#af9bff] border-gray-600 bg-black rounded"
                 />
                 <label
                   htmlFor="remember-me"
-                  className="ml-2 block text-sm text-gray-900"
+                  className="ml-2 block text-sm text-gray-300"
                 >
                   Remember me
                 </label>
@@ -202,7 +204,7 @@ const LoginPage = () => {
               <div className="text-sm">
                 <Link
                   to={"/"}
-                  className="font-medium text-[#8b71f0] hover:[#af9bff]"
+                  className="font-medium text-[#c3b1ff] hover:text-[#af9bff]"
                 >
                   Forgot your password?
                 </Link>
@@ -213,7 +215,7 @@ const LoginPage = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#6E59A5] hover:bg-[#77689e] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
+                className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-md text-sm font-medium text-white bg-[#6E59A5] hover:bg-[#8c79d9] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#af9bff] ${
                   isSubmitting ? "opacity-70 cursor-not-allowed" : ""
                 }`}
               >
@@ -229,72 +231,67 @@ const LoginPage = () => {
           <div className="mt-6">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300"></div>
+                <div className="w-full border-t border-gray-700" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">
+                <span className="px-2 bg-[#1A1A1A] text-gray-400">
                   Or continue with
                 </span>
               </div>
             </div>
 
             <div className="mt-6 grid grid-cols-2 gap-3">
-              <div>
-                <Link
-                  to={"/"}
-                  href="#"
-                  className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+              <Link
+                to={"/"}
+                href="#"
+                className="w-full inline-flex justify-center py-2 px-4 border border-gray-100 rounded-md shadow-sm bg-black text-sm font-medium text-gray-200 hover:bg-[#0f0f0f]"
+              >
+                <svg
+                  className="h-5 w-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
                 >
-                  <svg
-                    className="h-5 w-5"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M22.0367422,12 C22.0367422,11.3607602 21.9811382,10.7404063 21.8781318,10.1409091 L12,10.1409091 L12,14.0363636 L17.6322897,14.0363636 C17.4231524,15.1881818 16.7244793,16.1683168 15.6954173,16.8090909 L15.6954173,19.0454545 L19.1881318,19.0454545 C21.0060793,17.4072727 22.0367422,14.9563636 22.0367422,12 L22.0367422,12 Z"
-                      clipRule="evenodd"
-                    />
-                    <path
-                      fillRule="evenodd"
-                      d="M12,22 C14.9528207,22 17.4354793,21.0545455 19.1881318,19.0454545 L15.6954173,16.8090909 C14.8089639,17.3909091 13.6253837,17.7272727 12,17.7272727 C9.13131318,17.7272727 6.70901033,15.8127273 5.84677686,13.2 L2.23131318,13.2 L2.23131318,15.5090909 C3.97371033,19.2954545 7.69061033,22 12,22 L12,22 Z"
-                      clipRule="evenodd"
-                    />
-                    <path
-                      fillRule="evenodd"
-                      d="M5.84677686,13.2 C5.62790355,12.6 5.50677686,11.9581818 5.50677686,11.3 C5.50677686,10.6418182 5.62790355,10 5.84677686,9.4 L5.84677686,7.09090909 L2.23131318,7.09090909 C1.59213223,8.36363636 1.22313223,9.80454545 1.22313223,11.3 C1.22313223,12.7954545 1.59213223,14.2363636 2.23131318,15.5090909 L5.84677686,13.2 L5.84677686,13.2 Z"
-                      clipRule="evenodd"
-                    />
-                    <path
-                      fillRule="evenodd"
-                      d="M12,5.07272727 C13.4660793,5.07272727 14.7813132,5.54545455 15.8231132,6.52727273 L18.9177422,3.43636364 C17.4354793,2.07272727 14.9528207,1.2 12,1.2 C7.69061033,1.2 3.97371033,3.90454545 2.23131318,7.69090909 L5.84677686,10 C6.70901033,7.38727273 9.13131318,5.07272727 12,5.07272727 L12,5.07272727 Z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </Link>
-              </div>
-
-              <div>
-                <Link
-                  to={"/"}
-                  href="#"
-                  className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+                  <path
+                    fillRule="evenodd"
+                    d="M22.0367422,12 C22.0367422,11.3607602 21.9811382,10.7404063 21.8781318,10.1409091 L12,10.1409091 L12,14.0363636 L17.6322897,14.0363636 C17.4231524,15.1881818 16.7244793,16.1683168 15.6954173,16.8090909 L15.6954173,19.0454545 L19.1881318,19.0454545 C21.0060793,17.4072727 22.0367422,14.9563636 22.0367422,12 L22.0367422,12 Z"
+                    clipRule="evenodd"
+                  />
+                  <path
+                    fillRule="evenodd"
+                    d="M12,22 C14.9528207,22 17.4354793,21.0545455 19.1881318,19.0454545 L15.6954173,16.8090909 C14.8089639,17.3909091 13.6253837,17.7272727 12,17.7272727 C9.13131318,17.7272727 6.70901033,15.8127273 5.84677686,13.2 L2.23131318,13.2 L2.23131318,15.5090909 C3.97371033,19.2954545 7.69061033,22 12,22 L12,22 Z"
+                    clipRule="evenodd"
+                  />
+                  <path
+                    fillRule="evenodd"
+                    d="M5.84677686,13.2 C5.62790355,12.6 5.50677686,11.9581818 5.50677686,11.3 C5.50677686,10.6418182 5.62790355,10 5.84677686,9.4 L5.84677686,7.09090909 L2.23131318,7.09090909 C1.59213223,8.36363636 1.22313223,9.80454545 1.22313223,11.3 C1.22313223,12.7954545 1.59213223,14.2363636 2.23131318,15.5090909 L5.84677686,13.2 L5.84677686,13.2 Z"
+                    clipRule="evenodd"
+                  />
+                  <path
+                    fillRule="evenodd"
+                    d="M12,5.07272727 C13.4660793,5.07272727 14.7813132,5.54545455 15.8231132,6.52727273 L18.9177422,3.43636364 C17.4354793,2.07272727 14.9528207,1.2 12,1.2 C7.69061033,1.2 3.97371033,3.90454545 2.23131318,7.69090909 L5.84677686,10 C6.70901033,7.38727273 9.13131318,5.07272727 12,5.07272727 L12,5.07272727 Z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </Link>
+              <Link
+                to={"/"}
+                href="#"
+                className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+              >
+                <svg
+                  className="h-5 w-5"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  aria-hidden="true"
                 >
-                  <svg
-                    className="h-5 w-5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10,0 C4.4771525,0 0,4.47593818 0,10 C0,14.4194126 2.86666667,18.1660079 6.83333333,19.4879328 C7.33333333,19.5807279 7.5,19.2763928 7.5,19.0055401 C7.5,18.7610745 7.5,18.1417426 7.5,17.3055401 C4.71666667,17.9138029 4.13333333,15.9666031 4.13333333,15.9666031 C3.68333333,14.8105483 3.025,14.5062132 3.025,14.5062132 C2.11666667,13.8979505 3.09166667,13.9143376 3.09166667,13.9143376 C4.10833333,13.9879328 4.64166667,14.9334826 4.64166667,14.9334826 C5.55,16.4572354 6.98333333,16.0164126 7.54166667,15.7619471 C7.63333333,15.1208143 7.89166667,14.6799916 8.175,14.4194126 C5.95833333,14.1588335 3.625,13.3062132 3.625,9.47593818 C3.625,8.38642344 4.01666667,7.49334826 4.65833333,6.79505483 C4.55,6.54087209 4.20833333,5.52188335 4.75833333,4.14642344 C4.75833333,4.14642344 5.59166667,3.87593818 7.5,5.16799916 C8.29166667,4.94642344 9.15,4.83563558 10,4.83563558 C10.85,4.83563558 11.7083333,4.94642344 12.5,5.16799916 C14.4083333,3.87593818 15.2416667,4.14642344 15.2416667,4.14642344 C15.7916667,5.52188335 15.45,6.54087209 15.3416667,6.79505483 C15.9833333,7.49334826 16.375,8.38642344 16.375,9.47593818 C16.375,13.3225998 14.0333333,14.1505483 11.8083333,14.4029255 C12.1583333,14.7236477 12.5,15.3484955 12.5,16.2908143 C12.5,17.6334826 12.5,18.6688335 12.5,19.0055401 C12.5,19.2763928 12.6583333,19.5889131 13.1666667,19.4879328 C17.1333333,18.1577228 20,14.4194126 20,10 C20,4.47593818 15.5228475,0 10,0 Z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </Link>
-              </div>
+                  <path
+                    fillRule="evenodd"
+                    d="M10,0 C4.4771525,0 0,4.47593818 0,10 C0,14.4194126 2.86666667,18.1660079 6.83333333,19.4879328 C7.33333333,19.5807279 7.5,19.2763928 7.5,19.0055401 C7.5,18.7610745 7.5,18.1417426 7.5,17.3055401 C4.71666667,17.9138029 4.13333333,15.9666031 4.13333333,15.9666031 C3.68333333,14.8105483 3.025,14.5062132 3.025,14.5062132 C2.11666667,13.8979505 3.09166667,13.9143376 3.09166667,13.9143376 C4.10833333,13.9879328 4.64166667,14.9334826 4.64166667,14.9334826 C5.55,16.4572354 6.98333333,16.0164126 7.54166667,15.7619471 C7.63333333,15.1208143 7.89166667,14.6799916 8.175,14.4194126 C5.95833333,14.1588335 3.625,13.3062132 3.625,9.47593818 C3.625,8.38642344 4.01666667,7.49334826 4.65833333,6.79505483 C4.55,6.54087209 4.20833333,5.52188335 4.75833333,4.14642344 C4.75833333,4.14642344 5.59166667,3.87593818 7.5,5.16799916 C8.29166667,4.94642344 9.15,4.83563558 10,4.83563558 C10.85,4.83563558 11.7083333,4.94642344 12.5,5.16799916 C14.4083333,3.87593818 15.2416667,4.14642344 15.2416667,4.14642344 C15.7916667,5.52188335 15.45,6.54087209 15.3416667,6.79505483 C15.9833333,7.49334826 16.375,8.38642344 16.375,9.47593818 C16.375,13.3225998 14.0333333,14.1505483 11.8083333,14.4029255 C12.1583333,14.7236477 12.5,15.3484955 12.5,16.2908143 C12.5,17.6334826 12.5,18.6688335 12.5,19.0055401 C12.5,19.2763928 12.6583333,19.5889131 13.1666667,19.4879328 C17.1333333,18.1577228 20,14.4194126 20,10 C20,4.47593818 15.5228475,0 10,0 Z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </Link>
             </div>
           </div>
         </div>

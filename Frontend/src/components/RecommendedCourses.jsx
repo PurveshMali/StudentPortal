@@ -84,7 +84,7 @@ const RecommendedCourses = () => {
   };
 
   return (
-    <section className="py-12 px-4 bg-[#141B2D]">
+    <section className="py-12 px-4 bg-transparent">
       <div className="max-w-7xl mx-auto">
         <motion.div 
           initial="hidden"

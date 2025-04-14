@@ -4,15 +4,17 @@ import HeroSection from '../components/HeroSection';
 import FeaturedCourses from '../components/FeaturedCourses';
 import PlatformFeatures from '../components/PlatformFeatures';
 import RecommendedCourses from '../components/RecommendedCourses';
+import Footer from '../dashboard/components/Footer';
 
 const LandingPage = () => {
   return (
-    <div className="min-h-screen bg-purple-50">
+    <div className="min-h-screen bg-black">
       <Header />
       <HeroSection />
       <FeaturedCourses />
       <PlatformFeatures />
-      <RecommendedCourses />
+      {/* <RecommendedCourses /> */}
+      <Footer />
     </div>
   )
 }

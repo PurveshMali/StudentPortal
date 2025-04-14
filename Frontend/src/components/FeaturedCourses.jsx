@@ -66,67 +66,87 @@ const FeaturedCourses = () => {
   };
 
   return (
-    <section className="py-16 px-4 bg-gray-900 text-white">
-      <motion.div 
+    <section className="py-20 px-6 bg-transparent text-white relative overflow-hidden">
+      <motion.div
         className="max-w-7xl mx-auto"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={containerVariants}
       >
-        <div className="flex justify-between items-center mb-8">
+        {/* Header */}
+        <div className="flex justify-between items-center mb-12 flex-wrap gap-4">
           <motion.div variants={itemVariants}>
-            <h2 className="text-3xl font-bold text-white mb-2">Featured Courses</h2>
-            <p className="text-gray-400">Explore top courses created by students and educators</p>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-100 mb-2 tracking-tight">
+              Featured Courses
+            </h2>
+            <p className="text-gray-400 text-base">
+              Explore top courses created by students and educators
+            </p>
           </motion.div>
-          <motion.a 
-            href="/courses" 
-            className="flex items-center text-[#9b85d4] hover:text-[#b19de3] font-medium group"
+
+          <motion.a
+            href="/courses"
+            className="flex items-center text-[#B497FF] hover:text-[#D6C0FF] font-semibold group text-base"
             variants={itemVariants}
-            whileHover={{ x: 3 }}
+            whileHover={{ x: 5 }}
           >
-            View all courses 
-            <span className="ml-1 transition-transform duration-300 group-hover:translate-x-1">→</span>
+            View all courses
+            <span className="ml-2 transform transition-transform duration-300 group-hover:translate-x-1">
+              →
+            </span>
           </motion.a>
         </div>
 
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+        {/* Course Cards */}
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
           variants={containerVariants}
         >
           {courses.map((course) => (
             <motion.div
               key={course.id}
-              className="bg-gray-800 rounded-lg overflow-hidden border border-gray-700 hover:border-[#6E59A5]/50 shadow-lg shadow-purple-900/5 hover:shadow-purple-900/20 transition-all duration-300 flex flex-col"
               variants={itemVariants}
               whileHover={{ y: -5, transition: { duration: 0.3 } }}
+              className="group rounded-sm bg-gradient-to-br from-[#1a1a2e] via-[#1f1f30] to-[#12121c] border border-[#6E59A5]/20 backdrop-blur-sm shadow-md hover:shadow-purple-900/40 transition-all duration-300 overflow-hidden flex flex-col"
             >
-              <div className="relative">
-                <img src={course.image || "/placeholder.svg"} alt={course.title} className="w-full h-48 object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-60"></div>
-                <div className="absolute top-3 right-3 bg-gray-900/70 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-medium text-white">
+              {/* Image + Tag */}
+              <div className="relative h-48 overflow-hidden">
+                <img
+                  src={course.image || "/placeholder.svg"}
+                  alt={course.title}
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div className="absolute top-3 right-3 bg-[#1e1e2f]/70 px-3 py-1 rounded-full text-xs font-medium text-white border border-[#6E59A5]/30">
                   {course.category}
                 </div>
               </div>
-              <div className="p-5 flex flex-col flex-grow bg-gradient-to-b from-gray-800 to-gray-800/95">
+
+              {/* Card Content */}
+              <div className="flex flex-col flex-grow px-5 py-6">
                 <div className="mb-3">
-                  <span className="inline-block bg-[#6E59A5]/20 border border-[#6E59A5]/30 text-[#9b85d4] rounded-full px-3 py-1 text-sm font-medium">
+                  <span className="inline-block bg-[#6E59A5]/20 border border-[#6E59A5]/30 text-[#B497FF] rounded-full px-3 py-1 text-xs font-semibold tracking-wide uppercase">
                     {course.level}
                   </span>
                 </div>
-                <h3 className="text-xl font-bold mb-2 text-white">{course.title}</h3>
-                <p className="text-gray-400 mb-4">By {course.instructor}</p>
-                <div className="mt-auto flex justify-between items-center text-gray-400 text-sm">
-                  <div className="flex items-center">
+
+                <h3 className="text-lg sm:text-xl font-bold mb-1 text-white line-clamp-2">
+                  {course.title}
+                </h3>
+                <p className="text-gray-400 text-sm mb-4">By {course.instructor}</p>
+
+                {/* Meta Info */}
+                <div className="mt-auto flex justify-between items-center text-gray-400 text-xs">
+                  <div className="flex items-center gap-1">
                     <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-4 w-4 mr-1"
-                      viewBox="0 0 24 24"
+                      className="h-4 w-4"
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
+                      viewBox="0 0 24 24"
                     >
                       <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                       <circle cx="9" cy="7" r="4"></circle>
@@ -135,16 +155,16 @@ const FeaturedCourses = () => {
                     </svg>
                     <span>{course.students.toLocaleString()} students</span>
                   </div>
-                  <div className="flex items-center">
+
+                  <div className="flex items-center gap-1">
                     <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-4 w-4 mr-1"
-                      viewBox="0 0 24 24"
+                      className="h-4 w-4"
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
+                      viewBox="0 0 24 24"
                     >
                       <circle cx="12" cy="12" r="10"></circle>
                       <polyline points="12 6 12 12 16 14"></polyline>
