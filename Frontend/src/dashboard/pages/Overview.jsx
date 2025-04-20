@@ -1,8 +1,7 @@
 "use client";
+
 import { useDashboardData } from "../hooks/useDashboardData";
 import WidgetCard from "../components/WidgetCard";
-import Chart from "../components/Chart";
-import Table from "../components/Table";
 import Loader from "../components/Loader";
 import { Users, BookOpen, Award, BarChart2 } from "lucide-react";
 import {
@@ -23,14 +22,7 @@ const Overview = () => {
     return <Loader />;
   }
 
-  const { stats, recentActivity, performanceData } = dashboardData;
-
-  const activityColumns = [
-    { key: "user", label: "User" },
-    { key: "action", label: "Action" },
-    { key: "course", label: "Course" },
-    { key: "time", label: "Time", sortable: true },
-  ];
+  const { stats } = dashboardData;
 
   const activityData = [
     { name: "Mon", Course: 2, Forum: 5, Tutoring: 1 },
@@ -50,12 +42,11 @@ const Overview = () => {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 bg-black min-h-screen p-6 text-white">
+      {/* Header and Widgets */}
       <div>
-        <h1 className="text-2xl font-bold mt-4">Dashboard</h1>
-        <p className="mb-6">
-          Welcome back! Here's an overview of your learning journey.
-        </p>
+        <h1 className="text-2xl font-bold mt-4 text-white">Dashboard</h1>
+        <p className="mb-6 text-gray-400">Welcome back! Here's an overview of your learning journey.</p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <WidgetCard
@@ -64,6 +55,7 @@ const Overview = () => {
             icon={Users}
             trend="up"
             trendValue="12% from last month"
+            dark
           />
           <WidgetCard
             title="Forum Points"
@@ -71,6 +63,7 @@ const Overview = () => {
             icon={BookOpen}
             trend="up"
             trendValue="3 new courses"
+            dark
           />
           <WidgetCard
             title="Tutoring Sessions"
@@ -78,6 +71,7 @@ const Overview = () => {
             icon={Award}
             trend="up"
             trendValue="5% increase"
+            dark
           />
           <WidgetCard
             title="Achievements"
@@ -85,60 +79,49 @@ const Overview = () => {
             icon={BarChart2}
             trend="down"
             trendValue="2 points"
+            dark
           />
         </div>
       </div>
 
-      <div className="grid grid-cols-[60%_40%] lg:grid-cols-[55%_45%] gap-6 text-[#5bd08f] h-100">
-        {/* <Chart
-          type="area"
-          data={performanceData}
-          title="Student & Course Growth"
-          dataKeys={["students", "courses"]}
-          colors={["#6E59A5", "#5bd08f"]}
-        /> */}
-        <ResponsiveContainer width="100%" height="100%">
-          {/* <h1 className="text-2xl font-semibold text-black mb-4">Weekly Activity</h1> */}
-          <BarChart data={activityData} barCategoryGap="20%" barSize={20}>
-            <CartesianGrid strokeDasharray="3 3" vertical={false} />
-            <XAxis dataKey="name" />
-            <YAxis domain={[0, 12]} tickCount={7} />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="Course" fill="#6A5ACD" name="Course" />
-            <Bar dataKey="Forum" fill="#1E90FF" name="Forum" />
-            <Bar dataKey="Tutoring" fill="#FF8C42" name="Tutoring" />
-          </BarChart>
-        </ResponsiveContainer>
+      {/* Chart + Learning Goals */}
+      <div className="grid grid-cols-1 lg:grid-cols-[60%_40%] gap-6">
+        <div className="bg-gray-800 p-4 rounded-xl shadow-md">
+          <h2 className="text-lg font-semibold mb-4">Weekly Activity</h2>
+          <ResponsiveContainer width="100%" height={250}>
+            <BarChart data={activityData} barCategoryGap="20%" barSize={20}>
+              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#444" />
+              <XAxis dataKey="name" stroke="#ccc" />
+              <YAxis domain={[0, 12]} tickCount={7} stroke="#ccc" />
+              <Tooltip contentStyle={{ backgroundColor: "#1f2937", borderColor: "#444" }} labelStyle={{ color: "#fff" }} />
+              <Legend wrapperStyle={{ color: "#fff" }} />
+              <Bar dataKey="Course" fill="#7B68EE" name="Course" />
+              <Bar dataKey="Forum" fill="#00BFFF" name="Forum" />
+              <Bar dataKey="Tutoring" fill="#FFA500" name="Tutoring" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
 
-        {/* <Table
-          data={recentActivity}
-          columns={activityColumns}
-          title="Recent Activity"
-          pagination={true}
-          itemsPerPage={5}
-        /> */}
-
-<div className="mx-auto bg-white shadow-md rounded-xl p-5 w-125">
-      <h2 className="text-2xl font-semibold text-black">Learning Goals</h2>
-      <p className="text-gray-500 text-sm">Track your progress on set goals</p>
-      <div className="mt-4 space-y-4">
-        {goals.map((goal, index) => (
-          <div key={index}>
-            <div className="flex justify-between text-sm font-base text-gray-500">
-              <span>{goal.name}</span>
-              <span>{goal.progress}%</span>
-            </div>
-            <div className="w-full h-2 bg-gray-300 rounded-full mt-1">
-              <div
-                className="h-full rounded-full bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-500"
-                style={{ width: `${goal.progress}%` }}
-              />
-            </div>
+        <div className="bg-gray-800 shadow-md rounded-xl p-5">
+          <h2 className="text-xl font-semibold">Learning Goals</h2>
+          <p className="text-gray-400 text-sm">Track your progress on set goals</p>
+          <div className="mt-4 space-y-4">
+            {goals.map((goal, index) => (
+              <div key={index}>
+                <div className="flex justify-between text-sm font-medium text-gray-300">
+                  <span>{goal.name}</span>
+                  <span>{goal.progress}%</span>
+                </div>
+                <div className="w-full h-2 bg-gray-700 rounded-full mt-1">
+                  <div
+                    className="h-full rounded-full bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-500"
+                    style={{ width: `${goal.progress}%` }}
+                  />
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-    </div>
+        </div>
       </div>
     </div>
   );

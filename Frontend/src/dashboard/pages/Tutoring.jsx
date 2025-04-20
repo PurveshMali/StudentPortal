@@ -1,6 +1,6 @@
-"use client"
-import { motion } from "framer-motion"
-import { Video, Users, User } from "lucide-react"
+"use client";
+import { motion } from "framer-motion";
+import { Video, Users, User } from "lucide-react";
 
 const Tutoring = () => {
   // Sample data for tutoring sessions
@@ -17,7 +17,7 @@ const Tutoring = () => {
       maxStudents: 10,
       thumbnail: "https://wallpaperaccess.com/full/4578898.jpg",
       type: "Group",
-      meetingUrl: "https://calendar.app.google/MbrskCBkfuLLdtAR9"
+      meetingUrl: "https://calendar.app.google/MbrskCBkfuLLdtAR9",
     },
     {
       id: 2,
@@ -31,7 +31,7 @@ const Tutoring = () => {
       maxStudents: 8,
       thumbnail: "https://wallpaperaccess.com/full/1398313.jpg",
       type: "Group",
-      meetingUrl: "https://meeting.example.com/react-hooks"
+      meetingUrl: "https://meeting.example.com/react-hooks",
     },
     {
       id: 3,
@@ -43,9 +43,10 @@ const Tutoring = () => {
       time: "1:00 PM",
       students: 1,
       maxStudents: 1,
-      thumbnail: "https://tse4.mm.bing.net/th?id=OIP.7u5bQsTw_bllP32M_iK9BgHaEo&pid=Api&P=0&h=180",
+      thumbnail:
+        "https://tse4.mm.bing.net/th?id=OIP.7u5bQsTw_bllP32M_iK9BgHaEo&pid=Api&P=0&h=180",
       type: "One-on-One",
-      meetingUrl: "https://meeting.example.com/data-structures"
+      meetingUrl: "https://meeting.example.com/data-structures",
     },
     {
       id: 4,
@@ -57,9 +58,10 @@ const Tutoring = () => {
       time: "3:00 PM",
       students: 6,
       maxStudents: 12,
-      thumbnail: "https://tse4.mm.bing.net/th?id=OIP.Bh0VJB4reNFUr3eGD3676wHaFj&pid=Api&P=0&h=180",
+      thumbnail:
+        "https://tse4.mm.bing.net/th?id=OIP.Bh0VJB4reNFUr3eGD3676wHaFj&pid=Api&P=0&h=180",
       type: "Group",
-      meetingUrl: "https://meeting.example.com/cloud-computing"
+      meetingUrl: "https://meeting.example.com/cloud-computing",
     },
     {
       id: 5,
@@ -73,7 +75,7 @@ const Tutoring = () => {
       maxStudents: 1,
       thumbnail: "https://wallpaperaccess.com/full/1704555.jpg",
       type: "One-on-One",
-      meetingUrl: "https://meeting.example.com/blockchain"
+      meetingUrl: "https://meeting.example.com/blockchain",
     },
     {
       id: 6,
@@ -85,16 +87,17 @@ const Tutoring = () => {
       time: "5:00 PM",
       students: 7,
       maxStudents: 10,
-      thumbnail: "https://tse4.mm.bing.net/th?id=OIP.7u5bQsTw_bllP32M_iK9BgHaEo&pid=Api&P=0&h=180",
+      thumbnail:
+        "https://tse4.mm.bing.net/th?id=OIP.7u5bQsTw_bllP32M_iK9BgHaEo&pid=Api&P=0&h=180",
       type: "Group",
-      meetingUrl: "https://meeting.example.com/mobile-app-dev"
+      meetingUrl: "https://meeting.example.com/mobile-app-dev",
     },
-  ]
+  ];
 
   // Handle join session click
   const handleJoinSession = (meetingUrl) => {
-    window.open(meetingUrl, '_blank');
-  }
+    window.open(meetingUrl, "_blank");
+  };
 
   // Animation variants for cards
   const cardVariants = {
@@ -105,16 +108,23 @@ const Tutoring = () => {
       boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)",
       transition: { duration: 0.2 },
     },
-  }
+  };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 bg-[#121212] text-white">
       {/* Header section */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4 md:mb-0">Tutoring Dashboard</h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-100 mb-4 md:mb-0">
+          Tutoring Dashboard
+        </h1>
         <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md flex items-center transition-colors duration-200">
           <span className="mr-2">Schedule New Session</span>
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
             <path
               fillRule="evenodd"
               d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
@@ -129,7 +139,7 @@ const Tutoring = () => {
         {tutoringSessions.map((session) => (
           <motion.div
             key={session.id}
-            className="bg-white rounded-xl overflow-hidden shadow-md border border-gray-100"
+            className="bg-[#1A1A1A] rounded-xl overflow-hidden shadow-md border border-[#2A2A2A]"
             variants={cardVariants}
             initial="initial"
             animate="animate"
@@ -148,14 +158,14 @@ const Tutoring = () => {
                     session.domain === "AI & ML"
                       ? "bg-purple-100 text-purple-800"
                       : session.domain === "Web Development"
-                        ? "bg-blue-100 text-blue-800"
-                        : session.domain === "Programming"
-                          ? "bg-green-100 text-green-800"
-                          : session.domain === "Cloud Computing"
-                            ? "bg-teal-100 text-teal-800"
-                            : session.domain === "Cryptography"
-                              ? "bg-indigo-100 text-indigo-800"
-                              : "bg-gray-100 text-gray-800"
+                      ? "bg-blue-100 text-blue-800"
+                      : session.domain === "Programming"
+                      ? "bg-green-100 text-green-800"
+                      : session.domain === "Cloud Computing"
+                      ? "bg-teal-100 text-teal-800"
+                      : session.domain === "Cryptography"
+                      ? "bg-indigo-100 text-indigo-800"
+                      : "bg-gray-100 text-gray-800"
                   }`}
                 >
                   {session.domain}
@@ -166,7 +176,9 @@ const Tutoring = () => {
             {/* Session details */}
             <div className="p-5">
               <div className="flex justify-between items-start mb-2">
-                <h3 className="text-lg font-semibold text-gray-800 line-clamp-2">{session.title}</h3>
+                <h3 className="text-lg font-semibold text-gray-100 line-clamp-2">
+                  {session.title}
+                </h3>
                 <span
                   className={`ml-2 px-2 py-1 rounded-md text-xs font-medium ${
                     session.type === "One-on-One"
@@ -188,10 +200,12 @@ const Tutoring = () => {
                 </span>
               </div>
 
-              <p className="text-sm text-gray-600 mb-3">By {session.educator}</p>
+              <p className="text-sm text-gray-400 mb-3">
+                By {session.educator}
+              </p>
 
               <div className="flex items-center mb-3">
-                <span className="bg-gray-100 text-gray-700 text-xs font-medium px-2 py-1 rounded mr-2">
+                <span className="bg-gray-700 text-gray-300 text-xs font-medium px-2 py-1 rounded mr-2">
                   {session.level}
                 </span>
                 <span className="text-xs text-gray-500">
@@ -200,13 +214,13 @@ const Tutoring = () => {
               </div>
 
               <div className="flex justify-between items-center">
-                <div className="text-sm text-gray-600">
+                <div className="text-sm text-gray-400">
                   <span className="font-medium">
                     {session.students}/{session.maxStudents}
                   </span>{" "}
                   students
                 </div>
-                <button 
+                <button
                   onClick={() => handleJoinSession(session.meetingUrl)}
                   className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-1.5 px-3 rounded-md flex items-center transition-colors duration-200"
                 >
@@ -219,7 +233,7 @@ const Tutoring = () => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Tutoring;

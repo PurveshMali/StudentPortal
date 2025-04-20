@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useTheme } from "../context/ThemeContext"
-import { useAuth } from "../hooks/useAuth"
-import { Bell, Lock, User, Globe, Eye, EyeOff } from "lucide-react"
+import { useState } from "react";
+import { useTheme } from "../context/ThemeContext";
+import { useAuth } from "../hooks/useAuth";
+import { Bell, Lock, User, Globe, Eye, EyeOff } from "lucide-react";
 
 const Settings = () => {
-  const { theme, toggleTheme } = useTheme()
-  const { user } = useAuth()
-  const [showPassword, setShowPassword] = useState(false)
-  const [activeTab, setActiveTab] = useState("profile")
+  const { theme, toggleTheme } = useTheme();
+  const { user } = useAuth();
+  const [showPassword, setShowPassword] = useState(false);
+  const [activeTab, setActiveTab] = useState("profile");
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -17,42 +17,55 @@ const Settings = () => {
         return (
           <div className="space-y-6">
             <div>
-              <h3 className="text-lg font-medium mb-4">Profile Information</h3>
+              <h3 className="text-lg font-medium mb-4 text-white">
+                Profile Information
+              </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium mb-1">Full Name</label>
+                  <label className="block text-sm font-medium mb-1 text-white">
+                    Full Name
+                  </label>
                   <input
                     type="text"
                     defaultValue={user?.name || ""}
-                    className="w-full p-2 border border-purple-300 dark:border-purple-600 rounded-md bg-white dark:bg-dark-card"
+                    className="w-full p-2 border border-purple-600 dark:border-purple-400 rounded-md bg-black dark:bg-[#121212] text-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">Email Address</label>
+                  <label className="block text-sm font-medium mb-1 text-white">
+                    Email Address
+                  </label>
                   <input
                     type="email"
                     defaultValue={user?.email || ""}
-                    className="w-full p-2 border border-purple-300 dark:border-purple-600 rounded-md bg-white dark:bg-dark-card"
+                    className="w-full p-2 border border-purple-600 dark:border-purple-400 rounded-md bg-black dark:bg-[#121212] text-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">Role</label>
+                  <label className="block text-sm font-medium mb-1 text-white">
+                    Role
+                  </label>
                   <input
                     type="text"
                     defaultValue={user?.role || ""}
                     disabled
-                    className="w-full p-2 border border-purple-300 dark:border-purple-600 rounded-md bg-purple-100 dark:bg-[#9089d0] text-white"
+                    className="w-full p-2 border border-purple-600 dark:border-purple-400 rounded-md bg-purple-600 dark:bg-purple-700 text-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">Profile Picture</label>
+                  <label className="block text-sm font-medium mb-1 text-white">
+                    Profile Picture
+                  </label>
                   <div className="flex items-center space-x-4">
                     <img
-                      src={user?.avatar || "https://w7.pngwing.com/pngs/867/694/png-transparent-user-profile-default-computer-icons-network-video-recorder-avatar-cartoon-maker-blue-text-logo-thumbnail.png"}
+                      src={
+                        user?.avatar ||
+                        "https://w7.pngwing.com/pngs/867/694/png-transparent-user-profile-default-computer-icons-network-video-recorder-avatar-cartoon-maker-blue-text-logo-thumbnail.png"
+                      }
                       alt="Profile"
                       className="w-12 h-12 rounded-full"
                     />
-                    <button className="px-3 py-1 text-sm bg-primary text-white rounded-md hover:bg-primary-hover">
+                    <button className="px-3 py-1 text-sm bg-purple-600 text-white rounded-md hover:bg-purple-700">
                       Change
                     </button>
                   </div>
@@ -61,33 +74,37 @@ const Settings = () => {
             </div>
 
             <div>
-              <h3 className="text-lg font-medium mb-4">About Me</h3>
+              <h3 className="text-lg font-medium mb-4 text-white">About Me</h3>
               <textarea
                 rows={4}
-                className="w-full p-2 border border-purple-300 dark:border-purple-600 rounded-md bg-white dark:bg-dark-card"
+                className="w-full p-2 border border-purple-600 dark:border-purple-400 rounded-md bg-black dark:bg-[#121212] text-white"
                 placeholder="Write a short bio..."
               ></textarea>
             </div>
 
             <div className="flex justify-end">
-              <button className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-hover">
+              <button className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700">
                 Save Profile
               </button>
             </div>
           </div>
-        )
+        );
       case "security":
         return (
           <div className="space-y-6">
             <div>
-              <h3 className="text-lg font-medium mb-4">Change Password</h3>
+              <h3 className="text-lg font-medium mb-4 text-white">
+                Change Password
+              </h3>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium mb-1">Current Password</label>
+                  <label className="block text-sm font-medium mb-1 text-white">
+                    Current Password
+                  </label>
                   <div className="relative">
                     <input
                       type={showPassword ? "text" : "password"}
-                      className="w-full p-2 pr-10 border border-purple-300 dark:border-purple-600 rounded-md bg-white dark:bg-dark-card"
+                      className="w-full p-2 pr-10 border border-purple-600 dark:border-purple-400 rounded-md bg-black dark:bg-[#121212] text-white"
                     />
                     <button
                       onClick={() => setShowPassword(!showPassword)}
@@ -98,46 +115,58 @@ const Settings = () => {
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">New Password</label>
+                  <label className="block text-sm font-medium mb-1 text-white">
+                    New Password
+                  </label>
                   <input
                     type="password"
-                    className="w-full p-2 border border-purple-300 dark:border-purple-600 rounded-md bg-white dark:bg-dark-card"
+                    className="w-full p-2 border border-purple-600 dark:border-purple-400 rounded-md bg-black dark:bg-[#121212] text-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">Confirm New Password</label>
+                  <label className="block text-sm font-medium mb-1 text-white">
+                    Confirm New Password
+                  </label>
                   <input
                     type="password"
-                    className="w-full p-2 border border-purple-300 dark:border-purple-600 rounded-md bg-white dark:bg-dark-card"
+                    className="w-full p-2 border border-purple-600 dark:border-purple-400 rounded-md bg-black dark:bg-[#121212] text-white"
                   />
                 </div>
               </div>
             </div>
 
             <div>
-              <h3 className="text-lg font-medium mb-4">Two-Factor Authentication</h3>
-              <div className="flex items-center justify-between p-4 border border-purple-300 dark:border-purple-600 rounded-md">
+              <h3 className="text-lg font-medium mb-4 text-white">
+                Two-Factor Authentication
+              </h3>
+              <div className="flex items-center justify-between p-4 border border-purple-600 dark:border-purple-400 rounded-md bg-black dark:bg-[#121212]">
                 <div>
-                  <p className="font-medium">Enhance your account security</p>
+                  <p className="font-medium text-white">
+                    Enhance your account security
+                  </p>
                   <p className="text-sm text-purple-500 dark:text-purple-400">
                     Add an extra layer of security to your account
                   </p>
                 </div>
-                <button className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-hover">Enable</button>
+                <button className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700">
+                  Enable
+                </button>
               </div>
             </div>
 
             <div className="flex justify-end">
-              <button className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-hover">
+              <button className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700">
                 Save Changes
               </button>
             </div>
           </div>
-        )
+        );
       case "notifications":
         return (
           <div className="space-y-6">
-            <h3 className="text-lg font-medium mb-4">Notification Preferences</h3>
+            <h3 className="text-lg font-medium mb-4">
+              Notification Preferences
+            </h3>
 
             <div className="space-y-4">
               <div className="flex items-center justify-between p-4 border border-purple-300 dark:border-purple-600 rounded-md">
@@ -145,11 +174,17 @@ const Settings = () => {
                   <Bell className="w-5 h-5 mr-3 text-purple-500" />
                   <div>
                     <p className="font-medium">Course Updates</p>
-                    <p className="text-sm text-purple-500 dark:text-purple-400">Get notified when courses are updated</p>
+                    <p className="text-sm text-purple-500 dark:text-purple-400">
+                      Get notified when courses are updated
+                    </p>
                   </div>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
-                  <input type="checkbox" className="sr-only peer" defaultChecked />
+                  <input
+                    type="checkbox"
+                    className="sr-only peer"
+                    defaultChecked
+                  />
                   <div className="w-11 h-6 bg-purple-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/20 rounded-full peer dark:bg-purple-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-purple-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-purple-600 peer-checked:bg-primary"></div>
                 </label>
               </div>
@@ -159,11 +194,17 @@ const Settings = () => {
                   <Bell className="w-5 h-5 mr-3 text-purple-500" />
                   <div>
                     <p className="font-medium">Assignment Reminders</p>
-                    <p className="text-sm text-purple-500 dark:text-purple-400">Get notified about upcoming assignments</p>
+                    <p className="text-sm text-purple-500 dark:text-purple-400">
+                      Get notified about upcoming assignments
+                    </p>
                   </div>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
-                  <input type="checkbox" className="sr-only peer" defaultChecked />
+                  <input
+                    type="checkbox"
+                    className="sr-only peer"
+                    defaultChecked
+                  />
                   <div className="w-11 h-6 bg-purple-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/20 rounded-full peer dark:bg-purple-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-purple-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-purple-600 peer-checked:bg-primary"></div>
                 </label>
               </div>
@@ -179,7 +220,11 @@ const Settings = () => {
                   </div>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
-                  <input type="checkbox" className="sr-only peer" defaultChecked />
+                  <input
+                    type="checkbox"
+                    className="sr-only peer"
+                    defaultChecked
+                  />
                   <div className="w-11 h-6 bg-purple-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/20 rounded-full peer dark:bg-purple-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-purple-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-purple-600 peer-checked:bg-primary"></div>
                 </label>
               </div>
@@ -189,7 +234,9 @@ const Settings = () => {
                   <Bell className="w-5 h-5 mr-3 text-purple-500" />
                   <div>
                     <p className="font-medium">Email Notifications</p>
-                    <p className="text-sm text-purple-500 dark:text-purple-400">Receive email notifications</p>
+                    <p className="text-sm text-purple-500 dark:text-purple-400">
+                      Receive email notifications
+                    </p>
                   </div>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
@@ -205,7 +252,7 @@ const Settings = () => {
               </button>
             </div>
           </div>
-        )
+        );
       case "appearance":
         return (
           <div className="space-y-6">
@@ -217,7 +264,9 @@ const Settings = () => {
                   <div className="w-10 h-10 rounded-md bg-white border border-purple-300 mr-3"></div>
                   <div>
                     <p className="font-medium">Light Mode</p>
-                    <p className="text-sm text-purple-500 dark:text-purple-400">Light background with dark text</p>
+                    <p className="text-sm text-purple-500 dark:text-purple-400">
+                      Light background with dark text
+                    </p>
                   </div>
                 </div>
                 <input
@@ -234,7 +283,9 @@ const Settings = () => {
                   <div className="w-10 h-10 rounded-md bg-purple-800 border border-purple-700 mr-3"></div>
                   <div>
                     <p className="font-medium">Dark Mode</p>
-                    <p className="text-sm text-purple-500 dark:text-purple-400">Dark background with light text</p>
+                    <p className="text-sm text-purple-500 dark:text-purple-400">
+                      Dark background with light text
+                    </p>
                   </div>
                 </div>
                 <input
@@ -262,70 +313,77 @@ const Settings = () => {
               </div>
             </div>
           </div>
-        )
+        );
       default:
-        return null
+        return null;
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Settings</h1>
+      <h1 className="text-2xl font-bold text-white">Settings</h1>
 
       <div className="flex flex-col md:flex-row gap-6">
         <div className="md:w-64 flex-shrink-0">
-          <div className="bg-white dark:bg-dark-card rounded-lg border border-purple-200 dark:border-purple-700 overflow-hidden">
-            <div className="p-4 border-b border-purple-200 dark:border-purple-700">
-              <h3 className="font-medium">Settings</h3>
+          <div className="bg-gray-800 dark:bg-dark-card rounded-lg border border-purple-700 dark:border-purple-700 overflow-hidden">
+            <div className="p-4 border-b border-purple-700">
+              <h3 className="font-medium text-white">Settings</h3>
             </div>
             <nav className="p-2">
               <button
                 onClick={() => setActiveTab("profile")}
                 className={`flex items-center w-full px-3 py-2 rounded-md text-left ${
-                  activeTab === "profile" ? "bg-primary text-white" : "hover:bg-[#9089d0] dark:hover:bg-[#e3e0ff]"
+                  activeTab === "profile"
+                    ? "bg-primary text-white"
+                    : "hover:bg-[#9089d0] dark:hover:bg-[#e3e0ff]"
                 }`}
               >
-                <User size={18} className="mr-2" />
+                <User size={18} className="mr-2 text-white" />
                 Profile
               </button>
               <button
                 onClick={() => setActiveTab("security")}
                 className={`flex items-center w-full px-3 py-2 rounded-md text-left ${
-                  activeTab === "security" ? "bg-primary text-white" : "hover:bg-[#9089d0] dark:hover:bg-[#9089d0]"
+                  activeTab === "security"
+                    ? "bg-primary text-white"
+                    : "hover:bg-[#9089d0] dark:hover:bg-[#9089d0]"
                 }`}
               >
-                <Lock size={18} className="mr-2" />
+                <Lock size={18} className="mr-2 text-white" />
                 Security
               </button>
               <button
                 onClick={() => setActiveTab("notifications")}
                 className={`flex items-center w-full px-3 py-2 rounded-md text-left ${
-                  activeTab === "notifications" ? "bg-primary text-white" : "hover:bg-[#9089d0] dark:hover:bg-purple-700"
+                  activeTab === "notifications"
+                    ? "bg-primary text-white"
+                    : "hover:bg-[#9089d0] dark:hover:bg-purple-700"
                 }`}
               >
-                <Bell size={18} className="mr-2" />
+                <Bell size={18} className="mr-2 text-white" />
                 Notifications
               </button>
               <button
                 onClick={() => setActiveTab("appearance")}
                 className={`flex items-center w-full px-3 py-2 rounded-md text-left ${
-                  activeTab === "appearance" ? "bg-primary text-white" : "hover:bg-purple-100 dark:hover:bg-purple-700"
+                  activeTab === "appearance"
+                    ? "bg-primary text-white"
+                    : "hover:bg-purple-100 dark:hover:bg-purple-700"
                 }`}
               >
-                <Globe size={18} className="mr-2" />
+                <Globe size={18} className="mr-2 text-white" />
                 Appearance
               </button>
             </nav>
           </div>
         </div>
 
-        <div className="flex-1 bg-white dark:bg-dark-card rounded-lg border border-purple-200 dark:border-purple-700 p-6">
+        <div className="flex-1 bg-gray-800 dark:bg-dark-card rounded-lg border border-purple-700 dark:border-purple-700 p-6">
           {renderTabContent()}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Settings
-
+export default Settings;

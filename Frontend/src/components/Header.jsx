@@ -30,7 +30,7 @@ const Header = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
+            <motion.div className="group" whileHover={{ scale: 1.0 }} transition={{ duration: 0.2 }}>
               <Link to="/" className="flex items-center text-[#9b85d4] font-bold text-xl">
                 <motion.svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +42,7 @@ const Header = () => {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="lucide lucide-book-open"
+                  className="lucide lucide-book-open group-hover:scale-110 group-hover:rotate-3 transition-transform duration-200"
                   whileHover={{ rotate: 5 }}
                   transition={{ duration: 0.2 }}
                 >
@@ -61,7 +61,6 @@ const Header = () => {
                 key={item}
                 href={`/${item.toLowerCase().replace(" ", "-")}`}
                 className="text-gray-300 hover:text-[#9b85d4] relative px-1 py-2"
-                whileHover={{ y: -2 }}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index, duration: 0.5 }}

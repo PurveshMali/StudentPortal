@@ -1,236 +1,196 @@
-import React, { useState, useRef } from "react";
-import {
-  Search,
-  TrendingUp,
-  Clock,
-  User,
-  Plus,
-  ChevronDown,
-  X,
-  Send,
-  Link,
-  Upload,
-} from "lucide-react";
+import { Zap } from "lucide-react";
+import React, { useState } from "react";
 
 const ForumPage = () => {
-  // Mock data
-  const allPosts = [
+  // Sample dummy data
+  const [questions, setQuestions] = useState([
     {
-      id: "1",
+      id: 1,
       title: "How to implement a neural network from scratch?",
-      excerpt:
+      content:
         "I'm struggling with backpropagation in my neural network implementation. Can someone guide me through the math?",
       author: {
         name: "Sarah Chen",
-        avatar:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ9CtNtthbAXC6HWPmyTdVGT4jYugq0SspnN8VR54yYoVTyQ7L3Jnjb9tPP6dTtk9i99M&usqp=CAU",
+        avatar: "https://i.pravatar.cc/150?img=32",
         points: 328,
       },
       tags: ["Machine Learning", "Neural Networks", "Mathematics"],
-      upvotes: 24,
-      replies: 7,
-      timestamp: "2 hours ago",
-      comments: [
+      upvotes: 25,
+      replies: [
         {
-          id: "c1",
-          author: "Alex Wilson",
-          avatar: "/placeholder.svg",
+          id: 1,
           content:
             "For backpropagation, think of it as applying the chain rule repeatedly. The key is to calculate partial derivatives with respect to each weight.",
+          author: {
+            name: "Alex Wilson",
+            avatar: "https://i.pravatar.cc/150?img=53",
+            points: 215,
+          },
           timestamp: "1 hour ago",
-        },
-        {
-          id: "c2",
-          author: "Maria Garcia",
-          avatar: "/placeholder.svg",
-          content:
-            "I recommend looking into computational graphs. They make understanding the flow of gradients much clearer.",
-          timestamp: "45 minutes ago",
-        },
-        {
-          id: "c3",
-          author: "Raj Patel",
-          avatar: "/placeholder.svg",
-          content:
-            "Have you checked out Andrew Ng's deep learning course? The math explanations there are excellent.",
-          timestamp: "20 minutes ago",
+          upvotes: 8,
         },
       ],
+      timestamp: "2 hours ago",
+      attachments: [],
     },
     {
-      id: "2",
-      title: "Best resources for learning advanced algorithms?",
-      excerpt:
-        "I've completed the basic algorithms course and want to dive deeper. What books or courses would you recommend?",
+      id: 2,
+      title: "Best approach to teaching calculus to high school students?",
+      content:
+        "I'm a new teacher and wondering what methods work best for introducing calculus concepts to high school students who struggle with abstract thinking.",
       author: {
-        name: "Michael Wright",
-        avatar:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ9CtNtthbAXC6HWPmyTdVGT4jYugq0SspnN8VR54yYoVTyQ7L3Jnjb9tPP6dTtk9i99M&usqp=CAU",
+        name: "James Miller",
+        avatar: "https://i.pravatar.cc/150?img=68",
         points: 156,
       },
-      tags: ["Algorithms", "Computer Science", "Books"],
+      tags: ["Teaching", "Mathematics", "Education"],
       upvotes: 18,
-      replies: 12,
+      replies: [],
+      timestamp: "8 hours ago",
+      attachments: ["calculus_intro.pdf"],
+    },
+    {
+      id: 3,
+      title: "What are the benefits of using GraphQL over REST?",
+      content:
+        "I've been using REST APIs for years, but I keep hearing about GraphQL. Is it worth switching?",
+      author: {
+        name: "Mira Patel",
+        avatar: "https://i.pravatar.cc/150?img=45",
+        points: 202,
+      },
+      tags: ["Web Development", "API", "GraphQL"],
+      upvotes: 30,
+      replies: [
+        {
+          id: 1,
+          content:
+            "GraphQL gives more control to the client and reduces over-fetching. It’s great for complex UIs.",
+          author: {
+            name: "Nikhil Rao",
+            avatar: "https://i.pravatar.cc/150?img=21",
+            points: 180,
+          },
+          timestamp: "3 hours ago",
+          upvotes: 10,
+        },
+      ],
       timestamp: "6 hours ago",
-      comments: [
-        {
-          id: "c4",
-          author: "Jennifer Lee",
-          avatar:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ9CtNtthbAXC6HWPmyTdVGT4jYugq0SspnN8VR54yYoVTyQ7L3Jnjb9tPP6dTtk9i99M&usqp=CAU",
-          content:
-            "Introduction to Algorithms by CLRS is the gold standard. Challenging but worth it.",
-          timestamp: "5 hours ago",
-        },
-        {
-          id: "c5",
-          author: "Thomas Johnson",
-          avatar:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ9CtNtthbAXC6HWPmyTdVGT4jYugq0SspnN8VR54yYoVTyQ7L3Jnjb9tPP6dTtk9i99M&usqp=CAU",
-          content:
-            "I'd also recommend Algorithm Design Manual by Skiena. More practical than CLRS.",
-          timestamp: "4 hours ago",
-        },
-      ],
+      attachments: [],
     },
     {
-      id: "3",
-      title: "React performance optimization techniques?",
-      excerpt:
-        "My React application is getting slow with large datasets. What are some effective ways to optimize performance?",
+      id: 4,
+      title: "Struggling with recursive functions in Python",
+      content:
+        "Can someone explain in simple terms how recursion works? I get confused when it calls itself.",
       author: {
-        name: "Emily Johnson",
-        avatar:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ9CtNtthbAXC6HWPmyTdVGT4jYugq0SspnN8VR54yYoVTyQ7L3Jnjb9tPP6dTtk9i99M&usqp=CAU",
-        points: 542,
+        name: "Leo Martinez",
+        avatar: "https://i.pravatar.cc/150?img=11",
+        points: 78,
       },
-      tags: ["React", "JavaScript", "Performance"],
-      upvotes: 42,
-      replies: 15,
-      timestamp: "1 day ago",
-      comments: [
-        {
-          id: "c6",
-          author: "David Chen",
-          avatar:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ9CtNtthbAXC6HWPmyTdVGT4jYugq0SspnN8VR54yYoVTyQ7L3Jnjb9tPP6dTtk9i99M&usqp=CAU",
-          content:
-            "React.memo and useMemo can prevent unnecessary re-renders. Also look into virtualization for large lists.",
-          timestamp: "20 hours ago",
-        },
-      ],
-    },
-    {
-      id: "4",
-      title: "How to design a scalable microservices architecture?",
-      excerpt:
-        "I'm working on a project that needs to scale efficiently. What patterns and practices should I follow?",
-      author: {
-        name: "David Kim",
-        avatar:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ9CtNtthbAXC6HWPmyTdVGT4jYugq0SspnN8VR54yYoVTyQ7L3Jnjb9tPP6dTtk9i99M&usqp=CAU",
-        points: 723,
-      },
-      tags: ["Microservices", "System Design", "Architecture"],
-      upvotes: 36,
-      replies: 8,
-      timestamp: "2 days ago",
-      comments: [
-        {
-          id: "c7",
-          author: "Sophia Martinez",
-          avatar:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ9CtNtthbAXC6HWPmyTdVGT4jYugq0SspnN8VR54yYoVTyQ7L3Jnjb9tPP6dTtk9i99M&usqp=CAU",
-          content:
-            "Domain-driven design is crucial for defining service boundaries properly.",
-          timestamp: "1 day ago",
-        },
-      ],
-    },
-    {
-      id: "5",
-      title: "Implementing OAuth 2.0 in a Node.js application",
-      excerpt:
-        "I need help implementing secure authentication with OAuth 2.0 in my Express app. Any guidance would be appreciated.",
-      author: {
-        name: "Alex Turner",
-        avatar:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ9CtNtthbAXC6HWPmyTdVGT4jYugq0SspnN8VR54yYoVTyQ7L3Jnjb9tPP6dTtk9i99M&usqp=CAU",
-        points: 412,
-      },
-      tags: ["Node.js", "Authentication", "OAuth"],
-      upvotes: 29,
-      replies: 11,
-      timestamp: "3 days ago",
-      comments: [
-        {
-          id: "c8",
-          author: "James Wilson",
-          avatar:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ9CtNtthbAXC6HWPmyTdVGT4jYugq0SspnN8VR54yYoVTyQ7L3Jnjb9tPP6dTtk9i99M&usqp=CAU",
-          content:
-            "I recommend the passport-oauth2 package. Made implementation much simpler in my projects.",
-          timestamp: "2 days ago",
-        },
-      ],
-    },
-  ];
-
-  // Mock data for my posts
-  const myPosts = [
-    {
-      id: "6",
-      title: "Struggling with Tensorflow GPU setup",
-      excerpt:
-        "I'm having issues configuring Tensorflow to use my NVIDIA GPU. Has anyone else faced similar problems?",
-      author: {
-        name: "Current User",
-        avatar: "/placeholder.svg",
-        points: 275,
-      },
-      tags: ["Tensorflow", "GPU", "Deep Learning"],
+      tags: ["Python", "Recursion", "Programming Basics"],
       upvotes: 12,
-      replies: 5,
-      timestamp: "1 week ago",
-      comments: [
-        {
-          id: "c9",
-          author: "Elena Rodriguez",
-          avatar: "/placeholder.svg",
-          content:
-            "Check CUDA and cuDNN versions. They need to match the TensorFlow version you're using.",
-          timestamp: "6 days ago",
-        },
-      ],
+      replies: [],
+      timestamp: "1 day ago",
+      attachments: [],
     },
     {
-      id: "7",
-      title: "Database design for educational platform",
-      excerpt:
-        "Working on an educational platform and need advice on the database schema design. Particularly for handling course content and user progress.",
+      id: 5,
+      title: "Figma prototype is not clickable—what am I missing?",
+      content:
+        "I’ve linked the frames in prototype mode but clicking doesn’t transition. Is there a trick to it?",
       author: {
-        name: "Current User",
-        avatar: "/placeholder.svg",
-        points: 275,
+        name: "Aisha Khan",
+        avatar: "https://i.pravatar.cc/150?img=70",
+        points: 134,
       },
-      tags: ["Database", "SQL", "System Design"],
-      upvotes: 8,
-      replies: 4,
-      timestamp: "2 weeks ago",
-      comments: [
+      tags: ["UI/UX", "Figma", "Design Tools"],
+      upvotes: 9,
+      replies: [
         {
-          id: "c10",
-          author: "Kenji Tanaka",
-          avatar: "/placeholder.svg",
+          id: 1,
           content:
-            "Consider using a document DB for course content and SQL for user progress tracking.",
-          timestamp: "10 days ago",
+            "Make sure you are in Prototype tab and set the interaction type. Also double-check flow starting points.",
+          author: {
+            name: "Rajiv Bansal",
+            avatar: "https://i.pravatar.cc/150?img=59",
+            points: 142,
+          },
+          timestamp: "5 hours ago",
+          upvotes: 5,
         },
       ],
+      timestamp: "15 hours ago",
+      attachments: ["figma_prototype.png"],
     },
-  ];
+    {
+      id: 6,
+      title: "Tips for optimizing React app performance?",
+      content:
+        "My React app is lagging when rendering lists with 1000+ items. What can I do to improve performance?",
+      author: {
+        name: "Emily Zhao",
+        avatar: "https://i.pravatar.cc/150?img=38",
+        points: 290,
+      },
+      tags: ["React", "Performance", "Frontend"],
+      upvotes: 22,
+      replies: [],
+      timestamp: "3 hours ago",
+      attachments: [],
+    },
+    {
+      id: 7,
+      title: "Resources for learning Data Structures in C++?",
+      content:
+        "Can anyone recommend beginner-friendly tutorials or books for learning data structures in C++?",
+      author: {
+        name: "Mohit Sinha",
+        avatar: "https://i.pravatar.cc/150?img=18",
+        points: 110,
+      },
+      tags: ["C++", "Data Structures", "Learning"],
+      upvotes: 16,
+      replies: [
+        {
+          id: 1,
+          content:
+            "Try 'Data Structures and Algorithm Analysis in C++' by Mark Allen Weiss. It’s beginner-friendly.",
+          author: {
+            name: "Sneha Gupta",
+            avatar: "https://i.pravatar.cc/150?img=29",
+            points: 175,
+          },
+          timestamp: "7 hours ago",
+          upvotes: 7,
+        },
+      ],
+      timestamp: "12 hours ago",
+      attachments: ["ds_book_suggestion.txt"],
+    },
+  ]);
 
-  // Popular tags
+  const [currentTab, setCurrentTab] = useState("popular");
+  const [newQuestion, setNewQuestion] = useState({
+    title: "",
+    content: "",
+    tags: "",
+  });
+  const [showNewQuestionForm, setShowNewQuestionForm] = useState(false);
+  const [currentUser] = useState({
+    name: "Purvesh",
+    avatar: "https://i.pravatar.cc/150?img=12",
+    points: 120,
+    role: "Learner",
+  });
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All Categories");
+  const [sortBy, setSelectedSortBy] = useState("Most Relevant");
+  const [timeFilter, setSelectedTimeFilter] = useState("All Time");
+  const [newReply, setNewReply] = useState("");
+  const [replyingToId, setReplyingToId] = useState(null);
+  const [uploadedFiles, setUploadedFiles] = useState([]);
+
   const popularTags = [
     "JavaScript",
     "Python",
@@ -244,669 +204,755 @@ const ForumPage = () => {
     "Cloud Computing",
   ];
 
-  // State
-  const [activeTab, setActiveTab] = useState("popular");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [displayPosts, setDisplayPosts] = useState([...allPosts]);
-  const [postsUpvotes, setPostsUpvotes] = useState(
-    [...allPosts, ...myPosts].reduce((acc, post) => {
-      acc[post.id] = post.upvotes;
-      return acc;
-    }, {})
-  );
-  const [upvotedPosts, setUpvotedPosts] = useState({}); // Track which posts the user has upvoted
-  const [selectedCategory, setSelectedCategory] = useState("All Categories");
-  const [selectedRelevance, setSelectedRelevance] = useState("Most Relevant");
-  const [selectedTime, setSelectedTime] = useState("All Time");
-  const [showNewQuestionModal, setShowNewQuestionModal] = useState(false);
-  const [activeCommentSection, setActiveCommentSection] = useState(null);
-  const [commentText, setCommentText] = useState("");
-  const commentInputRef = useRef(null);
-
-  // Handle tab change
   const handleTabChange = (tab) => {
-    setActiveTab(tab);
-    if (tab === "popular") {
-      setDisplayPosts([...allPosts].sort((a, b) => b.upvotes - a.upvotes));
-    } else if (tab === "recent") {
-      // Assuming the posts are already sorted by recency
-      setDisplayPosts([...allPosts]);
-    } else if (tab === "my-posts") {
-      setDisplayPosts([...myPosts]);
-    }
-    // Close any open comment section when changing tabs
-    setActiveCommentSection(null);
+    setCurrentTab(tab);
   };
 
-  // Handle search
-  const handleSearch = (e) => {
-    const query = e.target.value;
-    setSearchQuery(query);
+  const handleQuestionSubmit = (e) => {
+    e.preventDefault();
 
-    if (query.trim() === "") {
-      handleTabChange(activeTab);
+    if (!newQuestion.title.trim() || !newQuestion.content.trim()) {
+      alert("Please fill in all required fields");
       return;
     }
 
-    const postsToSearch = activeTab === "my-posts" ? myPosts : allPosts;
-    const filtered = postsToSearch.filter(
-      (post) =>
-        post.title.toLowerCase().includes(query.toLowerCase()) ||
-        post.excerpt.toLowerCase().includes(query.toLowerCase()) ||
-        post.tags.some((tag) => tag.toLowerCase().includes(query.toLowerCase()))
-    );
+    const tagArray = newQuestion.tags.length
+      ? newQuestion.tags.split(",").map((tag) => tag.trim())
+      : [];
 
-    setDisplayPosts(filtered);
-  };
-
-  // Handle upvote - now checks if already upvoted
-  const handleUpvote = (postId) => {
-    if (upvotedPosts[postId]) {
-      // User already upvoted this post
-      return;
-    }
-
-    // Update upvote count
-    setPostsUpvotes((prev) => ({
-      ...prev,
-      [postId]: prev[postId] + 1,
-    }));
-
-    // Mark post as upvoted by this user
-    setUpvotedPosts((prev) => ({
-      ...prev,
-      [postId]: true,
-    }));
-
-    // Also update the upvote count in the original data arrays
-    const updatePostsArray = (postsArray) => {
-      return postsArray.map((post) => {
-        if (post.id === postId) {
-          return { ...post, upvotes: post.upvotes + 1 };
-        }
-        return post;
-      });
-    };
-
-    // Update the appropriate array
-    if (activeTab === "my-posts") {
-      const updatedMyPosts = updatePostsArray(myPosts);
-      // Update display if we're in my-posts tab
-      if (activeTab === "my-posts") {
-        setDisplayPosts(updatedMyPosts);
-      }
-    } else {
-      const updatedAllPosts = updatePostsArray(allPosts);
-      // Update display if we're not in my-posts tab
-      if (activeTab !== "my-posts") {
-        setDisplayPosts(updatedAllPosts);
-      }
-    }
-  };
-
-  // Toggle comment section
-  const toggleCommentSection = (postId) => {
-    if (activeCommentSection === postId) {
-      setActiveCommentSection(null);
-    } else {
-      setActiveCommentSection(postId);
-      setCommentText("");
-      // Focus on comment input after a short delay to allow rendering
-      setTimeout(() => {
-        if (commentInputRef.current) {
-          commentInputRef.current.focus();
-        }
-      }, 100);
-    }
-  };
-
-  // Add new comment
-  const addComment = (postId) => {
-    if (!commentText.trim()) return;
-
-    const newComment = {
-      id: `c${Date.now()}`,
-      author: "Current User",
-      avatar: "/placeholder.svg",
-      content: commentText,
+    const newQuestionObj = {
+      id: questions.length + 1,
+      title: newQuestion.title,
+      content: newQuestion.content,
+      author: currentUser,
+      tags: tagArray,
+      upvotes: 0,
+      replies: [],
       timestamp: "Just now",
+      attachments: uploadedFiles,
     };
 
-    // Find and update the post with the new comment
-    const updatePostsArray = (postsArray) => {
-      return postsArray.map((post) => {
-        if (post.id === postId) {
-          const updatedComments = [...(post.comments || []), newComment];
-          return {
-            ...post,
-            comments: updatedComments,
-            replies: post.replies + 1,
-          };
+    setQuestions([newQuestionObj, ...questions]);
+    setNewQuestion({ title: "", content: "", tags: "" });
+    setUploadedFiles([]);
+    setShowNewQuestionForm(false);
+  };
+
+  const handleUpvote = (questionId) => {
+    setQuestions(
+      questions.map((q) => {
+        if (q.id === questionId) {
+          return { ...q, upvotes: q.upvotes + 1 };
         }
-        return post;
-      });
-    };
+        return q;
+      })
+    );
+  };
 
-    // Update in the appropriate array and the display
-    if (
-      activeTab === "my-posts" ||
-      myPosts.some((post) => post.id === postId)
-    ) {
-      const updatedMyPosts = updatePostsArray(myPosts);
-      // If this is one of the user's posts, update myPosts
-      if (activeTab === "my-posts") {
-        setDisplayPosts(updatedMyPosts);
-      }
-    } else {
-      const updatedAllPosts = updatePostsArray(allPosts);
-      // If this is not one of the user's posts, update allPosts
-      if (activeTab !== "my-posts") {
-        setDisplayPosts(updatedAllPosts);
-      }
+  const handleReplyUpvote = (questionId, replyId) => {
+    setQuestions(
+      questions.map((q) => {
+        if (q.id === questionId) {
+          const updatedReplies = q.replies.map((r) => {
+            if (r.id === replyId) {
+              return { ...r, upvotes: r.upvotes + 1 };
+            }
+            return r;
+          });
+          return { ...q, replies: updatedReplies };
+        }
+        return q;
+      })
+    );
+  };
+
+  const handleReplySubmit = (questionId) => {
+    if (!newReply.trim()) {
+      alert("Reply cannot be empty");
+      return;
     }
 
-    // Clear comment input
-    setCommentText("");
-  };
-
-  // Handle tag filter
-  const handleTagFilter = (tag) => {
-    const postsToFilter = activeTab === "my-posts" ? myPosts : allPosts;
-    const filtered = postsToFilter.filter((post) =>
-      post.tags.some((t) => t.toLowerCase() === tag.toLowerCase())
-    );
-    setDisplayPosts(filtered);
-  };
-
-  // New Question Modal
-  const NewQuestionModal = () => {
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
-    const [tags, setTags] = useState("");
-
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      // Create new question
-      const newPost = {
-        id: String(allPosts.length + myPosts.length + 1),
-        title: title,
-        excerpt: content,
-        author: {
-          name: "Current User",
-          avatar: "/placeholder.svg",
-          points: 275,
-        },
-        tags: tags.split(",").map((tag) => tag.trim()),
-        upvotes: 0,
-        replies: 0,
-        timestamp: "Just now",
-        comments: [],
-      };
-
-      // Update upvotes tracking
-      setPostsUpvotes((prev) => ({
-        ...prev,
-        [newPost.id]: 0,
-      }));
-
-      // Add to my posts
-      myPosts.unshift(newPost);
-
-      // If currently on my posts tab, update display
-      if (activeTab === "my-posts") {
-        setDisplayPosts([...myPosts]);
-      } else if (activeTab === "recent") {
-        // If on recent tab, add to top
-        setDisplayPosts([newPost, ...displayPosts]);
+    const updatedQuestions = questions.map((q) => {
+      if (q.id === questionId) {
+        const newReplyObj = {
+          id: q.replies.length + 1,
+          content: newReply,
+          author: currentUser,
+          timestamp: "Just now",
+          upvotes: 0,
+        };
+        return { ...q, replies: [...q.replies, newReplyObj] };
       }
+      return q;
+    });
 
-      // Close modal
-      setShowNewQuestionModal(false);
-    };
+    setQuestions(updatedQuestions);
+    setNewReply("");
+    setReplyingToId(null);
+  };
 
-    return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div className="bg-white rounded-lg p-6 w-full max-w-2xl">
-          <h2 className="text-xl font-bold mb-4">Ask a New Question</h2>
-          <form onSubmit={handleSubmit}>
+  const handleFileUpload = (e) => {
+    const files = Array.from(e.target.files);
+    setUploadedFiles([...uploadedFiles, ...files.map((file) => file.name)]);
+  };
+
+  const filteredQuestions = questions.filter((q) => {
+    const matchesSearch =
+      q.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      q.content.toLowerCase().includes(searchQuery.toLowerCase());
+
+    const matchesCategory =
+      selectedCategory === "All Categories" ||
+      q.tags.includes(selectedCategory);
+
+    return matchesSearch && matchesCategory;
+  });
+
+  // Sort questions based on selected criteria
+  const sortedQuestions = [...filteredQuestions].sort((a, b) => {
+    if (sortBy === "Most Relevant") {
+      return b.upvotes - a.upvotes;
+    }
+    return 0;
+  });
+
+  const displayQuestions =
+    currentTab === "popular"
+      ? sortedQuestions
+      : currentTab === "recent"
+      ? [...sortedQuestions].sort(
+          (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
+        )
+      : sortedQuestions.filter((q) => q.author.name === currentUser.name);
+
+  return (
+    <div className="bg-[#0F0F0F] p-6">
+      {/* Forum Header */}
+      <div className="flex justify-between items-center mb-4">
+        <div>
+          <h1 className="text-2xl font-bold text-white">Community Forum</h1>
+          <p className="text-gray-400">
+            Ask questions, share knowledge, and get help from the community.
+          </p>
+        </div>
+        <div className="flex space-x-4">
+          <button
+            onClick={() => setShowNewQuestionForm(true)}
+            className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 mr-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 4v16m8-8H4"
+              />
+            </svg>
+            New Question
+          </button>
+          <label className="flex items-center px-4 py-2 bg-[#141414] text-gray-300 rounded-md hover:bg-[#1d1d1d] cursor-pointer">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 mr-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+              />
+            </svg>
+            Upload Material
+            <input
+              type="file"
+              className="hidden"
+              onChange={handleFileUpload}
+              multiple
+            />
+          </label>
+        </div>
+      </div>
+
+      {/* Search Bar */}
+      <div className="relative mb-6">
+        <input
+          type="text"
+          placeholder="Search questions..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="w-full px-4 py-2 border border-[#1d1d1d] rounded-md pl-10 bg-[#141414] text-white"
+        />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-5 w-5 text-gray-500 absolute left-3 top-3"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+          />
+        </svg>
+      </div>
+
+      {/* New Question Form */}
+      {showNewQuestionForm && (
+        <div className="bg-[#141414] p-6 rounded-lg shadow-md mb-6">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-semibold text-white">Ask a Question</h2>
+            <button
+              onClick={() => setShowNewQuestionForm(false)}
+              className="text-gray-400 hover:text-gray-200"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+          <form onSubmit={handleQuestionSubmit}>
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Title
-              </label>
+              <label className="block text-gray-300 mb-2">Title</label>
               <input
                 type="text"
-                className="w-full p-2 border border-gray-300 rounded"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                value={newQuestion.title}
+                onChange={(e) =>
+                  setNewQuestion({ ...newQuestion, title: e.target.value })
+                }
+                placeholder="What's your question? Be specific."
+                className="w-full px-4 py-2 border border-[#1d1d1d] rounded-md bg-[#1d1d1d] text-white"
                 required
               />
             </div>
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Question Details
-              </label>
+              <label className="block text-gray-300 mb-2">Details</label>
               <textarea
-                className="w-full p-2 border border-gray-300 rounded h-32"
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
+                value={newQuestion.content}
+                onChange={(e) =>
+                  setNewQuestion({ ...newQuestion, content: e.target.value })
+                }
+                placeholder="Provide more details about your question..."
+                className="w-full px-4 py-2 border border-[#1d1d1d] rounded-md h-32 bg-[#1d1d1d] text-white"
                 required
+              ></textarea>
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-300 mb-2">
+                Tags (comma separated)
+              </label>
+              <input
+                type="text"
+                value={newQuestion.tags}
+                onChange={(e) =>
+                  setNewQuestion({ ...newQuestion, tags: e.target.value })
+                }
+                placeholder="e.g., Machine Learning, Python, Mathematics"
+                className="w-full px-4 py-2 border border-[#1d1d1d] rounded-md bg-[#1d1d1d] text-white"
               />
             </div>
             <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Tags (comma-separated)
-              </label>
-              <input
-                type="text"
-                className="w-full p-2 border border-gray-300 rounded"
-                value={tags}
-                onChange={(e) => setTags(e.target.value)}
-                placeholder="e.g. React, JavaScript, Performance"
-                required
-              />
+              <label className="block text-gray-300 mb-2">Attachments</label>
+              <div className="flex items-center">
+                <input
+                  type="file"
+                  onChange={handleFileUpload}
+                  className="hidden"
+                  id="file-upload"
+                  multiple
+                />
+                <label
+                  htmlFor="file-upload"
+                  className="cursor-pointer px-4 py-2 bg-[#1d1d1d] text-gray-300 rounded-md hover:bg-gray-600"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 inline mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
+                    />
+                  </svg>
+                  Attach files
+                </label>
+              </div>
+              {uploadedFiles.length > 0 && (
+                <div className="mt-2">
+                  <p className="text-sm text-gray-400">Uploaded files:</p>
+                  <ul className="text-sm text-blue-400">
+                    {uploadedFiles.map((file, index) => (
+                      <li key={index} className="flex items-center">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-4 w-4 mr-1"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                          />
+                        </svg>
+                        {file}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
-            <div className="flex justify-end gap-3">
+            <div className="flex justify-end">
               <button
                 type="button"
-                className="px-4 py-2 text-gray-700 border border-gray-300 rounded hover:bg-gray-50"
-                onClick={() => setShowNewQuestionModal(false)}
+                onClick={() => setShowNewQuestionForm(false)}
+                className="px-4 py-2 text-gray-400 mr-2 hover:text-gray-200"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
               >
                 Post Question
               </button>
             </div>
           </form>
         </div>
+      )}
+
+      {/* Filter Section */}
+      <div className="flex justify-between mb-6">
+        {/* Tabs */}
+        <div className="flex border-b border-[#1d1d1d]">
+          <button
+            onClick={() => handleTabChange("popular")}
+            className={`flex items-center px-4 py-2 mr-4 ${
+              currentTab === "popular"
+                ? "text-blue-400 border-b-2 border-blue-400"
+                : "text-gray-400"
+            }`}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 mr-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+              />
+            </svg>
+            Popular
+          </button>
+          <button
+            onClick={() => handleTabChange("recent")}
+            className={`flex items-center px-4 py-2 mr-4 ${
+              currentTab === "recent"
+                ? "text-blue-400 border-b-2 border-blue-400"
+                : "text-gray-400"
+            }`}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 mr-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            Recent
+          </button>
+          <button
+            onClick={() => handleTabChange("myPosts")}
+            className={`flex items-center px-4 py-2 ${
+              currentTab === "myPosts"
+                ? "text-blue-400 border-b-2 border-blue-400"
+                : "text-gray-400"
+            }`}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 mr-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+              />
+            </svg>
+            My Posts
+          </button>
+        </div>
+
+        {/* Filter Dropdowns */}
+        <div className="flex space-x-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-1">
+              Filter By
+            </label>
+            <select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="border border-[#1d1d1d] rounded-md px-3 py-1 bg-[#141414] text-white"
+            >
+              <option>All Categories</option>
+              {popularTags.map((tag) => (
+                <option key={tag} value={tag}>
+                  {tag}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-1">
+              Sort By
+            </label>
+            <select
+              value={sortBy}
+              onChange={(e) => setSelectedSortBy(e.target.value)}
+              className="border border-[#1d1d1d] rounded-md px-3 py-1 bg-[#141414] text-white"
+            >
+              <option>Most Relevant</option>
+              <option>Most Recent</option>
+              <option>Most Upvoted</option>
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-1">
+              Time
+            </label>
+            <select
+              value={timeFilter}
+              onChange={(e) => setSelectedTimeFilter(e.target.value)}
+              className="border border-[#1d1d1d] rounded-md px-3 py-1 bg-[#141414] text-white"
+            >
+              <option>All Time</option>
+              <option>Today</option>
+              <option>This Week</option>
+              <option>This Month</option>
+            </select>
+          </div>
+        </div>
       </div>
-    );
-  };
 
-  // Comment Section Component
-  const CommentSection = ({ postId, comments }) => {
-    return (
-      <div className="mt-4 pt-4 border-t border-gray-200">
-        <h3 className="font-medium mb-3">Comments</h3>
+      {/* Popular Tags */}
+      <div className="mb-6">
+        <h3 className="text-lg font-medium mb-2 text-white">Popular Tags</h3>
+        <div className="flex flex-wrap">
+          {popularTags.map((tag) => (
+            <span
+              key={tag}
+              className="bg-[#141414] text-gray-300 rounded-full px-3 py-1 text-sm mr-2 mb-2 cursor-pointer hover:bg-[#1d1d1d]"
+              onClick={() => setSelectedCategory(tag)}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
 
-        {/* Comment list */}
-        <div className="space-y-4 mb-4">
-          {comments && comments.length > 0 ? (
-            comments.map((comment) => (
-              <div
-                key={comment.id}
-                className="flex space-x-3 pb-3 border-b border-gray-100"
-              >
-                <div className="w-8 h-8 bg-gray-200 rounded-full overflow-hidden">
-                  <img
-                    src={comment.avatar}
-                    alt={comment.author}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center space-x-2">
-                    <span className="font-medium">{comment.author}</span>
-                    <span className="text-xs text-gray-500">
-                      {comment.timestamp}
-                    </span>
-                  </div>
-                  <p className="text-gray-700 mt-1">{comment.content}</p>
-                </div>
-              </div>
-            ))
-          ) : (
-            <p className="text-gray-500 text-sm">
-              No comments yet. Be the first to comment!
+      {/* Questions List */}
+      <div className="space-y-6">
+        {displayQuestions.length === 0 ? (
+          <div className="bg-[#141414] p-8 rounded-lg shadow-md text-center">
+            <p className="text-gray-400 text-lg">
+              No questions found matching your criteria.
             </p>
-          )}
-        </div>
-
-        {/* Add comment form */}
-        <div className="flex space-x-3">
-          <div className="w-8 h-8 bg-gray-200 rounded-full overflow-hidden">
-            <img
-              src="/placeholder.svg"
-              alt="Current User"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="flex-1 relative">
-            <textarea
-              ref={commentInputRef}
-              className="w-full p-2 pl-3 pr-10 border border-gray-300 rounded-lg resize-none"
-              placeholder="Add a comment..."
-              rows="2"
-              value={commentText}
-              onChange={(e) => setCommentText(e.target.value)}
-            ></textarea>
             <button
-              className="absolute right-2 bottom-2 text-blue-600 p-1 rounded-full hover:bg-blue-50"
-              onClick={() => addComment(postId)}
-              disabled={!commentText.trim()}
+              onClick={() => setShowNewQuestionForm(true)}
+              className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
             >
-              <Send size={18} />
+              Ask a Question
             </button>
           </div>
-        </div>
-      </div>
-    );
-  };
-
-  return (
-    <div className="max-w-screen-xl mx-auto p-4">
-      {/* Header */}
-      <div className="flex justify-between items-center mb-2">
-        <div>
-          <h1 className="text-2xl font-bold">Community Forum</h1>
-          <p className="text-gray-600">
-            Ask questions, share knowledge, and get help from the community.
-          </p>
-        </div>
-        <div className="flex flex-row gap-0">
-          <button
-            className="bg-transparent text-blue-500 rounded-md px-4 py-2 flex items-center"
-            onClick={() => setShowNewQuestionModal(true)}
-          >
-            <Plus size={20} className="mr-2" />
-            New Question
-          </button>
-          <button
-            className="bg-transparent text-blue-500 rounded-md px-4 py-2 flex items-center"
-            onClick={() => {
-
-            }}
-          >
-            <Upload size={20} className="mr-2" />
-            Upload Material
-          </button>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="mt-6 flex flex-col lg:flex-row gap-6">
-        {/* Left Column (Posts) */}
-        <div className="w-full lg:w-3/4">
-          {/* Search */}
-          <div className="relative mb-6">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Search size={18} className="text-gray-400" />
-            </div>
-            <input
-              type="text"
-              className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md"
-              placeholder="Search questions..."
-              value={searchQuery}
-              onChange={handleSearch}
-            />
-          </div>
-
-          {/* Tabs */}
-          <div className="flex mb-6 border-b">
-            <button
-              className={`flex items-center px-4 py-2 ${
-                activeTab === "popular"
-                  ? "text-blue-600 border-b-2 border-blue-600 font-medium"
-                  : "text-gray-600"
-              }`}
-              onClick={() => handleTabChange("popular")}
+        ) : (
+          displayQuestions.map((question) => (
+            <div
+              key={question.id}
+              className="bg-[#141414] p-6 rounded-lg shadow-md"
             >
-              <TrendingUp size={18} className="mr-2" />
-              Popular
-            </button>
-            <button
-              className={`flex items-center px-4 py-2 ${
-                activeTab === "recent"
-                  ? "text-blue-600 border-b-2 border-blue-600 font-medium"
-                  : "text-gray-600"
-              }`}
-              onClick={() => handleTabChange("recent")}
-            >
-              <Clock size={18} className="mr-2" />
-              Recent
-            </button>
-            <button
-              className={`flex items-center px-4 py-2 ${
-                activeTab === "my-posts"
-                  ? "text-blue-600 border-b-2 border-blue-600 font-medium"
-                  : "text-gray-600"
-              }`}
-              onClick={() => handleTabChange("my-posts")}
-            >
-              <User size={18} className="mr-2" />
-              My Posts
-            </button>
-          </div>
-
-          {/* Posts */}
-          <div className="space-y-6">
-            {displayPosts.map((post) => (
-              <div
-                key={post.id}
-                className="border border-gray-200 rounded-lg p-6"
-              >
-                <div className="flex items-center mb-3">
-                  <div className="w-10 h-10 bg-gray-200 rounded-full overflow-hidden mr-3">
-                    <img
-                      src={post.author.avatar}
-                      alt={post.author.name}
-                      className="w-full h-full object-cover"
-                    />
+              <div className="flex items-start mb-4">
+                <img
+                  src={question.author.avatar}
+                  alt={question.author.name}
+                  className="w-10 h-10 rounded-full mr-3"
+                />
+                <div>
+                  <h3 className="font-semibold text-white">
+                    {question.author.name}
+                  </h3>
+                  <div className="flex items-center text-sm text-gray-400 mb-1">
+                    <Zap color="orange" size={15} />
+                    <p className="text-sm font-semibold text-[orange] ml-1">
+                      {question.author.points} pts
+                    </p>
                   </div>
-                  <div>
-                    <h3 className="font-medium">{post.author.name}</h3>
+                </div>
+                <span className="text-sm text-gray-400 ml-auto">
+                  {question.timestamp}
+                </span>
+              </div>
+
+              <h2 className="text-xl font-bold mb-2 text-white">
+                {question.title}
+              </h2>
+              <p className="text-gray-300 mb-4">{question.content}</p>
+
+              {question.attachments.length > 0 && (
+                <div className="mb-4">
+                  <p className="text-sm font-semibold mb-1 text-gray-300">
+                    Attachments:
+                  </p>
+                  <div className="flex flex-wrap">
+                    {question.attachments.map((attachment, idx) => (
+                      <div
+                        key={idx}
+                        className="flex items-center bg-[#1d1d1d] rounded-md px-3 py-1 mr-2 mb-2 text-gray-300"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-4 w-4 mr-1"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                          />
+                        </svg>
+                        {attachment}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div className="flex flex-wrap mb-4">
+                {question.tags.map((tag, idx) => (
+                  <span
+                    key={idx}
+                    className="bg-[#1d1d1d] text-gray-300 rounded-md px-2 py-1 text-sm mr-2 mb-2"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <div className="flex items-center mb-6 text-gray-400">
+                <button
+                  onClick={() => handleUpvote(question.id)}
+                  className="flex items-center mr-4 hover:text-blue-400"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 mr-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 15l7-7 7 7"
+                    />
+                  </svg>
+                  {question.upvotes} upvotes
+                </button>
+                <div className="flex items-center mr-4">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 mr-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                    />
+                  </svg>
+                  {question.replies.length} replies
+                </div>
+                <button
+                  onClick={() =>
+                    setReplyingToId(
+                      replyingToId === question.id ? null : question.id
+                    )
+                  }
+                  className="text-blue-400 hover:text-blue-300"
+                >
+                  Reply
+                </button>
+              </div>
+
+              {/* Replies */}
+              {question.replies.length > 0 && (
+                <div className="mb-4">
+                  <h3 className="font-semibold mb-2 text-white">Comments</h3>
+                  <div className="space-y-4">
+                    {question.replies.map((reply) => (
+                      <div
+                        key={reply.id}
+                        className="bg-[#1d1d1d] p-4 rounded-md"
+                      >
+                        <div className="flex items-start mb-2">
+                          <img
+                            src={reply.author.avatar}
+                            alt={reply.author.name}
+                            className="w-8 h-8 rounded-full mr-2"
+                          />
+                          <div>
+                            <h4 className="font-semibold text-white">
+                              {reply.author.name}
+                            </h4>
+                            <p className="text-xs text-gray-400">
+                              {reply.timestamp}
+                            </p>
+                          </div>
+                        </div>
+
+                        <p className="text-gray-300 mb-2">{reply.content}</p>
+
+                        <button
+                          onClick={() =>
+                            handleReplyUpvote(question.id, reply.id)
+                          }
+                          className="flex items-center text-sm text-gray-400 hover:text-blue-400"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-4 w-4 mr-1"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M5 15l7-7 7 7"
+                            />
+                          </svg>
+                          {reply.upvotes} upvotes
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Reply Form */}
+              {replyingToId === question.id && (
+                <div className="bg-[#1d1d1d] p-4 rounded-md">
+                  <textarea
+                    value={newReply}
+                    onChange={(e) => setNewReply(e.target.value)}
+                    placeholder="Write your reply..."
+                    className="w-full px-3 py-2 border border-gray-600 rounded-md mb-2 bg-[#141414] text-white"
+                    rows="3"
+                  ></textarea>
+
+                  <div className="flex justify-between items-center">
                     <div className="flex items-center">
-                      <span className="bg-purple-100 text-purple-800 text-xs font-medium px-2 py-0.5 rounded">
-                        {post.author.points} pts
-                      </span>
-                      <span className="text-gray-500 text-sm ml-3">
-                        {post.timestamp}
-                      </span>
+                      <input
+                        type="file"
+                        id={`reply-attachment-${question.id}`}
+                        className="hidden"
+                        multiple
+                        onChange={handleFileUpload}
+                      />
+                      <label
+                        htmlFor={`reply-attachment-${question.id}`}
+                        className="flex items-center text-gray-400 cursor-pointer hover:text-gray-300"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5 mr-1"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
+                          />
+                        </svg>
+                        Attach
+                      </label>
+                    </div>
+
+                    <div>
+                      <button
+                        onClick={() => setReplyingToId(null)}
+                        className="px-3 py-1 text-gray-400 mr-2 hover:text-gray-300"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        onClick={() => handleReplySubmit(question.id)}
+                        className="px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                      >
+                        Submit
+                      </button>
                     </div>
                   </div>
                 </div>
-
-                <h2 className="text-xl font-bold mb-2">{post.title}</h2>
-                <p className="text-gray-700 mb-4">{post.excerpt}</p>
-
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {post.tags.map((tag, index) => (
-                    <span
-                      key={index}
-                      className="bg-gray-100 text-gray-800 px-2 py-1 rounded text-sm cursor-pointer hover:bg-gray-200"
-                      onClick={() => handleTagFilter(tag)}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="flex items-center text-gray-600">
-                  <button
-                    className={`flex items-center mr-6 ${
-                      upvotedPosts[post.id]
-                        ? "text-blue-600"
-                        : "hover:text-blue-600"
-                    }`}
-                    onClick={() => handleUpvote(post.id)}
-                    disabled={upvotedPosts[post.id]}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 mr-1"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    <span>{postsUpvotes[post.id]} upvotes</span>
-                  </button>
-                  <button
-                    className={`flex items-center ${
-                      activeCommentSection === post.id ? "text-blue-600" : ""
-                    }`}
-                    onClick={() => toggleCommentSection(post.id)}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 mr-1"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-1.008c-.897.4-1.75.708-2.917.708-1.1 0-2-.9-2-1.5 0-.2.5-1.6 1.7-3.2C2.266 10.842 2 9.444 2 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 9a1 1 0 11-2 0 1 1 0 012 0zm4 0a1 1 0 11-2 0 1 1 0 012 0zm4 0a1 1 0 11-2 0 1 1 0 012 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    <span>{post.replies} replies</span>
-                  </button>
-                </div>
-
-                {/* Comment Section */}
-                {activeCommentSection === post.id && (
-                  <CommentSection
-                    postId={post.id}
-                    comments={post.comments || []}
-                  />
-                )}
-              </div>
-            ))}
-
-            {displayPosts.length === 0 && (
-              <div className="text-center py-16">
-                <p className="text-gray-500 text-lg">
-                  No posts match your criteria
-                </p>
-                <button
-                  className="text-blue-600 mt-2 hover:underline"
-                  onClick={() => {
-                    setSearchQuery("");
-                    handleTabChange(activeTab);
-                  }}
-                >
-                  Clear filters
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Right Column (Filters and Tags) */}
-        <div className="w-full lg:w-1/4">
-          {/* Filters */}
-          <div className="mb-8">
-            <h2 className="text-lg font-bold mb-4">Filter By</h2>
-
-            <div className="space-y-4">
-              <div>
-                <select
-                  className="w-full p-2 border border-gray-300 rounded appearance-none bg-white pr-8 relative"
-                  value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}
-                >
-                  <option>All Categories</option>
-                  <option>Programming</option>
-                  <option>Data Science</option>
-                  <option>Web Development</option>
-                  <option>Machine Learning</option>
-                  <option>DevOps</option>
-                </select>
-                <div className="absolute right-10 pointer-events-none flex items-center px-2">
-                  <ChevronDown size={18} className="text-gray-500" />
-                </div>
-              </div>
-
-              <div>
-                <select
-                  className="w-full p-2 border border-gray-300 rounded appearance-none bg-white"
-                  value={selectedRelevance}
-                  onChange={(e) => setSelectedRelevance(e.target.value)}
-                >
-                  <option>Most Relevant</option>
-                  <option>Most Upvoted</option>
-                  <option>Most Viewed</option>
-                  <option>Most Recent</option>
-                </select>
-              </div>
-
-              <div>
-                <select
-                  className="w-full p-2 border border-gray-300 rounded appearance-none bg-white"
-                  value={selectedTime}
-                  onChange={(e) => setSelectedTime(e.target.value)}
-                >
-                  <option>All Time</option>
-                  <option>Today</option>
-                  <option>This Week</option>
-                  <option>This Month</option>
-                  <option>This Year</option>
-                </select>
-              </div>
+              )}
             </div>
-          </div>
-
-          {/* Popular Tags */}
-          <div>
-            <h2 className="text-lg font-bold mb-4">Popular Tags</h2>
-            <div className="flex flex-wrap gap-2">
-              {popularTags.map((tag, index) => (
-                <span
-                  key={index}
-                  className="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm cursor-pointer hover:bg-gray-200"
-                  onClick={() => {
-                    setSearchQuery(tag);
-                    handleSearch({ target: { value: tag } });
-                  }}
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Popular Tags */}
-          <div>
-            <h2 className="text-lg font-bold mb-4">Popular Tags</h2>
-            <div className="flex flex-wrap gap-2">
-              {popularTags.map((tag, index) => (
-                <span
-                  key={index}
-                  className="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm cursor-pointer hover:bg-gray-200"
-                  onClick={() => {
-                    setSearchQuery(tag);
-                    handleSearch({ target: { value: tag } });
-                  }}
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Forum Guidelines */}
-          <div className="mt-8 bg-purple-50 p-4 rounded-lg">
-            <h2 className="text-lg font-bold mb-3">Forum Guidelines</h2>
-            <ul className="list-disc pl-5 space-y-2 text-sm">
-              <li>Be respectful and inclusive</li>
-              <li>Write clear, specific questions</li>
-              <li>Search before posting duplicates</li>
-              <li>Format code properly</li>
-              <li>Accept helpful answers</li>
-            </ul>
-          </div>
-        </div>
+          ))
+        )}
       </div>
-
-      {/* New Question Modal */}
-      {showNewQuestionModal && <NewQuestionModal />}
     </div>
   );
 };

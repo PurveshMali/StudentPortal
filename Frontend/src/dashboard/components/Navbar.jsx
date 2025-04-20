@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
-import { Bell, Sun, Moon, Search, ChevronDown } from "lucide-react";
+import { Bell, ChevronDown } from "lucide-react";
 import Notifications from "./Notifications";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -16,24 +16,22 @@ const Navbar = () => {
   const isEducatorDashboard = location.pathname.includes("educator-dashboard");
 
   const handleEducatorToggle = () => {
-    setShowUserMenu(false); // Close dropdown after click
+    setShowUserMenu(false);
 
     if (!user?.isEducator) {
       navigate("/new-educator");
     } else {
-      // Toggle between dashboards
       navigate(isEducatorDashboard ? "/dashboard" : "/educator-dashboard");
     }
   };
 
   return (
-    <div className="fixed top-0 right-0 left-0 ml-64 z-30 bg-dark-card text-primary-foreground bg-white text-gray-800 border-b border-purple-100">
+    <div className="fixed top-0 right-0 left-0 ml-64 z-30 bg-[#131313] text-white border-b border-[#3a3a3c]">
       <div className="flex items-center justify-end px-6 py-3 space-x-4">
-        {/* Theme toggle can be added here */}
         <div className="relative">
           <button
             onClick={() => setShowNotifications(!showNotifications)}
-            className="p-2 rounded-full hover:bg-[#e9e0ff] dark:hover:bg-[#e9e0ff] relative transition"
+            className="p-2 rounded-full hover:bg-[#2c2c2e] relative transition"
           >
             <Bell size={20} />
             <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full animate-ping"></span>
@@ -46,16 +44,16 @@ const Navbar = () => {
         <div className="relative">
           <button
             onClick={() => setShowUserMenu(!showUserMenu)}
-            className="flex items-center space-x-2 p-1 pr-2 rounded-lg hover:bg-[#eee8fd] dark:hover:bg-[#e9e0ff] transition"
+            className="flex items-center space-x-2 p-1 pr-2 rounded-lg hover:bg-[#2c2c2e] transition"
           >
             <img
               src="https://cdn.pixabay.com/animation/2022/12/05/10/47/10-47-58-930_512.gif"
               alt="User avatar"
-              className="w-10 h-10 rounded-full border-2 border-primary"
+              className="w-10 h-10 rounded-full border-2 border-purple-400"
             />
-            <div className="hidden md:block">
+            <div className="hidden md:block text-left">
               <p className="text-sm font-medium">{user?.firstName || "User"}</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">
+              <p className="text-xs text-gray-400">
                 {isEducatorDashboard ? "Educator" : "Learner"}
               </p>
             </div>
@@ -63,13 +61,13 @@ const Navbar = () => {
           </button>
 
           {showUserMenu && (
-            <div className="absolute right-0 mt-2 w-56 py-3 rounded-xl shadow-2xl bg-purple-900 text-white z-50 border border-gray-200">
+            <div className="absolute right-0 mt-2 w-auto py-1 rounded-sm shadow-2xl bg-[#2c2c2e] text-white z-50 border border-[#3a3a3c]">
               <button
                 onClick={handleEducatorToggle}
-                className="w-full px-4 py-3 text-sm font-semibold text-center text-white bg-gradient-to-r from-indigo-500 to-purple-500 rounded-md hover:from-purple-600 hover:to-indigo-600 transition"
+                className="cursor-pointer w-full px-4 py-3 text-sm font-semibold text-center bg-transparent transition hover:bg-[#3a3a3c]"
               >
                 {!user?.isEducator
-                  ? "Unlock Educator Portal"
+                  ? "Educator Portal"
                   : isEducatorDashboard
                   ? "Switch to Learner"
                   : "Switch to Educator"}

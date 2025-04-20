@@ -13,8 +13,6 @@ const SignupPage = () => {
     confirmPassword: "",
     agreeToTerms: false,
   });
-
-  const API_URL = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -82,7 +80,7 @@ const SignupPage = () => {
 
     try {
       const response = await axios.post(
-        `${API_URL}/api/auth/signup`,
+        `http://localhost:5000/api/auth/signup`,
         formData,
         {
           headers: {

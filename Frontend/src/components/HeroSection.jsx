@@ -15,7 +15,7 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative z-10 text-center max-w-3xl w-full">
         <motion.span
-          className="inline-block text-sm font-semibold bg-[#1f1f2b] text-[#9b85d4] px-4 py-1 rounded-full border border-[#6e59a580] mb-6"
+          className="hover:rotate-2 hover:scale-101 transition-all duration-100 ease-in-out inline-block text-sm font-semibold bg-[#1f1f2b] text-[#9b85d4] px-4 py-1 rounded-full border border-[#6e59a580] mb-6"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}

@@ -1,12 +1,20 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Heart, Search, BookOpen, Users, MessageSquare, Briefcase, ExternalLink } from "lucide-react"
-import { motion } from "framer-motion"
+import { useState } from "react";
+import {
+  Heart,
+  Search,
+  BookOpen,
+  Users,
+  MessageSquare,
+  Briefcase,
+  ExternalLink,
+} from "lucide-react";
+import { motion } from "framer-motion";
 
-const AllInsights = () => {
-  const [activeTab, setActiveTab] = useState("courses")
-  const [searchQuery, setSearchQuery] = useState("")
+const SavedPage = () => {
+  const [activeTab, setActiveTab] = useState("courses");
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Sample data for each category
   const savedData = {
@@ -17,7 +25,8 @@ const AllInsights = () => {
         author: "Jane Smith",
         duration: "8 hours",
         level: "Beginner",
-        thumbnail: "https://imgs.search.brave.com/NbOWekBS7BuIhLXUS49pdvAfmTdNYlOhlQUmKvR9jO4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jb3Jl/dWkuaW8vcmVhY3Qv/ZG9jcy9pbWFnZXMv/cmVhY3Q0MDAuanBn",
+        thumbnail:
+          "https://imgs.search.brave.com/NbOWekBS7BuIhLXUS49pdvAfmTdNYlOhlQUmKvR9jO4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jb3Jl/dWkuaW8vcmVhY3Qv/ZG9jcy9pbWFnZXMv/cmVhY3Q0MDAuanBn",
       },
       {
         id: 2,
@@ -25,7 +34,8 @@ const AllInsights = () => {
         author: "John Doe",
         duration: "12 hours",
         level: "Advanced",
-        thumbnail: "https://imgs.search.brave.com/t7GbhNrMWYEpfvyiiS9A0TSYLk-GQBCJO6qQJMk16kU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZGlnaXRhbG9jZWFu/LmNvbS9hcGkvc3Rh/dGljLWNvbnRlbnQv/djEvaW1hZ2VzP3Ny/Yz0vX25leHQvc3Rh/dGljL21lZGlhL2lu/dHJvLXRvLWNsb3Vk/LmQ0OWJjNWY3Lmpw/ZWcmd2lkdGg9MTky/MA",
+        thumbnail:
+          "https://imgs.search.brave.com/t7GbhNrMWYEpfvyiiS9A0TSYLk-GQBCJO6qQJMk16kU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZGlnaXRhbG9jZWFu/LmNvbS9hcGkvc3Rh/dGljLWNvbnRlbnQv/djEvaW1hZ2VzP3Ny/Yz0vX25leHQvc3Rh/dGljL21lZGlhL2lu/dHJvLXRvLWNsb3Vk/LmQ0OWJjNWY3Lmpw/ZWcmd2lkdGg9MTky/MA",
       },
       {
         id: 3,
@@ -33,7 +43,8 @@ const AllInsights = () => {
         author: "Sarah Johnson",
         duration: "6 hours",
         level: "Intermediate",
-        thumbnail: "https://imgs.search.brave.com/ds6oTskeuNDXXkctI1v-k2kNNZ-Bfj_ipTq3DD-E6zY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/dXhkZXNpZ25pbnN0/aXR1dGUuY29tL2Js/b2cvd3AtY29udGVu/dC91cGxvYWRzLzIw/MjIvMDYvMTQ1X1VY/LURlc2lnbi1Qcmlu/Y2lwbGVzX2Jsb2ct/Mi5wbmc",
+        thumbnail:
+          "https://imgs.search.brave.com/ds6oTskeuNDXXkctI1v-k2kNNZ-Bfj_ipTq3DD-E6zY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/dXhkZXNpZ25pbnN0/aXR1dGUuY29tL2Js/b2cvd3AtY29udGVu/dC91cGxvYWRzLzIw/MjIvMDYvMTQ1X1VY/LURlc2lnbi1Qcmlu/Y2lwbGVzX2Jsb2ct/Mi5wbmc",
       },
     ],
     tutors: [
@@ -43,7 +54,8 @@ const AllInsights = () => {
         session: "Data Science Mentoring",
         datetime: "2023-06-15 14:00",
         domain: "Data Science",
-        avatar: "https://imgs.search.brave.com/VuWDnxp1vZS4g-N7PeO81LBfEFjprKaBXfRbJsgEtis/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wdWIt/c3RhdGljLmZvdG9y/LmNvbS9hc3NldHMv/cHJvamVjdHMvcGFn/ZXMvMjRmZjA1MmJj/YjUwNDFlZmI1N2I2/ODEyNTM1MWZiNWYv/Zm90b3ItYzFmZWFi/NWI2NDM2NDJkY2Jl/YTQ5NzFhMDVlYzEw/YTEuanBn",
+        avatar:
+          "https://imgs.search.brave.com/VuWDnxp1vZS4g-N7PeO81LBfEFjprKaBXfRbJsgEtis/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wdWIt/c3RhdGljLmZvdG9y/LmNvbS9hc3NldHMv/cHJvamVjdHMvcGFn/ZXMvMjRmZjA1MmJj/YjUwNDFlZmI1N2I2/ODEyNTM1MWZiNWYv/Zm90b3ItYzFmZWFi/NWI2NDM2NDJkY2Jl/YTQ5NzFhMDVlYzEw/YTEuanBn",
       },
       {
         id: 2,
@@ -51,7 +63,8 @@ const AllInsights = () => {
         session: "Web Development Workshop",
         datetime: "2023-06-18 10:00",
         domain: "Web Dev",
-        avatar: "https://imgs.search.brave.com/VuWDnxp1vZS4g-N7PeO81LBfEFjprKaBXfRbJsgEtis/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wdWIt/c3RhdGljLmZvdG9y/LmNvbS9hc3NldHMv/cHJvamVjdHMvcGFn/ZXMvMjRmZjA1MmJj/YjUwNDFlZmI1N2I2/ODEyNTM1MWZiNWYv/Zm90b3ItYzFmZWFi/NWI2NDM2NDJkY2Jl/YTQ5NzFhMDVlYzEw/YTEuanBn",
+        avatar:
+          "https://imgs.search.brave.com/VuWDnxp1vZS4g-N7PeO81LBfEFjprKaBXfRbJsgEtis/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wdWIt/c3RhdGljLmZvdG9y/LmNvbS9hc3NldHMv/cHJvamVjdHMvcGFn/ZXMvMjRmZjA1MmJj/YjUwNDFlZmI1N2I2/ODEyNTM1MWZiNWYv/Zm90b3ItYzFmZWFi/NWI2NDM2NDJkY2Jl/YTQ5NzFhMDVlYzEw/YTEuanBn",
       },
     ],
     forumPosts: [
@@ -59,7 +72,8 @@ const AllInsights = () => {
         id: 1,
         title: "How to optimize React performance?",
         tags: ["React", "Performance"],
-        preview: "I've been working on a large React application and noticed some performance issues...",
+        preview:
+          "I've been working on a large React application and noticed some performance issues...",
         upvotes: 24,
         comments: 8,
       },
@@ -67,7 +81,8 @@ const AllInsights = () => {
         id: 2,
         title: "Best resources for learning machine learning",
         tags: ["ML", "Resources"],
-        preview: "I'm looking for comprehensive resources to learn machine learning from scratch...",
+        preview:
+          "I'm looking for comprehensive resources to learn machine learning from scratch...",
         upvotes: 32,
         comments: 15,
       },
@@ -88,17 +103,19 @@ const AllInsights = () => {
         description: "Promoting digital literacy in rural areas",
       },
     ],
-  }
+  };
 
   // Filter data based on search query
   const filteredData = searchQuery
-    ? savedData[activeTab].filter((item) => JSON.stringify(item).toLowerCase().includes(searchQuery.toLowerCase()))
-    : savedData[activeTab]
+    ? savedData[activeTab].filter((item) =>
+        JSON.stringify(item).toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : savedData[activeTab];
 
   const handleRemoveItem = (id) => {
     // In a real application, this would remove the item from saved items
-    console.log(`Removing item with id: ${id}`)
-  }
+    console.log(`Removing item with id: ${id}`);
+  };
 
   const renderTabContent = () => {
     if (filteredData.length === 0) {
@@ -108,9 +125,11 @@ const AllInsights = () => {
             <BookOpen className="w-full h-full" />
           </div>
           <h3 className="text-xl font-semibold mb-2">No saved items yet</h3>
-          <p className="text-gray-500 max-w-md">Start exploring and save the ones you love!</p>
+          <p className="text-gray-500 max-w-md">
+            Start exploring and save the ones you love!
+          </p>
         </div>
-      )
+      );
     }
 
     switch (activeTab) {
@@ -118,26 +137,38 @@ const AllInsights = () => {
         return (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredData.map((course) => (
-              <CourseCard key={course.id} course={course} onRemove={handleRemoveItem} />
+              <CourseCard
+                key={course.id}
+                course={course}
+                onRemove={handleRemoveItem}
+              />
             ))}
           </div>
-        )
+        );
       case "tutors":
         return (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredData.map((tutor) => (
-              <TutorCard key={tutor.id} tutor={tutor} onRemove={handleRemoveItem} />
+              <TutorCard
+                key={tutor.id}
+                tutor={tutor}
+                onRemove={handleRemoveItem}
+              />
             ))}
           </div>
-        )
+        );
       case "forumPosts":
         return (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {filteredData.map((post) => (
-              <ForumPostCard key={post.id} post={post} onRemove={handleRemoveItem} />
+              <ForumPostCard
+                key={post.id}
+                post={post}
+                onRemove={handleRemoveItem}
+              />
             ))}
           </div>
-        )
+        );
       case "ngoInitiatives":
         return (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -145,22 +176,22 @@ const AllInsights = () => {
               <NGOCard key={ngo.id} ngo={ngo} onRemove={handleRemoveItem} />
             ))}
           </div>
-        )
+        );
       default:
-        return null
+        return null;
     }
-  }
+  };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 bg-black text-white">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Saved Items</h1>
-        <p className="text-gray-500">All your saved content in one place.</p>
+        <h1 className="text-3xl font-bold mb-2 text-white">Saved Items</h1>
+        <p className="text-gray-400">All your saved content in one place.</p>
       </div>
 
       {/* Filter Bar */}
       <div className="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg">
+        <div className="flex space-x-1 bg-gray-800 p-1 rounded-lg">
           <TabButton
             active={activeTab === "courses"}
             onClick={() => setActiveTab("courses")}
@@ -188,11 +219,14 @@ const AllInsights = () => {
         </div>
 
         <div className="relative w-full md:w-64">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+          <Search
+            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+            size={18}
+          />
           <input
             type="text"
             placeholder="Search saved content..."
-            className="pl-10 pr-4 py-2 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="pl-10 pr-4 py-2 w-full border border-gray-700 rounded-lg bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -202,46 +236,56 @@ const AllInsights = () => {
       {/* Content */}
       {renderTabContent()}
     </div>
-  )
-}
+  );
+};
 
 // Tab Button Component
 const TabButton = ({ active, onClick, icon, label }) => (
   <button
     className={`flex items-center px-4 py-2 rounded-md text-sm font-medium transition-all ${
-      active ? "bg-white text-blue-600 shadow-sm" : "text-gray-600 hover:text-gray-900"
+      active
+        ? "bg-white text-purple-600 shadow-sm"
+        : "text-gray-100 hover:text-gray-400"
     }`}
     onClick={onClick}
   >
     {icon}
     <span className="ml-2">{label}</span>
   </button>
-)
+);
 
 // Course Card Component
 const CourseCard = ({ course, onRemove }) => (
   <motion.div
-    className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100"
+    className="bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-700"
     whileHover={{ y: -5 }}
     transition={{ duration: 0.2 }}
   >
     <div className="relative">
-      <img src={course.thumbnail || "/placeholder.svg"} alt={course.title} className="w-full h-40 object-cover" />
+      <img
+        src={course.thumbnail || "/placeholder.svg"}
+        alt={course.title}
+        className="w-full h-40 object-cover"
+      />
       <button
         onClick={() => onRemove(course.id)}
-        className="absolute top-2 right-2 bg-white p-1.5 rounded-full shadow-md hover:bg-gray-100"
+        className="absolute top-2 right-2 bg-gray-900 p-1.5 rounded-full shadow-md hover:bg-gray-700"
       >
         <Heart className="w-4 h-4 text-red-500 fill-current" />
       </button>
     </div>
     <div className="p-5">
       <div className="flex justify-between items-start mb-2">
-        <h3 className="font-bold text-lg line-clamp-2">{course.title}</h3>
+        <h3 className="font-bold text-lg line-clamp-2 text-white">
+          {course.title}
+        </h3>
       </div>
-      <p className="text-gray-600 text-sm mb-2">By {course.author}</p>
+      <p className="text-gray-400 text-sm mb-2">By {course.author}</p>
       <div className="flex justify-between items-center mb-4">
         <span className="text-gray-500 text-xs">{course.duration}</span>
-        <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">{course.level}</span>
+        <span className="bg-blue-800 text-blue-100 text-xs px-2 py-1 rounded-full">
+          {course.level}
+        </span>
       </div>
       <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg flex items-center justify-center">
         <span>Continue Learning</span>
@@ -249,31 +293,42 @@ const CourseCard = ({ course, onRemove }) => (
       </button>
     </div>
   </motion.div>
-)
+);
 
 // Tutor Card Component
 const TutorCard = ({ tutor, onRemove }) => (
   <motion.div
-    className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100"
+    className="bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-700"
     whileHover={{ y: -5 }}
     transition={{ duration: 0.2 }}
   >
     <div className="p-5">
       <div className="flex justify-between items-start mb-4">
         <div className="flex items-center">
-          <img src={tutor.avatar || "/placeholder.svg"} alt={tutor.name} className="w-12 h-12 rounded-full mr-3" />
+          <img
+            src={tutor.avatar || "/placeholder.svg"}
+            alt={tutor.name}
+            className="w-12 h-12 rounded-full mr-3"
+          />
           <div>
-            <h3 className="font-bold text-lg">{tutor.name}</h3>
-            <span className="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">{tutor.domain}</span>
+            <h3 className="font-bold text-lg text-white">{tutor.name}</h3>
+            <span className="bg-purple-800 text-purple-100 text-xs px-2 py-1 rounded-full">
+              {tutor.domain}
+            </span>
           </div>
         </div>
-        <button onClick={() => onRemove(tutor.id)} className="bg-white p-1.5 rounded-full shadow-md hover:bg-gray-100">
+        <button
+          onClick={() => onRemove(tutor.id)}
+          className="bg-gray-900 p-1.5 rounded-full shadow-md hover:bg-gray-700"
+        >
           <Heart className="w-4 h-4 text-red-500 fill-current" />
         </button>
       </div>
       <div className="mb-4">
-        <h4 className="font-medium mb-1">{tutor.session}</h4>
-        <p className="text-gray-500 text-sm">{new Date(tutor.datetime).toLocaleString()}</p>
+        <h4 className="font-medium text-white mb-1">{tutor.session}</h4>
+        <p className="text-gray-400 text-sm">
+          {new Date(tutor.datetime).toLocaleString()}
+        </p>
       </div>
       <button className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg flex items-center justify-center">
         <span>View Session</span>
@@ -281,35 +336,40 @@ const TutorCard = ({ tutor, onRemove }) => (
       </button>
     </div>
   </motion.div>
-)
+);
 
 // Forum Post Card Component
 const ForumPostCard = ({ post, onRemove }) => (
   <motion.div
-    className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100"
+    className="bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-700"
     whileHover={{ y: -5 }}
     transition={{ duration: 0.2 }}
   >
     <div className="p-5">
       <div className="flex justify-between items-start mb-3">
-        <h3 className="font-bold text-lg line-clamp-2">{post.title}</h3>
+        <h3 className="font-bold text-lg text-white line-clamp-2">
+          {post.title}
+        </h3>
         <button
           onClick={() => onRemove(post.id)}
-          className="bg-white p-1.5 rounded-full shadow-md hover:bg-gray-100 ml-2 flex-shrink-0"
+          className="bg-gray-900 p-1.5 rounded-full shadow-md hover:bg-gray-700 ml-2 flex-shrink-0"
         >
           <Heart className="w-4 h-4 text-red-500 fill-current" />
         </button>
       </div>
       <div className="flex flex-wrap gap-1 mb-3">
         {post.tags.map((tag, index) => (
-          <span key={index} className="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">
+          <span
+            key={index}
+            className="bg-gray-700 text-gray-300 text-xs px-2 py-1 rounded-full"
+          >
             {tag}
           </span>
         ))}
       </div>
-      <p className="text-gray-600 text-sm mb-4 line-clamp-2">{post.preview}</p>
+      <p className="text-gray-400 text-sm mb-4 line-clamp-2">{post.preview}</p>
       <div className="flex justify-between items-center mb-4">
-        <div className="flex items-center text-gray-500 text-xs">
+        <div className="flex items-center text-gray-400 text-xs">
           <span className="mr-3">👍 {post.upvotes}</span>
           <span>💬 {post.comments}</span>
         </div>
@@ -320,39 +380,49 @@ const ForumPostCard = ({ post, onRemove }) => (
       </button>
     </div>
   </motion.div>
-)
+);
 
 // NGO Card Component
 const NGOCard = ({ ngo, onRemove }) => (
   <motion.div
-    className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100"
+    className="bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-700"
     whileHover={{ y: -5 }}
     transition={{ duration: 0.2 }}
   >
     <div className="p-5">
       <div className="flex justify-between items-start mb-4">
         <div className="flex items-center">
-          <img src={ngo.logo || "/placeholder.svg"} alt={ngo.name} className="w-12 h-12 rounded-lg mr-3" />
-          <h3 className="font-bold text-lg">{ngo.name}</h3>
+          <img
+            src={ngo.logo || "/placeholder.svg"}
+            alt={ngo.name}
+            className="w-12 h-12 rounded-lg mr-3"
+          />
+          <h3 className="font-bold text-white">{ngo.name}</h3>
         </div>
-        <button onClick={() => onRemove(ngo.id)} className="bg-white p-1.5 rounded-full shadow-md hover:bg-gray-100">
+        <button
+          onClick={() => onRemove(ngo.id)}
+          className="bg-gray-900 p-1.5 rounded-full shadow-md hover:bg-gray-700"
+        >
           <Heart className="w-4 h-4 text-red-500 fill-current" />
         </button>
       </div>
       <div className="flex flex-wrap gap-1 mb-3">
         {ngo.tags.map((tag, index) => (
-          <span key={index} className="bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded-full">
+          <span
+            key={index}
+            className="bg-orange-400 text-gray-100 text-xs px-2 py-1 rounded-full"
+          >
             {tag}
           </span>
         ))}
       </div>
-      <p className="text-gray-600 text-sm mb-4">{ngo.description}</p>
-      <button className="w-full bg-orange-600 hover:bg-orange-700 text-white py-2 rounded-lg flex items-center justify-center">
+      <p className="text-gray-400 text-sm mb-4">{ngo.description}</p>
+      <button className="w-full bg-orange-400 hover:bg-orange-500 text-white py-2 rounded-lg flex items-center justify-center">
         <span>View Initiative</span>
         <ExternalLink size={16} className="ml-2" />
       </button>
     </div>
   </motion.div>
-)
+);
 
-export default AllInsights;
+export default SavedPage;

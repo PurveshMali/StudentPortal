@@ -62,6 +62,7 @@ exports.login = async (req, res) => {
     // Find user by email
     const user = await User.findOne({ email });
     if (!user) {
+      console.log("User not found");
       return res.status(400).json({ message: "Invalid credentials" });
     }
 

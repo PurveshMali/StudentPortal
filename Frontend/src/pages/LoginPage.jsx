@@ -12,8 +12,6 @@ const LoginPage = () => {
     rememberMe: false,
   });
 
-  const API_URL = import.meta.env.VITE_API_URL;
-
   const navigate = useNavigate(); // Assuming you're using react-router-dom for navigation
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);

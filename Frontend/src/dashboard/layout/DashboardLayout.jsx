@@ -10,15 +10,16 @@ import Loader from "../components/Loader"
 
 // Import all pages
 import Overview from "../pages/Overview"
-import Users from "../pages/MyCourses"
+import MyCourses from "../pages/MyCourses"
 import Courses from "../pages/ForumPage"
 import Reports from "../pages/Tutoring"
 import ForumAnalytics from "../pages/NGOPartners"
-import AIInsights from "../pages/AlInsights"
+import AIInsights from "../pages/SavedPage"
 import Settings from "../pages/Settings"
 import NGOPartners from "../pages/NGOPartners"
 import ForumPage from "../pages/ForumPage"
 import Tutoring from "../pages/Tutoring"
+import SavedPage from "../pages/SavedPage"
 
 const DashboardLayout = () => {
   const { theme } = useTheme()
@@ -52,7 +53,7 @@ const DashboardLayout = () => {
       case "overview":
         return <Overview />
       case "courses":
-        return <Users />
+        return <MyCourses />
       case "forum":
         return <ForumPage />
       case "tutoring":
@@ -60,17 +61,17 @@ const DashboardLayout = () => {
       case "ngoPartners":
         return <NGOPartners />
       case "saved":
-        return <AIInsights />
+        return <SavedPage />
       case "settings":
         return <Settings />
       default:
-        return <Users />
+        return <MyCourses />
     }
   }
 
   return (
     <DashboardProvider>
-      <div className={`min-h-screen ${theme === "dark" ? "bg-dark-background" : "bg-primary-background"}`}>
+      <div className={`min-h-screen bg-black`}>
         <Sidebar activePage={activePage} setActivePage={setActivePage} />
         <Navbar />
 
