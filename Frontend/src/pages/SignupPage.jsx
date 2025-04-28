@@ -91,7 +91,7 @@ const SignupPage = () => {
       );
 
       console.log("Signup successful:", response.data);
-      alert("Signup successful!"); 
+      alert("Signup successful!");
       // Or navigate to another page
       navigate("/login"); // Redirect to login page after successful signup
       // Reset form on success
@@ -118,12 +118,12 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#f9f6ff] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#0f0f0f] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="flex justify-center">
-        <Link
+          <Link
             to={"/"}
-            className="flex items-center text-[#6E59A5] font-bold text-xl"
+            className="flex items-center text-purple-400 font-bold text-xl"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -143,14 +143,14 @@ const SignupPage = () => {
             <span className="ml-2">EduConnect</span>
           </Link>
         </div>
-        <h2 className="mt-6 text-center text-3xl font-bold text-gray-900">
+        <h2 className="mt-6 text-center text-3xl font-bold text-white">
           Create your account
         </h2>
-        <p className="mt-2 text-center text-gray-600">
+        <p className="mt-2 text-center text-gray-400">
           Or{" "}
           <Link
             to={"/login"}
-            className="font-medium text-[#6E59A5] hover:text-[#9b73ff]"
+            className="font-medium text-purple-400 hover:text-purple-300"
           >
             sign in to your existing account
           </Link>
@@ -158,268 +158,197 @@ const SignupPage = () => {
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <div className="bg-[#1a1a1a] py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
+            {/* First + Last Name */}
             <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2">
               <div>
                 <label
                   htmlFor="firstName"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-gray-200"
                 >
                   First name
                 </label>
-                <div className="mt-1">
-                  <input
-                    type="text"
-                    name="firstName"
-                    id="firstName"
-                    autoComplete="given-name"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    className={`appearance-none block w-full px-3 py-2 border ${
-                      errors.firstName ? "border-red-300" : "border-gray-300"
-                    } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm`}
-                  />
-                  {errors.firstName && (
-                    <p className="mt-2 text-sm text-red-600">
-                      {errors.firstName}
-                    </p>
-                  )}
-                </div>
+                <input
+                  type="text"
+                  name="firstName"
+                  id="firstName"
+                  autoComplete="given-name"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  className={`bg-[#2c2c2c] text-white appearance-none block w-full px-3 py-2 border ${
+                    errors.firstName ? "border-red-400" : "border-gray-600"
+                  } rounded-md shadow-sm placeholder-gray-500 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm`}
+                />
+                {errors.firstName && (
+                  <p className="mt-2 text-sm text-red-500">
+                    {errors.firstName}
+                  </p>
+                )}
               </div>
 
               <div>
                 <label
                   htmlFor="lastName"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-gray-200"
                 >
                   Last name
                 </label>
-                <div className="mt-1">
-                  <input
-                    type="text"
-                    name="lastName"
-                    id="lastName"
-                    autoComplete="family-name"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    className={`appearance-none block w-full px-3 py-2 border ${
-                      errors.lastName ? "border-red-300" : "border-gray-300"
-                    } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm`}
-                  />
-                  {errors.lastName && (
-                    <p className="mt-2 text-sm text-red-600">
-                      {errors.lastName}
-                    </p>
-                  )}
-                </div>
+                <input
+                  type="text"
+                  name="lastName"
+                  id="lastName"
+                  autoComplete="family-name"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  className={`bg-[#2c2c2c] text-white appearance-none block w-full px-3 py-2 border ${
+                    errors.lastName ? "border-red-400" : "border-gray-600"
+                  } rounded-md shadow-sm placeholder-gray-500 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm`}
+                />
+                {errors.lastName && (
+                  <p className="mt-2 text-sm text-red-500">{errors.lastName}</p>
+                )}
               </div>
             </div>
 
+            {/* Email */}
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-gray-200"
               >
                 Email address
               </label>
-              <div className="mt-1">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className={`appearance-none block w-full px-3 py-2 border ${
-                    errors.email ? "border-red-300" : "border-gray-300"
-                  } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm`}
-                />
-                {errors.email && (
-                  <p className="mt-2 text-sm text-red-600">{errors.email}</p>
-                )}
-              </div>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                value={formData.email}
+                onChange={handleChange}
+                className={`bg-[#2c2c2c] text-white appearance-none block w-full px-3 py-2 border ${
+                  errors.email ? "border-red-400" : "border-gray-600"
+                } rounded-md shadow-sm placeholder-gray-500 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm`}
+              />
+              {errors.email && (
+                <p className="mt-2 text-sm text-red-500">{errors.email}</p>
+              )}
             </div>
 
+            {/* Password */}
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-gray-200"
               >
                 Password
               </label>
-              <div className="mt-1">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="new-password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  className={`appearance-none block w-full px-3 py-2 border ${
-                    errors.password ? "border-red-300" : "border-gray-300"
-                  } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm`}
-                />
-                {errors.password && (
-                  <p className="mt-2 text-sm text-red-600">{errors.password}</p>
-                )}
-              </div>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                autoComplete="new-password"
+                value={formData.password}
+                onChange={handleChange}
+                className={`bg-[#2c2c2c] text-white appearance-none block w-full px-3 py-2 border ${
+                  errors.password ? "border-red-400" : "border-gray-600"
+                } rounded-md shadow-sm placeholder-gray-500 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm`}
+              />
+              {errors.password && (
+                <p className="mt-2 text-sm text-red-500">{errors.password}</p>
+              )}
               <p className="mt-1 text-sm text-gray-500">
                 Password must be at least 8 characters
               </p>
             </div>
 
+            {/* Confirm Password */}
             <div>
               <label
                 htmlFor="confirmPassword"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-gray-200"
               >
                 Confirm password
               </label>
-              <div className="mt-1">
-                <input
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  type="password"
-                  autoComplete="new-password"
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                  className={`appearance-none block w-full px-3 py-2 border ${
-                    errors.confirmPassword
-                      ? "border-red-300"
-                      : "border-gray-300"
-                  } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm`}
-                />
-                {errors.confirmPassword && (
-                  <p className="mt-2 text-sm text-red-600">
-                    {errors.confirmPassword}
-                  </p>
-                )}
-              </div>
+              <input
+                id="confirmPassword"
+                name="confirmPassword"
+                type="password"
+                autoComplete="new-password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                className={`bg-[#2c2c2c] text-white appearance-none block w-full px-3 py-2 border ${
+                  errors.confirmPassword ? "border-red-400" : "border-gray-600"
+                } rounded-md shadow-sm placeholder-gray-500 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm`}
+              />
+              {errors.confirmPassword && (
+                <p className="mt-2 text-sm text-red-500">
+                  {errors.confirmPassword}
+                </p>
+              )}
             </div>
 
+            {/* Terms Checkbox */}
             <div className="flex items-start">
-              <div className="flex items-center h-5">
-                <input
-                  id="agreeToTerms"
-                  name="agreeToTerms"
-                  type="checkbox"
-                  checked={formData.agreeToTerms}
-                  onChange={handleChange}
-                  className={`h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded ${
-                    errors.agreeToTerms ? "border-red-300" : ""
-                  }`}
-                />
-              </div>
-              <div className="ml-3 text-sm">
-                <label
-                  htmlFor="agreeToTerms"
-                  className="font-medium text-gray-700"
-                >
-                  I agree to the{" "}
-                  <a
-                    href="/terms"
-                    className="text-purple-600 hover:text-purple-500"
-                  >
-                    Terms and Conditions
-                  </a>{" "}
-                  and{" "}
-                  <a
-                    href="/privacy"
-                    className="text-purple-600 hover:text-purple-500"
-                  >
-                    Privacy Policy
-                  </a>
-                </label>
-                {errors.agreeToTerms && (
-                  <p className="mt-1 text-sm text-red-600">
-                    {errors.agreeToTerms}
-                  </p>
-                )}
-              </div>
-            </div>
-
-            <div>
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 ${
-                  isSubmitting ? "opacity-70 cursor-not-allowed" : ""
+              <input
+                id="agreeToTerms"
+                name="agreeToTerms"
+                type="checkbox"
+                checked={formData.agreeToTerms}
+                onChange={handleChange}
+                className={`h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded ${
+                  errors.agreeToTerms ? "border-red-400" : ""
                 }`}
+              />
+              <label
+                htmlFor="agreeToTerms"
+                className="ml-2 block text-sm text-gray-300"
               >
-                {isSubmitting ? "Creating account..." : "Create account"}
-              </button>
+                I agree to the{" "}
+                <a
+                  href="/terms"
+                  className="text-purple-400 hover:text-purple-300"
+                >
+                  Terms and Conditions
+                </a>{" "}
+                and{" "}
+                <a
+                  href="/privacy"
+                  className="text-purple-400 hover:text-purple-300"
+                >
+                  Privacy Policy
+                </a>
+              </label>
             </div>
+            {errors.agreeToTerms && (
+              <p className="text-sm text-red-500 mt-1">{errors.agreeToTerms}</p>
+            )}
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 ${
+                isSubmitting ? "opacity-70 cursor-not-allowed" : ""
+              }`}
+            >
+              {isSubmitting ? "Creating account..." : "Create account"}
+            </button>
           </form>
 
+          {/* Divider */}
           <div className="mt-6">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300"></div>
+                <div className="w-full border-t border-gray-700"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">
+                <span className="px-2 bg-[#1a1a1a] text-gray-400">
                   Or continue with
                 </span>
               </div>
             </div>
-
-            <div className="mt-6 grid grid-cols-2 gap-3">
-              <div>
-                <a
-                  href="#"
-                  className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-                >
-                  <svg
-                    className="h-5 w-5"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M22.0367422,12 C22.0367422,11.3607602 21.9811382,10.7404063 21.8781318,10.1409091 L12,10.1409091 L12,14.0363636 L17.6322897,14.0363636 C17.4231524,15.1881818 16.7244793,16.1683168 15.6954173,16.8090909 L15.6954173,19.0454545 L19.1881318,19.0454545 C21.0060793,17.4072727 22.0367422,14.9563636 22.0367422,12 L22.0367422,12 Z"
-                      clipRule="evenodd"
-                    />
-                    <path
-                      fillRule="evenodd"
-                      d="M12,22 C14.9528207,22 17.4354793,21.0545455 19.1881318,19.0454545 L15.6954173,16.8090909 C14.8089639,17.3909091 13.6253837,17.7272727 12,17.7272727 C9.13131318,17.7272727 6.70901033,15.8127273 5.84677686,13.2 L2.23131318,13.2 L2.23131318,15.5090909 C3.97371033,19.2954545 7.69061033,22 12,22 L12,22 Z"
-                      clipRule="evenodd"
-                    />
-                    <path
-                      fillRule="evenodd"
-                      d="M5.84677686,13.2 C5.62790355,12.6 5.50677686,11.9581818 5.50677686,11.3 C5.50677686,10.6418182 5.62790355,10 5.84677686,9.4 L5.84677686,7.09090909 L2.23131318,7.09090909 C1.59213223,8.36363636 1.22313223,9.80454545 1.22313223,11.3 C1.22313223,12.7954545 1.59213223,14.2363636 2.23131318,15.5090909 L5.84677686,13.2 L5.84677686,13.2 Z"
-                      clipRule="evenodd"
-                    />
-                    <path
-                      fillRule="evenodd"
-                      d="M12,5.07272727 C13.4660793,5.07272727 14.7813132,5.54545455 15.8231132,6.52727273 L18.9177422,3.43636364 C17.4354793,2.07272727 14.9528207,1.2 12,1.2 C7.69061033,1.2 3.97371033,3.90454545 2.23131318,7.69090909 L5.84677686,10 C6.70901033,7.38727273 9.13131318,5.07272727 12,5.07272727 L12,5.07272727 Z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </a>
-              </div>
-
-              <div>
-                <a
-                  href="#"
-                  className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-                >
-                  <svg
-                    className="h-5 w-5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10,0 C4.4771525,0 0,4.47593818 0,10 C0,14.4194126 2.86666667,18.1660079 6.83333333,19.4879328 C7.33333333,19.5807279 7.5,19.2763928 7.5,19.0055401 C7.5,18.7610745 7.5,18.1417426 7.5,17.3055401 C4.71666667,17.9138029 4.13333333,15.9666031 4.13333333,15.9666031 C3.68333333,14.8105483 3.025,14.5062132 3.025,14.5062132 C2.11666667,13.8979505 3.09166667,13.9143376 3.09166667,13.9143376 C4.10833333,13.9879328 4.64166667,14.9334826 4.64166667,14.9334826 C5.55,16.4572354 6.98333333,16.0164126 7.54166667,15.7619471 C7.63333333,15.1208143 7.89166667,14.6799916 8.175,14.4194126 C5.95833333,14.1588335 3.625,13.3062132 3.625,9.47593818 C3.625,8.38642344 4.01666667,7.49334826 4.65833333,6.79505483 C4.55,6.54087209 4.20833333,5.52188335 4.75833333,4.14642344 C4.75833333,4.14642344 5.59166667,3.87593818 7.5,5.16799916 C8.29166667,4.94642344 9.15,4.83563558 10,4.83563558 C10.85,4.83563558 11.7083333,4.94642344 12.5,5.16799916 C14.4083333,3.87593818 15.2416667,4.14642344 15.2416667,4.14642344 C15.7916667,5.52188335 15.45,6.54087209 15.3416667,6.79505483 C15.9833333,7.49334826 16.375,8.38642344 16.375,9.47593818 C16.375,13.3225998 14.0333333,14.1505483 11.8083333,14.4029255 C12.1583333,14.7236477 12.5,15.3484955 12.5,16.2908143 C12.5,17.6334826 12.5,18.6688335 12.5,19.0055401 C12.5,19.2763928 12.6583333,19.5889131 13.1666667,19.4879328 C17.1333333,18.1577228 20,14.4194126 20,10 C20,4.47593818 15.5228475,0 10,0 Z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </a>
-              </div>
-            </div>
+            {/* Add social login buttons here */}
           </div>
         </div>
       </div>

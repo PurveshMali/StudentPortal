@@ -206,7 +206,7 @@ const MyCourses = () => {
 
     return (
       <div
-        className="bg-[#1A1A1A] rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 overflow-hidden cursor-pointer border border-[#2A2A2A]"
+        className="group hover:border-gray-500 hover:scale-101 bg-[#1A1A1A] rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 ease-in-out overflow-hidden cursor-pointer border border-[#2A2A2A]"
         onClick={() => handleCourseClick(course.id)}
       >
         <div className="relative">
@@ -215,7 +215,7 @@ const MyCourses = () => {
             alt={course.title}
             className="w-full h-48 object-cover"
           />
-          <div className="absolute top-4 right-4 bg-[#0F0F0F] text-white text-xs font-semibold px-3 py-1 rounded-full border border-gray-700 shadow-sm">
+          <div className="group-hover:rotate-2 group-hover:border-gray-500 hover:scale-103 transition-transform duration-300 absolute top-4 right-4 bg-[#0F0F0F] text-white text-xs font-semibold px-3 py-1 rounded-full border border-gray-700 shadow-sm">
             {course.category}
           </div>
         </div>
